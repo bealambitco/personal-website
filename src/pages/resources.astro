@@ -6,12 +6,12 @@ import { resources } from "../data/resources";
 <BaseLayout title="Resources" description="Tools, learning, and other recommended links.">
   <section class="section container">
     <a href="/" class="back-link">← Home</a>
-    <span class="eyebrow" style="margin-top: 16px;">Resources</span>
+    <h1 class="eyebrow" style="margin-top: 16px;">Resources</h1>
     <div class="resource-groups">
       {
         resources.map((group) => (
           <div class="resource-group">
-            <h3 class="resource-heading">{group.category}</h3>
+            <h2 class="resource-heading">{group.category}</h2>
             <ul class="resource-list">
               {group.items.map((item) => (
                 <li>
