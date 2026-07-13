@@ -7,15 +7,9 @@ how to keep changing it, and what's been checked/fixed along the way.
 
 ## What this is, and why it's built this way
 
-The brief was a Karpathy/Bryllim-style personal site — simple, fast, easy to
+The brief was a simple, fast, easy to
 navigate, on-brand, and something you can keep editing for years without
 needing a developer. Two real sites were checked as reference points:
-
-- **karpathy.ai** is, by the author's own description on the page, "pure
-  HTML and CSS in two static files" — zero frameworks.
-- **bryllim.com** runs on something like Next.js — it has live/dynamic
-  features (a real-time viewer count, `⌘K` command menu) that need a JS
-  framework to work.
 
 This site sits between the two. It's built with **Astro**, which compiles
 down to the same kind of flat, static HTML/CSS Karpathy's site is — no
