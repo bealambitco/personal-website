@@ -1,11 +1,10 @@
 ---
 import { profile } from "../data/profile";
-import { timeline } from "../data/timeline";
 ---
 
 <section class="hero container">
   <div class="hero-top">
-    <img class="hero-photo" src={profile.photo} alt={profile.photoAlt} width="96" height="96" />
+    <img class="hero-photo" src={profile.photo} alt={profile.photoAlt} width="104" height="104" />
     <div class="hero-heading">
       <h1>{profile.name}</h1>
       <p class="hero-title">{profile.title}</p>
@@ -13,7 +12,6 @@ import { timeline } from "../data/timeline";
   </div>
 
   <p class="hero-tagline">{profile.tagline}</p>
-  <p class="hero-about">{profile.about}</p>
 
   <div class="tag-row">
     {
@@ -28,50 +26,23 @@ import { timeline } from "../data/timeline";
       )
     }
   </div>
-
-  <div class="stat-grid">
-    {
-      profile.stats.map((stat) => (
-        <div>
-          <div class="stat-value">{stat.value}</div>
-          <div class="stat-label">{stat.label}</div>
-          <div class="stat-detail">{stat.detail}</div>
-        </div>
-      ))
-    }
-  </div>
-
-  <div id="timeline" class="hero-timeline">
-    <span class="hero-timeline-label">Timeline</span>
-    <ul class="timeline">
-      {
-        timeline.map((entry) => (
-          <li class="timeline-item">
-            <div class="timeline-year">{entry.year}</div>
-            <div class="timeline-title">{entry.title}</div>
-            {entry.detail && <div class="timeline-detail">{entry.detail}</div>}
-          </li>
-        ))
-      }
-    </ul>
-  </div>
 </section>
 
 <style>
   .hero {
-    padding-block: 48px 40px;
+    padding-block: 64px 48px;
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 22px;
   }
   .hero-top {
     display: flex;
     align-items: center;
-    gap: 18px;
+    gap: 20px;
   }
   .hero-photo {
-    width: 96px;
-    height: 96px;
+    width: 104px;
+    height: 104px;
     border-radius: 50%;
     object-fit: cover;
     flex-shrink: 0;
@@ -83,8 +54,9 @@ import { timeline } from "../data/timeline";
     transform: scale(1.03);
   }
   .hero-heading h1 {
-    font-size: 28px;
-    margin: 0 0 4px;
+    font-size: 40px;
+    line-height: 1.1;
+    margin: 0 0 6px;
   }
   .hero-title {
     font-family: var(--font-mono);
@@ -95,79 +67,21 @@ import { timeline } from "../data/timeline";
   .hero-tagline {
     color: var(--ink);
     margin: 0;
-    max-width: 60ch;
-    font-size: 18px;
-  }
-  .hero-about {
-    color: var(--ink-soft);
-    margin: 0;
-    max-width: 62ch;
-  }
-  .stat-grid {
-    margin-top: 4px;
-  }
-
-  .hero-timeline {
-    margin-top: 12px;
-    padding-top: 28px;
-    border-top: 1px solid var(--border-soft);
-  }
-  .hero-timeline-label {
-    display: block;
-    font-family: var(--font-mono);
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    margin-bottom: 16px;
-  }
-  .timeline {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    border-left: 2px solid var(--border);
-  }
-  .timeline-item {
-    position: relative;
-    padding: 0 0 28px 24px;
-  }
-  .timeline-item:last-child {
-    padding-bottom: 0;
-  }
-  .timeline-item::before {
-    content: "";
-    position: absolute;
-    left: -6px;
-    top: 5px;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--accent);
-    border: 2px solid var(--bg);
-  }
-  .timeline-year {
-    font-family: var(--font-mono);
-    font-size: 13px;
-    color: var(--ink-faint);
-  }
-  .timeline-title {
-    font-weight: 600;
-    margin-top: 2px;
-  }
-  .timeline-detail {
-    color: var(--ink-soft);
-    font-size: 15px;
-    margin-top: 2px;
+    max-width: 58ch;
+    font-size: 20px;
+    line-height: 1.5;
   }
 
   @media (max-width: 480px) {
+    .hero-heading h1 {
+      font-size: 32px;
+    }
     .hero-top {
       gap: 14px;
     }
     .hero-photo {
-      width: 72px;
-      height: 72px;
+      width: 76px;
+      height: 76px;
     }
   }
 </style>

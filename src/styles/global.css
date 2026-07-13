@@ -99,19 +99,10 @@ pre {
 }
 
 .section {
-  padding-block: 48px;
+  padding-block: 72px;
 }
 .section + .section {
-  border-top: 1px solid var(--border);
-}
-/* Full-bleed tint on alternating sections, without any wrapper markup — the
-   box-shadow spreads past the section's own (narrow) width, and clip-path
-   stops it from creating horizontal overflow. Gives wide viewports visual
-   rhythm across the full width while the text itself stays in a readable
-   column. */
-.section:nth-of-type(even) {
-  box-shadow: 0 0 0 100vmax var(--bg-raised);
-  clip-path: inset(0 -100vmax);
+  border-top: 1px solid var(--border-soft);
 }
 
 .eyebrow {
