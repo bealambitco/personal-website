@@ -1,0 +1,59 @@
+---
+import type { FeaturedItem } from "../data/featured";
+
+// Shared renderer for any list of link cards (Featured, Technical Work,
+// Latest Articles). Internal links (starting with "/") open in the same
+// tab; external links (starting with "http") open in a new tab and get a
+// small "↗" cue so it's clear they leave the site.
+type CardItem = FeaturedItem & { tags?: string[] };
+
+interface Props {
+  items: CardItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="card-list">
+  {
+    items.map((item) => {
+      const isExternal = item.href.startsWith("http");
+      return (
+        <div class="card-entry">
+          {item.embedUrl && (
+            <div class="embed-frame">
+              <iframe
+                src={item.embedUrl}
+                title={item.title}
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              />
+            </div>
+          )}
+          <a
+            class="card-link"
+            href={item.href}
+            target={isExternal ? "_blank" : undefined}
+            rel={isExternal ? "noopener noreferrer" : undefined}
+          >
+            <div class="card-kind">
+              {item.kind}
+              {item.date && ` · ${item.date}`}
+              {isExternal && <span class="card-external"> ↗</span>}
+            </div>
+            <div class="card-title">{item.title}</div>
+            <div class="card-description">{item.description}</div>
+            {item.tags && item.tags.length > 0 && (
+              <div class="tag-row" style="margin-top: 8px;">
+                {item.tags.map((tag) => (
+                  <span class="tag tag-sm">{tag}</span>
+                ))}
+              </div>
+            )}
+          </a>
+        </div>
+      );
+    })
+  }
+</div>

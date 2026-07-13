@@ -1,0 +1,64 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CardList from "../../components/CardList.astro";
+import { pillars } from "../../data/pillars";
+import { socials } from "../../data/socials";
+
+export async function getStaticPaths() {
+  return pillars.map((pillar) => ({
+    params: { slug: pillar.id },
+    props: { pillar },
+  }));
+}
+
+const { pillar } = Astro.props;
+
+const allPosts = await getCollection("posts", ({ data }) => !data.draft);
+const posts = allPosts
+  .filter((post) => post.data.pillar === pillar.id)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const linkOut = socials.find((s) => s.label === "LinkedIn") ?? socials[0];
+---
+
+<BaseLayout title={pillar.label} description={pillar.description}>
+  <section class="section container">
+    <a href="/topics" class="back-link">← All topics</a>
+    <span class="eyebrow" style="margin-top: 16px;">{pillar.label}</span>
+    <p class="muted">{pillar.description}</p>
+
+    {
+      posts.length > 0 ? (
+        <div style="margin-top: 24px;">
+          <CardList
+            items={posts.map((post) => ({
+              kind: "Article" as const,
+              title: post.data.title,
+              description: post.data.description,
+              href: `/writing/${post.id}`,
+              date: post.data.date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" }),
+            }))}
+          />
+        </div>
+      ) : (
+        <p class="muted" style="margin-top: 24px;">
+          Nothing posted directly on the site yet — in the meantime, find {pillar.label.toLowerCase()}-related
+          posts on <a href={linkOut.href}>{linkOut.label}</a>. Once an article is ready, add a markdown file to
+          <code>src/content/posts/</code> with <code>pillar: "{pillar.id}"</code> and it'll appear here automatically.
+        </p>
+      )
+    }
+  </section>
+</BaseLayout>
+
+<style>
+  .back-link {
+    font-size: 14px;
+    color: var(--ink-faint);
+    text-decoration: none;
+  }
+  .back-link:hover {
+    color: var(--primary);
+  }
+</style>

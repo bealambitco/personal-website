@@ -1,0 +1,89 @@
+---
+import { profile } from "../data/profile";
+---
+
+<section class="hero container">
+  <div class="hero-top">
+    <img class="hero-photo" src={profile.photo} alt={profile.photoAlt} width="96" height="96" />
+    <div class="hero-heading">
+      <h1>{profile.name}</h1>
+      <p class="hero-title">{profile.title}</p>
+    </div>
+  </div>
+
+  <p class="hero-tagline">{profile.tagline}</p>
+  <p class="hero-about">{profile.about}</p>
+
+  <div class="tag-row">
+    {profile.credentials.map((c) => <span class="tag tag-credential">{c}</span>)}
+  </div>
+
+  <div class="stat-grid">
+    {
+      profile.stats.map((stat) => (
+        <div>
+          <div class="stat-value">{stat.value}</div>
+          <div class="stat-label">{stat.label}</div>
+          <div class="stat-detail">{stat.detail}</div>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-block: 48px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .hero-top {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .hero-photo {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1px solid var(--border);
+    background: var(--bg-raised);
+  }
+  .hero-heading h1 {
+    font-size: 28px;
+    margin: 0 0 4px;
+  }
+  .hero-title {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--primary);
+    margin: 0;
+  }
+  .hero-tagline {
+    color: var(--ink);
+    margin: 0;
+    max-width: 60ch;
+    font-size: 18px;
+  }
+  .hero-about {
+    color: var(--ink-soft);
+    margin: 0;
+    max-width: 62ch;
+  }
+  .stat-grid {
+    margin-top: 4px;
+  }
+
+  @media (max-width: 480px) {
+    .hero-top {
+      gap: 14px;
+    }
+    .hero-photo {
+      width: 72px;
+      height: 72px;
+    }
+  }
+</style>

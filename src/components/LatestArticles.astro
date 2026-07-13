@@ -1,0 +1,30 @@
+---
+import { getCollection } from "astro:content";
+import CardList from "./CardList.astro";
+
+const allPosts = await getCollection("posts", ({ data }) => !data.draft);
+const latest = allPosts
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 5)
+  .map((post) => ({
+    kind: "Article" as const,
+    title: post.data.title,
+    description: post.data.description,
+    href: `/writing/${post.id}`,
+    date: post.data.date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" }),
+  }));
+---
+
+<section id="latest-articles" class="section container">
+  <span class="eyebrow">Latest Articles</span>
+  {
+    latest.length > 0 ? (
+      <CardList items={latest} />
+    ) : (
+      <p class="muted">
+        Nothing published on the site yet — browse by topic via{" "}
+        <a href="/topics">Writing</a> in the nav, or check back soon.
+      </p>
+    )
+  }
+</section>

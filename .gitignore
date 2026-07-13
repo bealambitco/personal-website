@@ -1,0 +1,22 @@
+# build output
+dist/
+.astro/
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+
+# environment
+.env
+.env.production
+
+# editor / os
+.DS_Store
+
+# reference doc, not part of the site — kept local only (11MB binary)
+Brand Board*.pdf
+
+# local Claude Code settings, not project config
+.claude/settings.local.json

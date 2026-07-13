@@ -1,0 +1,12 @@
+---
+import { socials } from "../data/socials";
+import { profile } from "../data/profile";
+---
+
+<section id="contact" class="section container">
+  <span class="eyebrow">Get in touch</span>
+  <p class="muted" style="margin-bottom: 16px;">{profile.location}</p>
+  <div class="tag-row">
+    {socials.map((social) => <a class="tag" href={social.href}>{social.label}</a>)}
+  </div>
+</section>

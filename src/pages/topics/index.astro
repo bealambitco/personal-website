@@ -1,0 +1,62 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { pillars } from "../../data/pillars";
+---
+
+<BaseLayout title="Writing" description="All topics — browse by subject.">
+  <section class="section container">
+    <a href="/" class="back-link">← Home</a>
+    <span class="eyebrow" style="margin-top: 16px;">All topics</span>
+    <p class="muted" style="margin-bottom: 24px;">
+      These fill in over time. Each topic links to its own page — once
+      there's nothing there yet, it points you to where I currently post.
+    </p>
+    <div class="pillar-grid">
+      {
+        pillars.map((pillar) => (
+          <a class="pillar-card" href={`/topics/${pillar.id}`}>
+            <div class="pillar-label">{pillar.label}</div>
+            <div class="pillar-description">{pillar.description}</div>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .back-link {
+    font-size: 14px;
+    color: var(--ink-faint);
+    text-decoration: none;
+  }
+  .back-link:hover {
+    color: var(--primary);
+  }
+  .pillar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+  }
+  .pillar-card {
+    display: block;
+    padding: 16px;
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius);
+    text-decoration: none;
+    background: var(--bg-raised);
+  }
+  .pillar-card:hover {
+    border-color: var(--accent);
+  }
+  .pillar-label {
+    font-weight: 600;
+    color: var(--ink);
+    font-size: 15px;
+  }
+  .pillar-description {
+    font-size: 13.5px;
+    color: var(--ink-faint);
+    margin-top: 4px;
+  }
+</style>

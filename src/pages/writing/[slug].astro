@@ -1,0 +1,58 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { pillars } from "../../data/pillars";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts", ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const pillar = pillars.find((p) => p.id === post.data.pillar);
+---
+
+<BaseLayout title={post.data.title} description={post.data.description}>
+  <article class="section container prose">
+    {pillar && (
+      <a href={`/topics/${pillar.id}`} class="back-link">← {pillar.label}</a>
+    )}
+    <h1 style="margin-top: 16px;">{post.data.title}</h1>
+    <p class="muted">
+      {post.data.date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+    </p>
+    <Content />
+  </article>
+</BaseLayout>
+
+<style>
+  .back-link {
+    font-size: 14px;
+    color: var(--ink-faint);
+    text-decoration: none;
+  }
+  .back-link:hover {
+    color: var(--primary);
+  }
+  .prose :global(h2) {
+    margin-top: 40px;
+    font-size: 22px;
+  }
+  .prose :global(p) {
+    margin-block: 16px;
+  }
+  .prose :global(pre) {
+    background: var(--bg-raised);
+    padding: 16px;
+    border-radius: var(--radius);
+    overflow-x: auto;
+  }
+  .prose :global(img) {
+    border-radius: var(--radius);
+    margin-block: 16px;
+  }
+</style>

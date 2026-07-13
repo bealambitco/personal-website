@@ -1,0 +1,9 @@
+---
+import { featured } from "../data/featured";
+import CardList from "./CardList.astro";
+---
+
+<section id="featured" class="section container">
+  <span class="eyebrow">Featured</span>
+  <CardList items={featured} />
+</section>

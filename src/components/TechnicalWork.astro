@@ -1,0 +1,21 @@
+---
+import { projects } from "../data/projects";
+import { socials } from "../data/socials";
+import CardList from "./CardList.astro";
+
+const github = socials.find((s) => s.label === "GitHub");
+---
+
+<section id="work" class="section container">
+  <span class="eyebrow">Technical Work</span>
+  {
+    github && (
+      <p class="muted" style="margin-bottom: 16px;">
+        <a href={github.href} target="_blank" rel="noopener noreferrer">
+          See all projects on GitHub ↗
+        </a>
+      </p>
+    )
+  }
+  <CardList items={projects} />
+</section>

@@ -1,0 +1,61 @@
+/*
+  Brand tokens — from the Bea Lambitco brand board (April 2026).
+  Everything else in the site reads color/type from these custom
+  properties, so retheming means editing this one file.
+
+  Rule of thumb from the brand board: violet is always present (it's the
+  primary color), gold marks credentials/achievements, orange marks proof
+  points and actions — and orange especially should stay rare.
+*/
+
+:root {
+  /* brand hues */
+  --color-amethyst: #4a1a8c; /* Royal Amethyst — primary, 62% of any layout */
+  --color-violet: #6929c4; /* Vivid Violet — gradient depth */
+  --color-orchid: #9b5de5; /* Electric Orchid — links, highlights */
+  --color-gold: #b8862a; /* Warm Gold, deepened for text contrast on light bg */
+  --color-gold-chip: #e8b84b; /* Warm Gold as-specified, for badges/chips */
+  --color-orange: #d4622a; /* Signature Orange — proof points & CTAs only */
+  --color-lavender-mist: #f5f2ff;
+
+  /* semantic tokens (light) */
+  --bg: #fdfcff;
+  --bg-raised: var(--color-lavender-mist);
+  --ink: #1e1030;
+  --ink-soft: #5b4a7a;
+  --ink-faint: #8577a3;
+  --primary: var(--color-amethyst);
+  --accent: var(--color-orchid);
+  --gold: var(--color-gold);
+  --gold-chip: var(--color-gold-chip);
+  --orange: var(--color-orange);
+  --border: rgba(74, 26, 140, 0.15);
+  --border-soft: rgba(74, 26, 140, 0.08);
+
+  --font-sans: "Inter Variable", "Inter", ui-sans-serif, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --content-width: 680px;
+  --radius: 8px;
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #140a26;
+    --bg-raised: #1d1136;
+    --ink: #f1ecfb;
+    --ink-soft: #bdaee0;
+    --ink-faint: #8d7bb3;
+    --primary: #b79cf2;
+    --accent: #c9a8ff;
+    --gold: #e8b84b;
+    --gold-chip: #7a5a1e;
+    --orange: #e88254;
+    --border: rgba(238, 228, 255, 0.16);
+    --border-soft: rgba(238, 228, 255, 0.08);
+
+    color-scheme: dark;
+  }
+}

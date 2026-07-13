@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import Timeline from "../components/Timeline.astro";
+import Featured from "../components/Featured.astro";
+import TechnicalWork from "../components/TechnicalWork.astro";
+import LatestArticles from "../components/LatestArticles.astro";
+import Contact from "../components/Contact.astro";
+import { profile } from "../data/profile";
+---
+
+<BaseLayout title={profile.name}>
+  <Hero />
+  <Timeline />
+  <Featured />
+  <TechnicalWork />
+  <LatestArticles />
+  <Contact />
+</BaseLayout>
