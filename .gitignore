@@ -20,3 +20,6 @@ Brand Board*.pdf
 
 # Claude Code project/session files — dev-tool config, not part of the site
 .claude/
+
+# personal editing notes — not part of the deployed site, kept local only
+EDITING.md
