@@ -7,18 +7,14 @@ writing hub organized by topic (AI, Data, Risk, PH Finance, and more).
 
 ## What this is
 
-The brief behind this site was simple: something as fast and unpretentious as
-[karpathy.ai](https://karpathy.ai) (which is, by its own description, "pure
-HTML and CSS, zero frameworks"), with a bit more structure to hold a growing
-archive of writing — closer to what a site like
-[bryllim.com](https://bryllim.com) offers, without the overhead of the
-dynamic, app-like features that come with it.
+A fast, unpretentious personal site with enough structure to hold a growing
+archive of writing, without the overhead of a full web app.
 
-It's built with [Astro](https://astro.build), which compiles down to the same
-kind of flat, static HTML/CSS a hand-written site produces — no JavaScript
-framework ships to the browser. The one deliberate exception is a handful of
-small, framework-free `<script>` tags (filtering/sorting the writing archive,
-a scroll-reveal effect) — plain JavaScript, no build step, no dependency.
+It's built with [Astro](https://astro.build), which compiles down to flat,
+static HTML/CSS — no JavaScript framework ships to the browser. The one
+deliberate exception is a small, framework-free `<script>` tag that powers
+filtering/sorting on the writing archive — plain JavaScript, no build step,
+no dependency.
 
 No database, no CMS, no admin panel. All content lives in plain text/markdown
 files in this repo.
