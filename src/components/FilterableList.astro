@@ -1,0 +1,174 @@
+---
+import type { LinkItem } from "../data/link-item";
+import CardList from "./CardList.astro";
+
+// Wraps CardList with a year filter and a category/newest/oldest view
+// toggle. Used by Featured and Experience, wherever a list can hold more
+// than a couple items per kind (e.g. three "Talk" entries) and benefits
+// from being sorted/filtered rather than read as one long list.
+interface Props {
+  items: LinkItem[];
+}
+
+const { items } = Astro.props;
+
+// Group by kind, preserving each kind's first-appearance order in `items`.
+const kinds: string[] = [];
+for (const item of items) {
+  if (!kinds.includes(item.kind)) kinds.push(item.kind);
+}
+const byKind = kinds.map((kind) => ({
+  kind,
+  items: items.filter((i) => i.kind === kind).sort((a, b) => (b.year ?? 0) - (a.year ?? 0)),
+}));
+
+const years = [...new Set(items.map((i) => i.year).filter((y): y is number => typeof y === "number"))].sort(
+  (a, b) => b - a,
+);
+
+const newest = [...items].sort((a, b) => (b.year ?? 0) - (a.year ?? 0));
+const oldest = [...items].sort((a, b) => (a.year ?? 0) - (b.year ?? 0));
+
+const showFilters = years.length > 1 || kinds.length > 1;
+---
+
+<div class="filterable" data-filterable>
+  {
+    showFilters && (
+      <div class="filter-bar">
+        {years.length > 1 && (
+          <div class="filter-group">
+            <button type="button" class="filter-pill active" data-year-filter="all">
+              All years
+            </button>
+            {years.map((y) => (
+              <button type="button" class="filter-pill" data-year-filter={y}>
+                {y}
+              </button>
+            ))}
+          </div>
+        )}
+        {kinds.length > 1 && (
+          <div class="filter-group">
+            <button type="button" class="view-pill active" data-view-btn="category">
+              By category
+            </button>
+            <button type="button" class="view-pill" data-view-btn="newest">
+              Newest first
+            </button>
+            <button type="button" class="view-pill" data-view-btn="oldest">
+              Oldest first
+            </button>
+          </div>
+        )}
+      </div>
+    )
+  }
+
+  <div data-view-panel="category">
+    {
+      byKind.map(({ kind, items: kindItems }) => (
+        <div class="kind-group">
+          {kinds.length > 1 && <h3 class="kind-heading">{kind}</h3>}
+          <CardList items={kindItems} />
+        </div>
+      ))
+    }
+  </div>
+  <div data-view-panel="newest" hidden>
+    <CardList items={newest} />
+  </div>
+  <div data-view-panel="oldest" hidden>
+    <CardList items={oldest} />
+  </div>
+</div>
+
+<style>
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .filter-pill,
+  .view-pill {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--ink-faint);
+    cursor: pointer;
+  }
+  .filter-pill:hover,
+  .view-pill:hover {
+    color: var(--primary);
+  }
+  .filter-pill.active,
+  .view-pill.active {
+    background: var(--bg-raised);
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+  .kind-group + .kind-group {
+    margin-top: 24px;
+  }
+  .kind-heading {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 4px;
+  }
+</style>
+
+<script>
+  function initFilterable(block: HTMLElement) {
+    const yearButtons = block.querySelectorAll<HTMLButtonElement>("[data-year-filter]");
+    const viewButtons = block.querySelectorAll<HTMLButtonElement>("[data-view-btn]");
+    const panels = block.querySelectorAll<HTMLElement>("[data-view-panel]");
+    const entries = block.querySelectorAll<HTMLElement>(".card-entry");
+    const kindGroups = block.querySelectorAll<HTMLElement>(".kind-group");
+
+    yearButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        yearButtons.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        const year = btn.dataset.yearFilter;
+        entries.forEach((entry) => {
+          const match = year === "all" || entry.dataset.year === year;
+          entry.style.display = match ? "" : "none";
+        });
+        // Hide a kind's heading too when the filter leaves it with no
+        // visible entries (e.g. "Press" has nothing tagged this year).
+        kindGroups.forEach((group) => {
+          const hasVisible = Array.from(group.querySelectorAll<HTMLElement>(".card-entry")).some(
+            (entry) => entry.style.display !== "none",
+          );
+          group.style.display = hasVisible ? "" : "none";
+        });
+      });
+    });
+
+    viewButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        viewButtons.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        const view = btn.dataset.viewBtn;
+        panels.forEach((panel) => {
+          panel.hidden = panel.dataset.viewPanel !== view;
+        });
+      });
+    });
+  }
+
+  document.querySelectorAll<HTMLElement>("[data-filterable]").forEach(initFilterable);
+</script>

@@ -1,21 +1,21 @@
 ---
-import { projects } from "../data/projects";
+import { experience } from "../data/experience";
 import { socials } from "../data/socials";
-import CardList from "./CardList.astro";
+import FilterableList from "./FilterableList.astro";
 
 const github = socials.find((s) => s.label === "GitHub");
 ---
 
-<section id="work" class="section container">
-  <h2 class="eyebrow">Technical Work</h2>
+<section id="experience" class="section container">
+  <h2 class="eyebrow">Experience</h2>
   {
     github && (
       <p class="muted" style="margin-bottom: 16px;">
         <a href={github.href} target="_blank" rel="noopener noreferrer">
-          See all projects on GitHub ↗
+          See code on GitHub ↗
         </a>
       </p>
     )
   }
-  <CardList items={projects} />
+  <FilterableList items={experience} />
 </section>

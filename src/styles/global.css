@@ -37,12 +37,18 @@ img {
 }
 
 a {
-  color: var(--accent);
+  /* Primary (not accent) for resting-state text links: Electric Orchid
+     reads at ~4:1 on the light background, under the 4.5:1 guideline for
+     normal-size text. Royal Amethyst clears it comfortably (~11:1) while
+     staying in the brand's violet family. Orchid still gets its "links,
+     highlights" role on hover, where the brief moment of lower contrast
+     doesn't matter as much. */
+  color: var(--primary);
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
 }
 a:hover {
-  color: var(--primary);
+  color: var(--accent);
 }
 a:focus-visible,
 button:focus-visible {
@@ -87,7 +93,7 @@ pre {
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--primary);
   margin-bottom: 16px;
 }
 
@@ -204,7 +210,7 @@ pre {
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: var(--accent);
+  color: var(--primary);
 }
 .card-title {
   font-weight: 600;

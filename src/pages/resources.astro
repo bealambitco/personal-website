@@ -1,27 +1,43 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { resources } from "../data/resources";
+import { pillars, pillarGroups } from "../data/pillars";
 ---
 
-<BaseLayout title="Resources" description="Tools, learning, and other recommended links.">
-  <section class="section container">
+<BaseLayout title="Resources" description="Tools, learning, and other recommended links, by topic.">
+  <section class="section container wide">
     <a href="/" class="back-link">← Home</a>
     <h1 class="eyebrow" style="margin-top: 16px;">Resources</h1>
-    <div class="resource-groups">
+
+    <div class="group-grid">
       {
-        resources.map((group) => (
-          <div class="resource-group">
-            <h2 class="resource-heading">{group.category}</h2>
-            <ul class="resource-list">
-              {group.items.map((item) => (
-                <li>
-                  <a href={item.href} target="_blank" rel="noopener noreferrer">
-                    {item.label}
-                  </a>
-                  {item.note && <span class="muted"> — {item.note}</span>}
-                </li>
-              ))}
-            </ul>
+        pillarGroups.map((group) => (
+          <div class="group-col">
+            <h2 class="group-heading">{group}</h2>
+            {pillars
+              .filter((p) => p.group === group)
+              .map((pillar) => {
+                const items = resources.filter((r) => r.pillar === pillar.id);
+                return (
+                  <div id={pillar.id} class="pillar-block">
+                    <h3 class="pillar-heading">{pillar.label}</h3>
+                    {items.length > 0 ? (
+                      <ul class="resource-list">
+                        {items.map((item) => (
+                          <li>
+                            <a href={item.href} target="_blank" rel="noopener noreferrer">
+                              {item.label}
+                            </a>
+                            {item.note && <span class="muted"> — {item.note}</span>}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p class="muted small">Nothing here yet.</p>
+                    )}
+                  </div>
+                );
+              })}
           </div>
         ))
       }
@@ -30,6 +46,9 @@ import { resources } from "../data/resources";
 </BaseLayout>
 
 <style>
+  .wide {
+    max-width: 920px;
+  }
   .back-link {
     font-size: 14px;
     color: var(--ink-faint);
@@ -38,16 +57,30 @@ import { resources } from "../data/resources";
   .back-link:hover {
     color: var(--primary);
   }
-  .resource-groups {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    margin-top: 24px;
+  .group-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-top: 28px;
   }
-  .resource-heading {
-    font-size: 15px;
-    margin: 0 0 8px;
+  .group-heading {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .pillar-block {
+    margin-bottom: 20px;
+  }
+  .pillar-heading {
+    font-size: 14.5px;
+    font-weight: 600;
     color: var(--ink);
+    margin: 0 0 6px;
   }
   .resource-list {
     list-style: none;
@@ -56,5 +89,16 @@ import { resources } from "../data/resources";
     display: flex;
     flex-direction: column;
     gap: 6px;
+    font-size: 14.5px;
+  }
+  .small {
+    font-size: 13px;
+  }
+
+  @media (max-width: 720px) {
+    .group-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
   }
 </style>

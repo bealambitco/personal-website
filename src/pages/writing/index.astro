@@ -1,0 +1,52 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import FilterableList from "../../components/FilterableList.astro";
+import { pillars } from "../../data/pillars";
+
+const allPosts = await getCollection("posts", ({ data }) => !data.draft);
+
+// Reuse FilterableList's kind-grouping for pillars instead of Featured's
+// talk/article/video kinds — "kind" here is the pillar label, so "By
+// category" groups articles by topic, and the year filter works the same
+// way it does everywhere else.
+const items = allPosts.map((post) => {
+  const pillar = pillars.find((p) => p.id === post.data.pillar);
+  return {
+    kind: pillar?.label ?? post.data.pillar,
+    title: post.data.title,
+    description: post.data.description,
+    href: `/writing/${post.id}`,
+    date: post.data.date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" }),
+    year: post.data.date.getFullYear(),
+  };
+});
+---
+
+<BaseLayout title="All Articles" description="Every article published on this site, filterable by topic and year.">
+  <section class="section container">
+    <a href="/" class="back-link">← Home</a>
+    <h1 class="eyebrow" style="margin-top: 16px;">All articles</h1>
+
+    {
+      items.length > 0 ? (
+        <FilterableList items={items} />
+      ) : (
+        <p class="muted" style="margin-top: 24px;">
+          Nothing published yet — browse by topic via <a href="/topics">Writing</a> in the nav instead.
+        </p>
+      )
+    }
+  </section>
+</BaseLayout>
+
+<style>
+  .back-link {
+    font-size: 14px;
+    color: var(--ink-faint);
+    text-decoration: none;
+  }
+  .back-link:hover {
+    color: var(--primary);
+  }
+</style>

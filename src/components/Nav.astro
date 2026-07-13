@@ -1,11 +1,11 @@
 ---
 import { profile } from "../data/profile";
-import { pillars } from "../data/pillars";
+import MegaMenu from "./MegaMenu.astro";
 
 const links = [
   { href: "/#timeline", label: "Timeline" },
   { href: "/#featured", label: "Featured" },
-  { href: "/#work", label: "Work" },
+  { href: "/#experience", label: "Experience" },
 ];
 ---
 
@@ -15,17 +15,30 @@ const links = [
     <nav class="nav-links" aria-label="Section navigation">
       {links.map((link) => <a href={link.href}>{link.label}</a>)}
 
-      <details class="nav-dropdown">
+      <details class="nav-dropdown" name="nav-dropdown">
         <summary>Writing</summary>
         <div class="nav-dropdown-panel">
-          <a href="/#latest-articles">Latest</a>
-          <a href="/topics">All topics</a>
-          <div class="nav-dropdown-divider" />
-          {pillars.map((pillar) => <a href={`/topics/${pillar.id}`}>{pillar.label}</a>)}
+          <MegaMenu
+            topLinks={[
+              { href: "/#latest-articles", label: "Latest" },
+              { href: "/topics", label: "All topics" },
+              { href: "/writing", label: "All articles" },
+            ]}
+            hrefFor={(id) => `/topics/${id}`}
+          />
         </div>
       </details>
 
-      <a href="/resources">Resources</a>
+      <details class="nav-dropdown" name="nav-dropdown">
+        <summary>Resources</summary>
+        <div class="nav-dropdown-panel">
+          <MegaMenu
+            topLinks={[{ href: "/resources", label: "All resources" }]}
+            hrefFor={(id) => `/resources#${id}`}
+          />
+        </div>
+      </details>
+
       <a href="/#contact">Contact</a>
     </nav>
   </div>
@@ -46,6 +59,7 @@ const links = [
     justify-content: space-between;
     gap: 16px;
     padding-block: 14px;
+    position: relative;
   }
   .nav-name {
     font-weight: 600;
@@ -73,7 +87,7 @@ const links = [
   }
 
   .nav-dropdown {
-    position: relative;
+    position: static;
   }
   .nav-dropdown summary {
     color: var(--ink-soft);
@@ -102,32 +116,24 @@ const links = [
   }
   .nav-dropdown-panel {
     position: absolute;
-    top: calc(100% + 10px);
-    left: 0;
-    display: flex;
-    flex-direction: column;
-    min-width: 180px;
-    padding: 8px;
+    top: 100%;
+    right: 24px;
+    margin-top: 10px;
+    width: 520px;
+    max-width: calc(100vw - 48px);
+    padding: 16px;
     background: var(--bg);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     box-shadow: 0 8px 24px rgba(30, 16, 48, 0.12);
   }
-  .nav-dropdown-panel a {
-    padding: 6px 10px;
-    border-radius: 6px;
-    color: var(--ink-soft);
-    text-decoration: none;
-    font-size: 14px;
-    white-space: nowrap;
-  }
-  .nav-dropdown-panel a:hover {
-    color: var(--primary);
-    background: var(--bg-raised);
-  }
-  .nav-dropdown-divider {
-    height: 1px;
-    background: var(--border-soft);
-    margin: 6px 4px;
+
+  @media (max-width: 640px) {
+    .nav-dropdown-panel {
+      position: static;
+      width: 100%;
+      margin-top: 12px;
+      box-shadow: none;
+    }
   }
 </style>

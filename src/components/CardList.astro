@@ -1,14 +1,14 @@
 ---
-import type { FeaturedItem } from "../data/featured";
+import type { LinkItem } from "../data/link-item";
 
-// Shared renderer for any list of link cards (Featured, Technical Work,
-// Latest Articles). Internal links (starting with "/") open in the same
-// tab; external links (starting with "http") open in a new tab and get a
-// small "↗" cue so it's clear they leave the site.
-type CardItem = FeaturedItem & { tags?: string[] };
-
+// Shared renderer for any list of link cards (Featured, Experience,
+// Volunteer Work, Latest Articles, topic pages). Internal links (starting
+// with "/") open in the same tab; external links (starting with "http")
+// open in a new tab and get a small "↗" cue so it's clear they leave the
+// site. Each card carries a `data-year` attribute so FilterableList.astro
+// can show/hide entries by year.
 interface Props {
-  items: CardItem[];
+  items: LinkItem[];
 }
 
 const { items } = Astro.props;
@@ -19,7 +19,7 @@ const { items } = Astro.props;
     items.map((item) => {
       const isExternal = item.href.startsWith("http");
       return (
-        <div class="card-entry">
+        <div class="card-entry" data-year={item.year ?? ""}>
           {item.embedUrl && (
             <div class="embed-frame">
               <iframe
