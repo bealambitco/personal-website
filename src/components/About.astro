@@ -1,0 +1,101 @@
+---
+import { profile } from "../data/profile";
+import { timeline } from "../data/timeline";
+---
+
+<section id="about" class="section container">
+  <h2 class="section-title">About</h2>
+  <p class="about-body">{profile.about}</p>
+
+  <div class="stat-grid">
+    {
+      profile.stats.map((stat) => (
+        <div>
+          <div class="stat-value">{stat.value}</div>
+          <div class="stat-label">{stat.label}</div>
+          <div class="stat-detail">{stat.detail}</div>
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="about-timeline">
+    <span class="about-timeline-label">Timeline</span>
+    <ul class="timeline">
+      {
+        timeline.map((entry) => (
+          <li class="timeline-item">
+            <div class="timeline-year">{entry.year}</div>
+            <div class="timeline-title">{entry.title}</div>
+            {entry.detail && <div class="timeline-detail">{entry.detail}</div>}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .about-body {
+    color: var(--ink-soft);
+    margin: 0 0 32px;
+    max-width: 62ch;
+    font-size: 17px;
+  }
+  .stat-grid {
+    margin-bottom: 40px;
+  }
+
+  .about-timeline {
+    padding-top: 32px;
+    border-top: 1px solid var(--border-soft);
+  }
+  .about-timeline-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 16px;
+  }
+  .timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-left: 2px solid var(--border);
+  }
+  .timeline-item {
+    position: relative;
+    padding: 0 0 28px 24px;
+  }
+  .timeline-item:last-child {
+    padding-bottom: 0;
+  }
+  .timeline-item::before {
+    content: "";
+    position: absolute;
+    left: -6px;
+    top: 5px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+  }
+  .timeline-year {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+  }
+  .timeline-title {
+    font-weight: 600;
+    margin-top: 2px;
+  }
+  .timeline-detail {
+    color: var(--ink-soft);
+    font-size: 15px;
+    margin-top: 2px;
+  }
+</style>

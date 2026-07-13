@@ -6,7 +6,7 @@ import { pillars } from "../../data/pillars";
 <BaseLayout title="Writing" description="All topics — browse by subject.">
   <section class="section container">
     <a href="/" class="back-link">← Home</a>
-    <h1 class="eyebrow" style="margin-top: 16px;">All topics</h1>
+    <h1 class="page-title">All topics</h1>
     <p class="muted" style="margin-bottom: 24px;">
       These fill in over time. Each topic links to its own page — once
       there's nothing there yet, it points you to where I currently post.
@@ -45,9 +45,15 @@ import { pillars } from "../../data/pillars";
     border-radius: var(--radius);
     text-decoration: none;
     background: var(--bg-raised);
+    transition:
+      border-color 180ms ease,
+      transform 180ms ease,
+      box-shadow 180ms ease;
   }
   .pillar-card:hover {
     border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(30, 16, 48, 0.08);
   }
   .pillar-label {
     font-weight: 600;

@@ -43,15 +43,19 @@ export const featured: FeaturedItem[] = [
     date: "2024",
     year: 2024,
   },
-  {
-    kind: "Video",
-    title: "Example: how to embed a YouTube talk here",
-    description: "Delete this once you have a real video — embedUrl is what renders the inline player above (use the /embed/ URL form, not the regular watch link).",
-    href: "https://www.youtube.com/watch?v=YOUR_VIDEO_ID",
-    embedUrl: "https://www.youtube.com/embed/YOUR_VIDEO_ID",
-    date: "2025",
-    year: 2025,
-  },
+  // To feature a video with an inline player, uncomment and fill in a real
+  // video ID — `embedUrl` must use YouTube's /embed/ URL form, not /watch.
+  // (Kept commented out: a placeholder ID renders a broken black frame to
+  // visitors, which is worse than no video at all.)
+  // {
+  //   kind: "Video",
+  //   title: "Talk title",
+  //   description: "One line on what the talk covers.",
+  //   href: "https://www.youtube.com/watch?v=VIDEO_ID",
+  //   embedUrl: "https://www.youtube.com/embed/VIDEO_ID",
+  //   date: "2025",
+  //   year: 2025,
+  // },
   {
     kind: "Article",
     title: "AI in Finance: where the value actually is",

@@ -20,11 +20,15 @@ export const profile = {
   about:
     "Most PH finance teams don't have an AI problem — they have a clarity, workflow, and prioritisation problem. I've sat on both sides of that gap: inside a financial institution building the data and AI capability, and now helping other teams do the same through consulting, training, and speaking.",
 
+  // `credlyUrl` is optional — set it to your Credly badge URL
+  // (https://www.credly.com/badges/<id>) and the chip becomes a link that
+  // opens the badge in a new tab. Leave it out and the chip stays plain
+  // text, so this is safe to fill in one at a time.
   credentials: [
-    "FRM · Certified Financial Risk Manager",
-    "Microsoft Azure AI Engineer",
-    "BSP-IFC Hackathon Winner 2024",
-    "Ateneo de Manila · Magna Cum Laude",
+    { label: "FRM · Certified Financial Risk Manager", credlyUrl: "" },
+    { label: "Microsoft Azure AI Engineer", credlyUrl: "" },
+    { label: "BSP-IFC Hackathon Winner 2024", credlyUrl: "" },
+    { label: "Ateneo de Manila · Magna Cum Laude", credlyUrl: "" },
   ],
 
   // Proof points. Keep this list short — these are the numbers that back
