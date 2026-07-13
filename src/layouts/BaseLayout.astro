@@ -29,6 +29,13 @@ const pageTitle = title === profile.name ? title : `${title} · ${profile.name}`
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary" />
     <Analytics />
+    <script is:inline>
+      // Runs synchronously before the body paints, so the CSS that hides
+      // sections pending their scroll-reveal only ever applies once we know
+      // JS actually works — no flash of hidden content, and it degrades to
+      // "everything just visible" if JS is off or fails.
+      document.documentElement.classList.add("has-js");
+    </script>
   </head>
   <body>
     <Nav />
@@ -36,5 +43,20 @@ const pageTitle = title === profile.name ? title : `${title} · ${profile.name}`
       <slot />
     </main>
     <Footer />
+    <script>
+      const targets = document.querySelectorAll("main > .hero, main > .section");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            }
+          }
+        },
+        { threshold: 0.15, rootMargin: "0px 0px -60px 0px" },
+      );
+      targets.forEach((el) => observer.observe(el));
+    </script>
   </body>
 </html>

@@ -1,5 +1,6 @@
 ---
 import { profile } from "../data/profile";
+import { timeline } from "../data/timeline";
 ---
 
 <section class="hero container">
@@ -15,7 +16,17 @@ import { profile } from "../data/profile";
   <p class="hero-about">{profile.about}</p>
 
   <div class="tag-row">
-    {profile.credentials.map((c) => <span class="tag tag-credential">{c}</span>)}
+    {
+      profile.credentials.map((c) =>
+        c.credlyUrl ? (
+          <a class="tag tag-credential" href={c.credlyUrl} target="_blank" rel="noopener noreferrer">
+            {c.label} <span class="card-external">↗</span>
+          </a>
+        ) : (
+          <span class="tag tag-credential">{c.label}</span>
+        ),
+      )
+    }
   </div>
 
   <div class="stat-grid">
@@ -28,6 +39,21 @@ import { profile } from "../data/profile";
         </div>
       ))
     }
+  </div>
+
+  <div id="timeline" class="hero-timeline">
+    <span class="hero-timeline-label">Timeline</span>
+    <ul class="timeline">
+      {
+        timeline.map((entry) => (
+          <li class="timeline-item">
+            <div class="timeline-year">{entry.year}</div>
+            <div class="timeline-title">{entry.title}</div>
+            {entry.detail && <div class="timeline-detail">{entry.detail}</div>}
+          </li>
+        ))
+      }
+    </ul>
   </div>
 </section>
 
@@ -51,6 +77,10 @@ import { profile } from "../data/profile";
     flex-shrink: 0;
     border: 1px solid var(--border);
     background: var(--bg-raised);
+    transition: transform 220ms ease;
+  }
+  .hero-photo:hover {
+    transform: scale(1.03);
   }
   .hero-heading h1 {
     font-size: 28px;
@@ -75,6 +105,60 @@ import { profile } from "../data/profile";
   }
   .stat-grid {
     margin-top: 4px;
+  }
+
+  .hero-timeline {
+    margin-top: 12px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border-soft);
+  }
+  .hero-timeline-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 16px;
+  }
+  .timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-left: 2px solid var(--border);
+  }
+  .timeline-item {
+    position: relative;
+    padding: 0 0 28px 24px;
+  }
+  .timeline-item:last-child {
+    padding-bottom: 0;
+  }
+  .timeline-item::before {
+    content: "";
+    position: absolute;
+    left: -6px;
+    top: 5px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+  }
+  .timeline-year {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+  }
+  .timeline-title {
+    font-weight: 600;
+    margin-top: 2px;
+  }
+  .timeline-detail {
+    color: var(--ink-soft);
+    font-size: 15px;
+    margin-top: 2px;
   }
 
   @media (max-width: 480px) {

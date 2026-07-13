@@ -18,5 +18,5 @@ npm-debug.log*
 # reference doc, not part of the site — kept local only (11MB binary)
 Brand Board*.pdf
 
-# local Claude Code settings, not project config
-.claude/settings.local.json
+# Claude Code project/session files — dev-tool config, not part of the site
+.claude/

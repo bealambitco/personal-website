@@ -21,6 +21,24 @@ html {
   }
 }
 
+/* Scroll reveal — only applies once `.has-js` proves the observer script
+   actually ran (see BaseLayout.astro), so content already visible if JS is
+   off. Reduced-motion users still get it, just effectively instantly, via
+   the transition-duration override above. */
+.has-js .hero,
+.has-js .section {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 500ms ease,
+    transform 500ms ease;
+}
+.has-js .hero.is-visible,
+.has-js .section.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
 body {
   margin: 0;
   background: var(--bg);
@@ -46,6 +64,7 @@ a {
   color: var(--primary);
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
+  transition: color 180ms ease;
 }
 a:hover {
   color: var(--accent);
@@ -85,16 +104,25 @@ pre {
 .section + .section {
   border-top: 1px solid var(--border);
 }
+/* Full-bleed tint on alternating sections, without any wrapper markup — the
+   box-shadow spreads past the section's own (narrow) width, and clip-path
+   stops it from creating horizontal overflow. Gives wide viewports visual
+   rhythm across the full width while the text itself stays in a readable
+   column. */
+.section:nth-of-type(even) {
+  box-shadow: 0 0 0 100vmax var(--bg-raised);
+  clip-path: inset(0 -100vmax);
+}
 
 .eyebrow {
   display: block;
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 500;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--primary);
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
 /* credential / pillar tags */
@@ -113,10 +141,15 @@ pre {
   color: var(--ink-soft);
   text-decoration: none;
   background: var(--bg-raised);
+  transition:
+    color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
 }
 .tag:hover {
   color: var(--primary);
   border-color: var(--accent);
+  transform: translateY(-1px);
 }
 .tag.tag-credential {
   background: color-mix(in srgb, var(--gold-chip) 18%, var(--bg-raised));
@@ -148,46 +181,6 @@ pre {
   color: var(--ink-faint);
 }
 
-/* timeline */
-.timeline {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  border-left: 2px solid var(--border);
-}
-.timeline-item {
-  position: relative;
-  padding: 0 0 28px 24px;
-}
-.timeline-item:last-child {
-  padding-bottom: 0;
-}
-.timeline-item::before {
-  content: "";
-  position: absolute;
-  left: -6px;
-  top: 5px;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--accent);
-  border: 2px solid var(--bg);
-}
-.timeline-year {
-  font-family: var(--font-mono);
-  font-size: 13px;
-  color: var(--ink-faint);
-}
-.timeline-title {
-  font-weight: 600;
-  margin-top: 2px;
-}
-.timeline-detail {
-  color: var(--ink-soft);
-  font-size: 15px;
-  margin-top: 2px;
-}
-
 /* featured cards */
 .card-list {
   display: flex;
@@ -201,9 +194,15 @@ pre {
   border-radius: var(--radius);
   text-decoration: none;
   color: inherit;
+  transition:
+    background-color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
 }
 .card-link:hover {
   background: var(--bg-raised);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(30, 16, 48, 0.08);
 }
 .card-kind {
   font-family: var(--font-mono);

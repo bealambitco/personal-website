@@ -3,7 +3,6 @@ import { profile } from "../data/profile";
 import MegaMenu from "./MegaMenu.astro";
 
 const links = [
-  { href: "/#timeline", label: "Timeline" },
   { href: "/#featured", label: "Featured" },
   { href: "/#experience", label: "Experience" },
 ];
@@ -81,6 +80,7 @@ const links = [
     text-decoration: none;
     font-size: 14px;
     white-space: nowrap;
+    transition: color 180ms ease;
   }
   .nav-links > a:hover {
     color: var(--primary);
@@ -95,6 +95,7 @@ const links = [
     cursor: pointer;
     list-style: none;
     white-space: nowrap;
+    transition: color 180ms ease;
   }
   .nav-dropdown summary::-webkit-details-marker {
     display: none;

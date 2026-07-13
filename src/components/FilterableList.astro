@@ -106,6 +106,10 @@ const showFilters = years.length > 1 || kinds.length > 1;
     background: var(--bg);
     color: var(--ink-faint);
     cursor: pointer;
+    transition:
+      color 180ms ease,
+      border-color 180ms ease,
+      background-color 180ms ease;
   }
   .filter-pill:hover,
   .view-pill:hover {
