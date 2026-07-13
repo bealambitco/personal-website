@@ -8,8 +8,8 @@ export type SocialLink = {
 export const socials: SocialLink[] = [
   { label: "Email", href: "mailto:bealambitco@yahoo.com" },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/bea-lambitco" },
-  // TODO: replace with your real GitHub profile — TechnicalWork.astro reads
-  // this entry by label to build its "See all projects on GitHub" link.
+  // TODO: replace with your real GitHub profile — Experience.astro reads
+  // this entry by label to build its "See code on GitHub" link.
   { label: "GitHub", href: "https://github.com/your-username" },
   // TODO: replace with your real Calendly (or other scheduling) link.
   { label: "Book a time", href: "https://calendly.com/your-handle" },

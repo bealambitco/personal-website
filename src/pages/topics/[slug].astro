@@ -43,8 +43,8 @@ const linkOut = socials.find((s) => s.label === "LinkedIn") ?? socials[0];
         </div>
       ) : (
         <p class="muted" style="margin-top: 24px;">
-          Nothing posted directly on the site yet — in the meantime, find {pillar.label.toLowerCase()}-related
-          posts on <a href={linkOut.href}>{linkOut.label}</a>. Once an article is ready, add a markdown file to
+          Nothing posted directly on the site yet — in the meantime, find {pillar.label} posts on{" "}
+          <a href={linkOut.href}>{linkOut.label}</a>. Once an article is ready, add a markdown file to
           <code>src/content/posts/</code> with <code>pillar: "{pillar.id}"</code> and it'll appear here automatically.
         </p>
       )

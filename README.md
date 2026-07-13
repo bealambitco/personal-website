@@ -73,9 +73,12 @@ separate (unpaid community work is a different kind of entry than paid
 roles/projects), and Featured stays separate too (that's external
 recognition — talks, press, media about you — not roles you held).
 
-## Filtering and sorting (Featured / Experience / All Articles)
+## Filtering and sorting (Featured / Experience / Volunteer Work / All Articles)
 
-These three lists share one component, `FilterableList.astro`:
+These lists share one component, `FilterableList.astro`. The filter/sort
+bar itself only appears once there's more than one year or more than one
+kind in the data — Volunteer Work usually won't show it until it has more
+than one entry:
 
 - **Year filter**: pill buttons for each year present in the data (only
   shown if there's more than one year).
@@ -145,7 +148,7 @@ and delete/replace:
   example content_`) — delete the files or overwrite them with real posts.
 - Example entries in `featured.ts`, `experience.ts`, `volunteer.ts`,
   `resources.ts` — replace with your real talks/projects/links.
-- Exact years in `timeline.ts` are marked `TODO`.
+- Exact years in `timeline.ts` are marked `20XX`.
 - Confirm which email you want published in `profile.ts`.
 - Real URLs for GitHub and Calendly (or equivalent) in `socials.ts`.
 
