@@ -217,6 +217,24 @@ pre {
 .card-link:hover .card-title {
   color: var(--primary);
 }
+/* thumbnail sits beside the text instead of stacked above it */
+.card-link.has-thumb {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.card-thumb {
+  flex-shrink: 0;
+  width: 84px;
+  height: 84px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-soft);
+  background: var(--bg-raised);
+}
+.card-body {
+  min-width: 0;
+}
 .card-kind {
   font-family: var(--font-mono);
   font-size: 12px;
@@ -256,9 +274,16 @@ pre {
 .card-list.grid .card-link:hover {
   border-color: var(--accent);
 }
-.card-list.grid .card-image {
-  max-height: 140px;
-  margin-bottom: 10px;
+/* in a grid tile the thumbnail sits on top, sized to fit the tile, not
+   beside the text (too narrow a column for a side-by-side layout) */
+.card-list.grid .card-link.has-thumb {
+  flex-direction: column;
+}
+.card-list.grid .card-thumb {
+  width: 100%;
+  height: 72px;
+  object-fit: contain;
+  padding: 8px;
 }
 
 /* inline embeds (YouTube, or any iframe-able page) on a card */
@@ -276,16 +301,6 @@ pre {
   width: 100%;
   height: 100%;
   border: 0;
-}
-
-.card-image {
-  display: block;
-  width: 100%;
-  max-height: 320px;
-  object-fit: cover;
-  border-radius: var(--radius);
-  border: 1px solid var(--border-soft);
-  margin-bottom: 12px;
 }
 
 .tag-sm {

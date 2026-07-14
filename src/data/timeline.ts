@@ -8,7 +8,7 @@ export type TimelineEntry = {
 export const timeline: TimelineEntry[] = [
   {
     year: "2024",
-    title: "Started Corporate Trainer role & Data and AI Consultant (self-employed)",
+    title: "Data and AI Consultant/Corporate Trainer (self-employed)",
     detail: "18 Data & AI courses delivered (5.2/6 avg rating), alongside data modelling, engineering, and business analysis for a global consulting firm.",
   },
   {
