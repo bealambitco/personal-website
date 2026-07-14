@@ -1,5 +1,6 @@
 ---
 import type { LinkItem } from "../data/link-item";
+import { getPreviewImage } from "../lib/link-preview";
 
 // Shared renderer for any list of link cards (Featured, Experience,
 // Volunteer Work, Latest Articles, topic pages). Internal links (starting
@@ -9,15 +10,41 @@ import type { LinkItem } from "../data/link-item";
 // can show/hide entries by year.
 interface Props {
   items: LinkItem[];
+  // "grid" renders compact bordered tiles instead of full-width rows —
+  // use it for lists that are long and don't need much room per entry
+  // (e.g. certifications). Defaults to the row layout everywhere else.
+  layout?: "list" | "grid";
 }
 
-const { items } = Astro.props;
+const { items, layout = "list" } = Astro.props;
+
+// URLs where an og:image exists but is never actually representative of
+// the specific entry, so auto-fetching it just adds visual noise:
+// - linkedin.com/in/... is a personal profile page — its image is always
+//   the same profile photo, not a preview of whatever it's linked from.
+// - learn.microsoft.com credential pages all share one generic sitewide
+//   banner, not a per-credential image.
+function shouldSkipPreview(url: string): boolean {
+  return /linkedin\.com\/in\//i.test(url) || /learn\.microsoft\.com/i.test(url);
+}
+
+// Auto-fetch a real preview image for external links that don't already
+// have one set by hand — best-effort, silently skipped if it fails or if
+// the source is known not to give a meaningful image (see above).
+const resolvedItems = await Promise.all(
+  items.map(async (item) => {
+    if (item.imageUrl || item.embedUrl || !item.href.startsWith("http") || shouldSkipPreview(item.href)) return item;
+    const preview = await getPreviewImage(item.href);
+    return preview ? { ...item, imageUrl: preview } : item;
+  }),
+);
 ---
 
-<div class="card-list">
+<div class={`card-list ${layout}`}>
   {
-    items.map((item) => {
+    resolvedItems.map((item) => {
       const isExternal = item.href.startsWith("http");
+      const hasThumb = !item.embedUrl && !!item.imageUrl;
       return (
         <div class="card-entry" data-year={item.year ?? ""}>
           {item.embedUrl && (
@@ -34,25 +61,28 @@ const { items } = Astro.props;
             </div>
           )}
           <a
-            class="card-link"
+            class={`card-link${hasThumb ? " has-thumb" : ""}`}
             href={item.href}
             target={isExternal ? "_blank" : undefined}
             rel={isExternal ? "noopener noreferrer" : undefined}
           >
-            <div class="card-kind">
-              {item.kind}
-              {item.date && ` · ${item.date}`}
-              {isExternal && <span class="card-external"> ↗</span>}
-            </div>
-            <div class="card-title">{item.title}</div>
-            <div class="card-description">{item.description}</div>
-            {item.tags && item.tags.length > 0 && (
-              <div class="tag-row" style="margin-top: 8px;">
-                {item.tags.map((tag) => (
-                  <span class="tag tag-sm">{tag}</span>
-                ))}
+            {hasThumb && <img class="card-thumb" src={item.imageUrl} alt="" loading="lazy" />}
+            <div class="card-body">
+              <div class="card-kind">
+                {item.kind}
+                {item.date && ` · ${item.date}`}
+                {isExternal && <span class="card-external"> ↗</span>}
               </div>
-            )}
+              <div class="card-title">{item.title}</div>
+              {item.description && <div class="card-description">{item.description}</div>}
+              {item.tags && item.tags.length > 0 && (
+                <div class="tag-row" style="margin-top: 8px;">
+                  {item.tags.map((tag) => (
+                    <span class="tag tag-sm">{tag}</span>
+                  ))}
+                </div>
+              )}
+            </div>
           </a>
         </div>
       );

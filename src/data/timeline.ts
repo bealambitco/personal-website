@@ -8,23 +8,13 @@ export type TimelineEntry = {
 export const timeline: TimelineEntry[] = [
   {
     year: "2024",
-    title: "Started Corporate Trainer role",
-    detail: "18 Data & AI courses delivered (Prompt Engineering, SQL, Python, Power BI, BigQuery), 5.2/6 avg rating.",
-  },
-  {
-    year: "2024",
-    title: "Started Data and AI Consultant (self-employed)",
-    detail: "Data modelling, engineering, and business analysis for a global consulting firm; grew a high-performing Data & AI team.",
-  },
-  {
-    year: "2024",
-    title: "Won BSP-IFC Open Finance PH Hackathon",
-    detail: "#1 with Pensyon PH — a retirement planning solution built on Open API and GenAI.",
+    title: "Data and AI Consultant/Corporate Trainer (self-employed)",
+    detail: "18 Data & AI courses delivered (5.2/6 avg rating), alongside data modelling, engineering, and business analysis for a global consulting firm.",
   },
   {
     year: "2019–2024",
     title: "Data & Analytics Head (3 yrs) · Risk Manager (2 yrs), ATRAM",
-    detail: "Pioneered the Data & Analytics team, built the firm's Azure data warehouse, and saved $2.25M with an AML screening tool.",
+    detail: "Pioneered the Data & Analytics team, built the firm's Azure data warehouse, and saved $2.25M with an AML screening tool — capped by winning #1 at the BSP-IFC Open Finance PH Hackathon (2024) with Pensyon PH.",
   },
   {
     year: "2023–2024",
