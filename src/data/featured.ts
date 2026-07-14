@@ -11,10 +11,14 @@ export type FeaturedItem = LinkItem;
 // once you know it.
 export const featured: FeaturedItem[] = [
   {
+    // this page has no og:image (confirmed — checked its raw HTML), so
+    // pointing at the article's own real editorial photo instead of
+    // leaving it blank
     kind: "Press",
     title: "Featured in Microsoft's coverage of ATRAM's Azure rollout",
     description: "Quoted as Head of Data & Analytics at ATRAM on tackling data quality and governance challenges.",
     href: "https://news.microsoft.com/en-ph/2023/03/17/atram-enhances-data-management-and-connectivity-with-microsoft-solutions-unlocks-more-investment-opportunities-for-filipinos/",
+    imageUrl: "https://msftstories.thesourcemediaassets.com/sites/436/2023/03/CLO18_bankCoworkers_001-scaled.jpg",
     date: "Mar 2023",
     year: 2023,
   },
@@ -53,7 +57,10 @@ export const featured: FeaturedItem[] = [
     year: 2025,
   },
   {
-    // approx. — exact 2025 date not given
+    // approx. — exact 2025 date not given. Its auto-fetched LinkedIn image
+    // didn't render reliably once deployed (LinkedIn's CDN links aren't
+    // stable outside their own site — same problem as Facebook's), so
+    // this stays text-only rather than ship something broken.
     kind: "Talk",
     title: "Guest speaker, University of Perpetual Help System Laguna",
     description: "TechCon session on data journeys and AI.",

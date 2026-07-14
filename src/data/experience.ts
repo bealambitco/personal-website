@@ -97,9 +97,13 @@ export const experience: ExperienceItem[] = [
     year: 2022,
   },
   {
+    // learn.microsoft.com credential pages don't expose a per-credential
+    // image (confirmed), so using a self-hosted badge icon for consistency
+    // with the Credly-badge cards above instead of leaving it blank
     kind: "Certification",
     title: "Microsoft Certified: Azure Data Engineer Associate",
     href: "https://learn.microsoft.com/en-us/users/bealambitco-6128/credentials/132cc3ed72252cd0",
+    imageUrl: "/logos/microsoft-badge.png",
     date: "2023",
     year: 2023,
   },
@@ -114,6 +118,7 @@ export const experience: ExperienceItem[] = [
     kind: "Certification",
     title: "Microsoft AI Credential",
     href: "https://learn.microsoft.com/en-us/users/bealambitco-6128/credentials/4676fdc18a7500ba",
+    imageUrl: "/logos/microsoft-badge.png",
     date: "2024",
     year: 2024,
   },

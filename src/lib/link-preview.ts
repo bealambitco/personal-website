@@ -28,9 +28,13 @@ async function fetchOgImage(url: string): Promise<string | null> {
     // Facebook's CDN (fbcdn.net) serves signed, short-lived image URLs —
     // they work at fetch time but routinely 404/403 once the signature
     // expires, so a card embedding one would break unpredictably after
-    // deploy. Not worth it for a permanently-live site.
+    // deploy. LinkedIn's post-share images (licdn.com) turned out to have
+    // the same problem in practice (confirmed broken once actually
+    // deployed, despite resolving fine at build time) — not worth it for
+    // a permanently-live site either.
+    const unreliableImageHosts = /(?:fbcdn\.net|licdn\.com)$/i;
     try {
-      if (/fbcdn\.net$/i.test(new URL(image).hostname)) return null;
+      if (unreliableImageHosts.test(new URL(image).hostname)) return null;
     } catch {
       return null;
     }
