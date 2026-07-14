@@ -26,7 +26,7 @@ export const profile = {
   // text, so this is safe to fill in one at a time.
   credentials: [
     { label: "FRM · Certified Financial Risk Manager", credlyUrl: "" },
-    { label: "Microsoft Azure AI Engineer", credlyUrl: "" },
+    { label: "Microsoft Certified: AI-900 · DP-900 · AZ-900", credlyUrl: "" },
     { label: "BSP-IFC Hackathon Winner 2024", credlyUrl: "" },
     { label: "Ateneo de Manila · Magna Cum Laude", credlyUrl: "" },
   ],
@@ -34,10 +34,10 @@ export const profile = {
   // Proof points. Keep this list short — these are the numbers that back
   // up the claims above, not a full résumé.
   stats: [
-    { value: "$2.25M", label: "Cost saved", detail: "AML screening tool · ATRAM" },
-    { value: "90%", label: "Time reduction", detail: "Report prep time · ATRAM" },
     { value: "18", label: "Courses delivered", detail: "5.2/6 avg trainer rating" },
     { value: "#1", label: "Hackathon winner", detail: "BSP-IFC Open Finance PH · 2024" },
+    { value: "5 yrs", label: "Data & Risk leadership", detail: "Data & Analytics Head + Risk Manager · ATRAM" },
+    { value: "Top 30", label: "of 1,986 graduates", detail: "Ateneo de Manila · Magna Cum Laude" },
   ],
 
   // Path to your photo inside /public. This is a placeholder monogram —

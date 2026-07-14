@@ -4,14 +4,19 @@ export type VolunteerItem = LinkItem;
 
 // Unpaid community contributions — separate from Experience (paid work,
 // projects, teaching) so it doesn't get lost in that list.
-//
-// TODO: replace with your real volunteer work, or delete this section from
-// index.astro entirely if it doesn't apply.
 export const volunteer: VolunteerItem[] = [
   {
     kind: "Volunteer",
-    title: "[Organization name]",
-    description: "One line on your role and what you contributed.",
+    title: "Moderator, Data Engineering Pilipinas (DEP)",
+    description: "Helped build DEP's open learning program; volunteered at partner events as judge, speaker, mentor, and organizer.",
+    href: "https://www.linkedin.com/in/bea-lambitco",
+    date: "2024–present",
+    year: 2024,
+  },
+  {
+    kind: "Mentor",
+    title: "Mentor — Women in Big Data, FTW Foundation, KadaKareer",
+    description: "Mentored students and professionals on their data career growth.",
     href: "https://www.linkedin.com/in/bea-lambitco",
     date: "2023–present",
     year: 2023,
