@@ -16,7 +16,7 @@ const { Content } = await render(post);
 const pillar = pillars.find((p) => p.id === post.data.pillar);
 ---
 
-<BaseLayout title={post.data.title} description={post.data.description}>
+<BaseLayout title={post.data.title} description={post.data.description} canonicalUrl={post.data.canonicalUrl}>
   <article class="section container prose">
     {pillar && (
       <a href={`/topics/${pillar.id}`} class="back-link">← {pillar.label}</a>
