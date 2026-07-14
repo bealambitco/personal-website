@@ -16,8 +16,8 @@ import { profile } from "../data/profile";
   <div class="tag-row">
     {
       profile.credentials.map((c) =>
-        c.credlyUrl ? (
-          <a class="tag tag-credential" href={c.credlyUrl} target="_blank" rel="noopener noreferrer">
+        c.url ? (
+          <a class="tag tag-credential" href={c.url} target="_blank" rel="noopener noreferrer">
             {c.label} <span class="card-external">↗</span>
           </a>
         ) : (

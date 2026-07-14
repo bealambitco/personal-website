@@ -12,23 +12,25 @@ export const profile = {
   // Shown next to your photo. Keep it to 2-3 sentences — this is the
   // "who is this person" summary.
   tagline:
-    "Finance-native data and AI expertise. I help financial institutions turn analytics and automation into clear, measurable outcomes.",
+    "Finance-native data and AI expertise — turning analytics and automation into clear, measurable outcomes for financial institutions.",
 
   // One tight paragraph — this sits right under the tagline in the compact
   // hero block, above your credentials and achievements. Keep it short on
   // purpose; it's a summary, not the full story.
   about:
-    "Most PH finance teams don't have an AI problem — they have a clarity, workflow, and prioritisation problem. I've sat on both sides of that gap: inside a financial institution building the data and AI capability, and now helping other teams do the same through consulting, training, and speaking.",
+    "Most PH finance teams don't have an AI problem. They have a clarity, workflow, and prioritisation problem. I've worked both sides of that gap — building the data and AI capability inside a financial institution, and now helping other teams do the same through consulting, training, and speaking.",
 
-  // `credlyUrl` is optional — set it to your Credly badge URL
-  // (https://www.credly.com/badges/<id>) and the chip becomes a link that
-  // opens the badge in a new tab. Leave it out and the chip stays plain
-  // text, so this is safe to fill in one at a time.
+  // `url` is optional — set it to a verification link (Credly, Microsoft
+  // Learn, GARP, Coursera, etc.) and the chip becomes a link that opens it
+  // in a new tab. Leave it out and the chip stays plain text.
   credentials: [
-    { label: "FRM · Certified Financial Risk Manager", credlyUrl: "" },
-    { label: "Microsoft Certified: AI-900 · DP-900 · AZ-900", credlyUrl: "" },
-    { label: "BSP-IFC Hackathon Winner 2024", credlyUrl: "" },
-    { label: "Ateneo de Manila · Magna Cum Laude", credlyUrl: "" },
+    { label: "FRM · Certified Financial Risk Manager", url: "https://my.garp.org/DigitalBadgeFRM?id=0031W0000210o7kQAA" },
+    {
+      label: "Azure Data Engineer Associate",
+      url: "https://learn.microsoft.com/en-us/users/bealambitco-6128/credentials/132cc3ed72252cd0",
+    },
+    { label: "BSP-IFC Hackathon Winner 2024", url: "https://www.bsp.gov.ph/SitePages/MediaAndResearch/MediaDisp.aspx?ItemId=7225" },
+    { label: "Ateneo de Manila · Magna Cum Laude", url: "" },
   ],
 
   // Proof points. Keep this list short — these are the numbers that back
@@ -40,9 +42,7 @@ export const profile = {
     { value: "Top 30", label: "of 1,986 graduates", detail: "Ateneo de Manila · Magna Cum Laude" },
   ],
 
-  // Path to your photo inside /public. This is a placeholder monogram —
-  // drop your real portrait in public/ (e.g. public/photo.jpg) and change
-  // this to "/photo.jpg" to replace it.
-  photo: "/photo.svg",
+  // Path to your photo inside /public.
+  photo: "/photo.jpg",
   photoAlt: "Portrait of Bea Lambitco",
 };

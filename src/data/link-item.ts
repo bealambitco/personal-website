@@ -4,7 +4,9 @@
 // everywhere, regardless of which section renders them.
 export type LinkItem = {
   title: string;
-  description: string;
+  // Optional — leave it out for a terse entry (e.g. a certification) that
+  // doesn't need a summary line.
+  description?: string;
   href: string;
   // Free text — each section defines its own conventional values, e.g.
   // Featured uses "Talk" | "Article" | "Video" | "Press" | "Project";
@@ -18,5 +20,8 @@ export type LinkItem = {
   // YouTube "/embed/" URL (or any iframe-able page) — shows an inline
   // preview above the card. See featured.ts for an example.
   embedUrl?: string;
+  // A plain photo instead of a video embed — path under /public (e.g.
+  // "/volunteer/dep-2024.jpg") or a full URL. Ignored if embedUrl is set.
+  imageUrl?: string;
   tags?: string[];
 };

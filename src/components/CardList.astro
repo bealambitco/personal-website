@@ -20,7 +20,7 @@ const { items } = Astro.props;
       const isExternal = item.href.startsWith("http");
       return (
         <div class="card-entry" data-year={item.year ?? ""}>
-          {item.embedUrl && (
+          {item.embedUrl ? (
             <div class="embed-frame">
               <iframe
                 src={item.embedUrl}
@@ -32,6 +32,8 @@ const { items } = Astro.props;
                 sandbox="allow-scripts allow-same-origin allow-presentation allow-popups"
               />
             </div>
+          ) : (
+            item.imageUrl && <img class="card-image" src={item.imageUrl} alt="" loading="lazy" />
           )}
           <a
             class="card-link"
@@ -45,7 +47,7 @@ const { items } = Astro.props;
               {isExternal && <span class="card-external"> ↗</span>}
             </div>
             <div class="card-title">{item.title}</div>
-            <div class="card-description">{item.description}</div>
+            {item.description && <div class="card-description">{item.description}</div>}
             {item.tags && item.tags.length > 0 && (
               <div class="tag-row" style="margin-top: 8px;">
                 {item.tags.map((tag) => (
