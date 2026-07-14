@@ -23,7 +23,18 @@ async function fetchOgImage(url: string): Promise<string | null> {
     const match =
       html.match(/<meta[^>]+property=["']og:image["'][^>]*content=["']([^"']+)["']/i) ??
       html.match(/<meta[^>]+content=["']([^"']+)["'][^>]*property=["']og:image["']/i);
-    return match?.[1]?.trim() || null;
+    const image = match?.[1]?.trim();
+    if (!image) return null;
+    // Facebook's CDN (fbcdn.net) serves signed, short-lived image URLs —
+    // they work at fetch time but routinely 404/403 once the signature
+    // expires, so a card embedding one would break unpredictably after
+    // deploy. Not worth it for a permanently-live site.
+    try {
+      if (/fbcdn\.net$/i.test(new URL(image).hostname)) return null;
+    } catch {
+      return null;
+    }
+    return image;
   } catch {
     return null;
   }

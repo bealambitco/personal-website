@@ -1,5 +1,13 @@
 ---
 import { profile } from "../data/profile";
+import { socials } from "../data/socials";
+
+// Your most-checked profiles, surfaced right under your credentials so a
+// visitor doesn't have to scroll to Contact to find them. Contact still
+// exists separately for Email/Book a time. Add/remove labels here — it
+// just filters the shared `socials` list, doesn't need its own data file.
+const handleLabels = ["LinkedIn", "GitHub", "YouTube", "TikTok"];
+const handles = socials.filter((s) => handleLabels.includes(s.label));
 ---
 
 <section class="hero container">
@@ -24,6 +32,19 @@ import { profile } from "../data/profile";
           <span class="tag tag-credential">{c.label}</span>
         ),
       )
+    }
+  </div>
+
+  <div class="handle-row">
+    {
+      handles.map((s, i) => (
+        <>
+          {i > 0 && <span class="handle-sep">·</span>}
+          <a href={s.href} target="_blank" rel="noopener noreferrer">
+            {s.label}
+          </a>
+        </>
+      ))
     }
   </div>
 </section>
@@ -71,6 +92,24 @@ import { profile } from "../data/profile";
     max-width: 58ch;
     font-size: 20px;
     line-height: 1.5;
+  }
+  .handle-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-top: -6px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+  }
+  .handle-row a {
+    color: var(--ink-soft);
+  }
+  .handle-row a:hover {
+    color: var(--primary);
+  }
+  .handle-sep {
+    color: var(--border);
   }
 
   @media (max-width: 480px) {

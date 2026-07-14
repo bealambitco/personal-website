@@ -1,12 +1,17 @@
 ---
 import { socials } from "../data/socials";
 import { profile } from "../data/profile";
+
+// LinkedIn/GitHub/YouTube/TikTok live in Hero now — no need to repeat them
+// here too. Keep this to the two things "get in touch" actually means.
+const contactLabels = ["Email", "Book a time"];
+const contactLinks = socials.filter((s) => contactLabels.includes(s.label));
 ---
 
 <section id="contact" class="section container">
   <h2 class="section-title">Get in touch</h2>
   <p class="muted" style="margin-bottom: 16px;">{profile.location}</p>
   <div class="tag-row">
-    {socials.map((social) => <a class="tag" href={social.href}>{social.label}</a>)}
+    {contactLinks.map((social) => <a class="tag" href={social.href}>{social.label}</a>)}
   </div>
 </section>
