@@ -42,6 +42,9 @@ files in this repo.
   together as more gets added
 - Sitemap + `robots.txt` + Open Graph/Twitter card images out of the box,
   and security headers (CSP and friends) via `vercel.json`
+- Link cards fetch their own preview thumbnail automatically at build time
+  (the same `og:image` you'd see pasting a link into Slack) — no manual
+  screenshotting needed
 
 ## Running it locally
 
