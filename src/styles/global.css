@@ -240,6 +240,27 @@ pre {
   font-weight: 400;
 }
 
+/* compact card-grid variant (certifications, talks — see FilterableList's
+   gridKinds) instead of the default full-width row list */
+.card-list.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+.card-list.grid .card-link {
+  height: 100%;
+  margin-inline: 0;
+  border: 1px solid var(--border-soft);
+  background: var(--bg-raised);
+}
+.card-list.grid .card-link:hover {
+  border-color: var(--accent);
+}
+.card-list.grid .card-image {
+  max-height: 140px;
+  margin-bottom: 10px;
+}
+
 /* inline embeds (YouTube, or any iframe-able page) on a card */
 .embed-frame {
   position: relative;

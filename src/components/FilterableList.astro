@@ -30,6 +30,11 @@ const newest = [...items].sort((a, b) => (b.year ?? 0) - (a.year ?? 0));
 const oldest = [...items].sort((a, b) => (a.year ?? 0) - (b.year ?? 0));
 
 const showFilters = years.length > 1 || kinds.length > 1;
+
+// Kinds that read better as a compact card grid than a long stack of full-
+// width rows — mainly ones that tend to pile up (certifications) or don't
+// need much room per entry (talks). Add to this list freely.
+const gridKinds = ["Certification", "Talk"];
 ---
 
 <div class="filterable" data-filterable>
@@ -70,7 +75,7 @@ const showFilters = years.length > 1 || kinds.length > 1;
       byKind.map(({ kind, items: kindItems }) => (
         <div class="kind-group">
           {kinds.length > 1 && <h3 class="kind-heading">{kind}</h3>}
-          <CardList items={kindItems} />
+          <CardList items={kindItems} layout={gridKinds.includes(kind) ? "grid" : "list"} />
         </div>
       ))
     }

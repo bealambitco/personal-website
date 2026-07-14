@@ -16,8 +16,8 @@ export const experience: ExperienceItem[] = [
   {
     kind: "Training",
     title: "Corporate Trainer — Data & AI workshops",
-    description: "18 courses delivered (Prompt Engineering, SQL, Python, Power BI, BigQuery), 5.2/6 avg rating, 100% recommendation on Advanced SQL.",
-    href: "https://www.linkedin.com/in/bea-lambitco",
+    description: "18 courses delivered (Prompt Engineering, SQL, Python, Power BI, BigQuery), 5.2/6 avg rating, 100% recommendation on Advanced SQL. Full feedback & testimonials linked below.",
+    href: "https://www.canva.com/design/DAHENEVk42c/NYjPMGIoVBwRNSmK-dbUXw/edit",
     date: "2024–Present",
     year: 2024,
   },
@@ -30,6 +30,7 @@ export const experience: ExperienceItem[] = [
     year: 2024,
   },
   {
+    // TODO: swap for the real Omdena project link
     kind: "Project",
     title: "AI-Driven Chatbot for Disaster Assistance & Emergency Relief",
     description: "Omdena collaboration with DataCamp and 50 AI engineers worldwide — a proof-of-concept chatbot providing real-time guidance in disaster-affected areas.",
@@ -38,6 +39,7 @@ export const experience: ExperienceItem[] = [
     year: 2024,
   },
   {
+    // TODO: swap for the real Aralin project link
     kind: "Project",
     title: "Software Engineer Consultant, Aralin",
     description: "Built Aralin Insights, an AI-based learning system giving students personalized academic guidance.",
@@ -53,15 +55,6 @@ export const experience: ExperienceItem[] = [
     date: "2017–2019",
     year: 2019,
   },
-  {
-    kind: "Training",
-    title: "Trainer feedback & testimonials",
-    description: "Student ratings and comments collected across corporate training cohorts.",
-    href: "https://www.canva.com/design/DAHENEVk42c/NYjPMGIoVBwRNSmK-dbUXw/edit",
-    date: "2024–Present",
-    year: 2024,
-  },
-
   // Certifications — years below are inferred from your career timeline
   // (bootcamp before Aralin, fundamentals before the associate-level cert,
   // etc.) since exact issue dates weren't given. Double-check and correct

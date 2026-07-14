@@ -38,7 +38,6 @@ export const profile = {
   stats: [
     { value: "18", label: "Courses delivered", detail: "5.2/6 avg trainer rating" },
     { value: "#1", label: "Hackathon winner", detail: "BSP-IFC Open Finance PH · 2024" },
-    { value: "5 yrs", label: "Data & Risk leadership", detail: "Data & Analytics Head + Risk Manager · ATRAM" },
     { value: "Top 30", label: "of 1,986 graduates", detail: "Ateneo de Manila · Magna Cum Laude" },
   ],
 
