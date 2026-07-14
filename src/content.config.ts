@@ -1,4 +1,5 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection } from "astro:content";
+import { z } from "astro/zod";
 import { glob } from "astro/loaders";
 import { pillars } from "./data/pillars";
 
@@ -14,6 +15,12 @@ const posts = defineCollection({
     pillar: z.enum(pillarIds),
     date: z.coerce.date(),
     draft: z.boolean().default(false),
+    // Set this only if the "real"/original version of this post lives
+    // somewhere else (e.g. you wrote it on LinkedIn/Substack first and are
+    // mirroring it here) — it tells search engines the other URL is
+    // canonical, so this copy doesn't compete with it. Leave unset for
+    // anything written here first — self-canonical is the correct default.
+    canonicalUrl: z.url().optional(),
   }),
 });
 

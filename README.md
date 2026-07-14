@@ -28,7 +28,8 @@ files in this repo.
 - **[Inter](https://rsms.me/inter/)** + **[JetBrains Mono](https://www.jetbrains.com/lp/mono/)**,
   self-hosted (no font CDN request)
 - Deployed on **[Vercel](https://vercel.com)**, redeploying automatically on
-  every push to `main`
+  every push to `main`, with **Vercel Web Analytics** for privacy-friendly
+  traffic stats
 
 ## Features
 
@@ -39,6 +40,8 @@ files in this repo.
   video embeds
 - Resources page organized the same way as the writing hub, so both grow
   together as more gets added
+- Sitemap + `robots.txt` + Open Graph/Twitter card images out of the box,
+  and security headers (CSP and friends) via `vercel.json`
 
 ## Running it locally
 
@@ -55,9 +58,9 @@ npm run preview  # serve that build locally
 
 ## Content workflow
 
-Everything editorial lives in `src/data/*.ts` (profile, timeline, talks,
-projects, resources, topics) — plain arrays of objects, no Astro/TypeScript
-knowledge required to edit them.
+Everything editorial lives in `src/data/*.ts` (profile, timeline, featured
+talks/press, experience, volunteer work, resources, topics, social links) —
+plain arrays of objects, no Astro/TypeScript knowledge required to edit them.
 
 **Adding an article**: copy `src/content/posts/_template.md`, fill in the
 frontmatter (title, topic, date), write it in Markdown, set `draft: false`.

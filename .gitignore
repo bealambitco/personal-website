@@ -23,3 +23,6 @@ Brand Board*.pdf
 
 # personal editing notes — not part of the deployed site, kept local only
 EDITING.md
+
+# developer-facing technical deep dive — local reference only, not published
+TECHNICAL.md

@@ -8,10 +8,17 @@ import Analytics from "@vercel/analytics/astro";
 interface Props {
   title: string;
   description?: string;
+  // Set only for a post that's canonically published elsewhere (e.g.
+  // mirrored from/to another platform later) — every other page defaults
+  // to its own URL automatically, which is the correct canonical for
+  // everything on the site today.
+  canonicalUrl?: string;
 }
 
-const { title, description = profile.tagline } = Astro.props;
+const { title, description = profile.tagline, canonicalUrl } = Astro.props;
 const pageTitle = title === profile.name ? title : `${title} · ${profile.name}`;
+const canonical = canonicalUrl ?? new URL(Astro.url.pathname, Astro.site).toString();
+const ogImage = new URL("/og-image.png", Astro.site).toString();
 ---
 
 <!doctype html>
@@ -23,11 +30,14 @@ const pageTitle = title === profile.name ? title : `${title} · ${profile.name}`
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={canonical} />
 
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
     <Analytics />
   </head>
   <body>
