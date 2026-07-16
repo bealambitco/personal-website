@@ -22,7 +22,7 @@ export const profile = {
   // hero block, above your credentials and achievements. Keep it short on
   // purpose; it's a summary, not the full story.
   about:
-    "Most teams don't have an AI problem — they have a clarity, alignment, and prioritisation problem: the technology and the business value it's meant to serve don't quite meet. I've worked both sides of that gap. I built the data and AI capability inside a financial institution end to end — from the engineering to the boardroom case — and now help teams across finance, education, and beyond do the same through consulting, training, and speaking. What I care about is quality you can measure: work that's technically sound, focused on business value, and communicated so clearly that decisions actually get made.",
+    "Most organizations don't have an AI problem — they have a clarity, alignment, and prioritisation problem: the technology and the business value it's meant to serve rarely meet. My work closes that gap. I spent years in banking and asset management doing the work myself, pioneering and leading a data and analytics function from the ground up — from the engineering to the boardroom case. Today I consult with organizations, train working professionals, and speak at industry events, with one goal: simplifying and democratizing data and AI so more people and teams can genuinely use it, not just talk about it.",
 
   // `url` is optional — set it to a verification link (Credly, Microsoft
   // Learn, GARP, Coursera, etc.) and the chip becomes a link that opens it
