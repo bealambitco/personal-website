@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { pillars } from "../../data/pillars";
+import { writingPillars } from "../../data/pillars";
 ---
 
 <BaseLayout title="Writing" description="All topics — browse by subject.">
@@ -8,12 +8,11 @@ import { pillars } from "../../data/pillars";
     <a href="/" class="back-link">← Home</a>
     <h1 class="page-title">All topics</h1>
     <p class="muted" style="margin-bottom: 24px;">
-      These fill in over time. Each topic links to its own page — once
-      there's nothing there yet, it points you to where I currently post.
+      What I write about. These fill in over time — each topic has its own page.
     </p>
     <div class="pillar-grid">
       {
-        pillars.map((pillar) => (
+        writingPillars.map((pillar) => (
           <a class="pillar-card" href={`/topics/${pillar.id}`}>
             <div class="pillar-label">{pillar.label}</div>
             <div class="pillar-description">{pillar.description}</div>

@@ -6,7 +6,7 @@ import { socials } from "../data/socials";
 // visitor doesn't have to scroll to Contact to find them. Contact still
 // exists separately for Email/Book a time. Add/remove labels here — it
 // just filters the shared `socials` list, doesn't need its own data file.
-const handleLabels = ["LinkedIn", "GitHub", "YouTube", "TikTok"];
+const handleLabels = ["LinkedIn", "GitHub", "YouTube", "TikTok", "Substack"];
 const handles = socials.filter((s) => handleLabels.includes(s.label));
 ---
 
@@ -14,7 +14,7 @@ const handles = socials.filter((s) => handleLabels.includes(s.label));
   <div class="hero-top">
     <img class="hero-photo" src={profile.photo} alt={profile.photoAlt} width="104" height="104" />
     <div class="hero-heading">
-      <h1>{profile.name}</h1>
+      <h1>{profile.displayName}</h1>
       <p class="hero-title">{profile.title}</p>
     </div>
   </div>
@@ -75,8 +75,10 @@ const handles = socials.filter((s) => handleLabels.includes(s.label));
     transform: scale(1.03);
   }
   .hero-heading h1 {
-    font-size: clamp(40px, 5.5vw, 52px);
-    line-height: 1.05;
+    /* sized for the full three-word name — bumping this back up will make
+       it wrap awkwardly next to the photo at laptop widths */
+    font-size: clamp(32px, 4.2vw, 44px);
+    line-height: 1.1;
     letter-spacing: -0.03em;
     margin: 0 0 8px;
   }
@@ -114,7 +116,7 @@ const handles = socials.filter((s) => handleLabels.includes(s.label));
 
   @media (max-width: 480px) {
     .hero-heading h1 {
-      font-size: 34px;
+      font-size: 26px;
     }
     .hero-top {
       gap: 14px;

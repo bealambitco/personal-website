@@ -13,9 +13,15 @@ interface Props {
   // to its own URL automatically, which is the correct canonical for
   // everything on the site today.
   canonicalUrl?: string;
+  // "article" for blog posts (better link-preview semantics); defaults to
+  // "website" for everything else.
+  ogType?: "website" | "article";
+  // Optional schema.org JSON-LD object (Person on the homepage, BlogPosting
+  // on articles) — serialized into a <script type="application/ld+json">.
+  structuredData?: Record<string, unknown>;
 }
 
-const { title, description = profile.tagline, canonicalUrl } = Astro.props;
+const { title, description = profile.tagline, canonicalUrl, ogType = "website", structuredData } = Astro.props;
 const pageTitle = title === profile.name ? title : `${title} · ${profile.name}`;
 const canonical = canonicalUrl ?? new URL(Astro.url.pathname, Astro.site).toString();
 const ogImage = new URL("/og-image.png", Astro.site).toString();
@@ -34,10 +40,19 @@ const ogImage = new URL("/og-image.png", Astro.site).toString();
 
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
     <meta name="twitter:card" content="summary_large_image" />
+    <link rel="alternate" type="application/rss+xml" title={profile.name} href={new URL("/rss.xml", Astro.site)} />
+    {
+      /* JSON-LD must be raw JSON, so set:html is required here. The data is
+         authored in our own source (never user input), and `<` is escaped to
+         rule out any </script> breakout even in principle. */
+      structuredData && (
+        <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData).replace(/</g, "\\u003c")} />
+      )
+    }
     <Analytics />
   </head>
   <body>

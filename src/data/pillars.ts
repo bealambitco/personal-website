@@ -1,18 +1,24 @@
-// The content pillars for the Writing hub, plus the Resources page (each
-// resource link is tagged with one of these too — see resources.ts).
+// The topic taxonomy shared by the Writing hub and the Resources page.
 //
-// `group` controls the 3-column layout used in the nav mega-menu and on
+// `group` controls the 3-column layout used in the nav mega-menus and on
 // /resources: "Technical" (hard skills), "Industry" (sector/domain
-// knowledge), "Life" (career/personal). Add a new pillar by adding an
-// object here — no other file needs to change. Posts/resources are matched
-// to a pillar by their own `pillar` field.
+// knowledge), "Life" (career/personal).
+//
+// `sections` controls where a pillar appears: "writing" puts it in the
+// Writing mega-menu, /topics, and the posts schema; "resources" puts it in
+// the Resources mega-menu and /resources. Most pillars are in both; a few
+// are writing-only (AI in Finance, AI in Education) or resources-only
+// (Investments). Add a new pillar by adding an object here — no other file
+// needs to change. Posts/resources are matched by their `pillar` field.
 export type PillarGroup = "Technical" | "Industry" | "Life";
+export type PillarSection = "writing" | "resources";
 
 export type Pillar = {
   id: string;
   label: string;
   description: string;
   group: PillarGroup;
+  sections: PillarSection[];
 };
 
 export const pillarGroups: PillarGroup[] = ["Technical", "Industry", "Life"];
@@ -22,8 +28,9 @@ export const pillars: Pillar[] = [
     id: "ai",
     label: "AI",
     description:
-      "Practical AI applications in finance, and honest takes on what the technology can and can't do.",
+      "Practical AI applications, and honest takes on what the technology can and can't do.",
     group: "Technical",
+    sections: ["writing", "resources"],
   },
   {
     id: "data",
@@ -31,48 +38,80 @@ export const pillars: Pillar[] = [
     description:
       "Pipelines, governance, and the unglamorous data foundations that make AI work at all.",
     group: "Technical",
-  },
-  {
-    id: "risk",
-    label: "Risk",
-    description: "Financial risk management, from an FRM lens.",
-    group: "Technical",
+    sections: ["writing", "resources"],
   },
   {
     id: "math",
     label: "Math",
     description: "The quantitative foundations behind the models.",
     group: "Technical",
+    sections: ["writing", "resources"],
+  },
+  {
+    id: "risk",
+    label: "Risk",
+    description: "Financial risk management, from an FRM lens.",
+    group: "Technical",
+    sections: ["writing", "resources"],
   },
   {
     id: "tools",
     label: "Tools & Tutorials",
     description: "Hands-on guides in SQL, Python, Power BI, and BigQuery.",
     group: "Technical",
+    sections: ["writing", "resources"],
   },
   {
-    id: "ph-finance",
-    label: "PH Finance",
-    description:
-      "BSP regulations, the Philippine fintech landscape, and digital transformation in local finance.",
+    id: "ai-in-finance",
+    label: "AI in Finance",
+    description: "Where AI actually earns its keep in financial institutions — and where it doesn't.",
     group: "Industry",
+    sections: ["writing"],
+  },
+  {
+    id: "ai-in-education",
+    label: "AI in Education",
+    description: "AI for learning, teaching, and training — from classrooms to corporate upskilling.",
+    group: "Industry",
+    sections: ["writing"],
+  },
+  {
+    id: "finance",
+    label: "Finance",
+    description:
+      "BSP regulations, the Philippine fintech landscape, and the wider world of finance.",
+    group: "Industry",
+    sections: ["writing", "resources"],
+  },
+  {
+    id: "investments",
+    label: "Investments",
+    description: "Investing tools, references, and resources worth knowing.",
+    group: "Industry",
+    sections: ["resources"],
+  },
+  {
+    id: "life",
+    label: "General",
+    description: "Personal essays and everything that doesn't fit a neater box.",
+    group: "Life",
+    sections: ["writing", "resources"],
   },
   {
     id: "career",
     label: "Career",
     description: "Lessons from building a career across finance, risk, and AI.",
     group: "Life",
-  },
-  {
-    id: "life",
-    label: "Life",
-    description: "Personal essays outside of work.",
-    group: "Life",
+    sections: ["writing", "resources"],
   },
   {
     id: "wellness",
     label: "Wellness",
     description: "Balance, mental health, and sustaining a demanding career.",
     group: "Life",
+    sections: ["writing", "resources"],
   },
 ];
+
+export const writingPillars = pillars.filter((p) => p.sections.includes("writing"));
+export const resourcePillars = pillars.filter((p) => p.sections.includes("resources"));

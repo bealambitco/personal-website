@@ -2,11 +2,11 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import CardList from "../../components/CardList.astro";
-import { pillars } from "../../data/pillars";
+import { writingPillars } from "../../data/pillars";
 import { socials } from "../../data/socials";
 
 export async function getStaticPaths() {
-  return pillars.map((pillar) => ({
+  return writingPillars.map((pillar) => ({
     params: { slug: pillar.id },
     props: { pillar },
   }));
@@ -43,9 +43,11 @@ const linkOut = socials.find((s) => s.label === "LinkedIn") ?? socials[0];
         </div>
       ) : (
         <p class="muted" style="margin-top: 24px;">
-          Nothing posted directly on the site yet — in the meantime, find {pillar.label} posts on{" "}
-          <a href={linkOut.href}>{linkOut.label}</a>. Once an article is ready, add a markdown file to
-          <code>src/content/posts/</code> with <code>pillar: "{pillar.id}"</code> and it'll appear here automatically.
+          Nothing published under {pillar.label} yet — in the meantime, I write regularly on{" "}
+          <a href={linkOut.href} target="_blank" rel="noopener noreferrer">
+            {linkOut.label}
+          </a>
+          .
         </p>
       )
     }

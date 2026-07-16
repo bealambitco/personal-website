@@ -1,7 +1,8 @@
 # bealambitco.com
 
-Bea Lambitco's personal site — bio, timeline, talks, projects, and a growing
-writing hub organized by topic (AI, Data, Risk, PH Finance, and more).
+The personal site of Bea Lambitco — Data & AI consultant, trainer, speaker.
+Bio, timeline, talks, projects, and a growing writing hub organized by topic
+(AI, Data, Risk, AI in Finance, and more).
 
 **Live:** [bealambitco.com](https://bealambitco.com)
 
@@ -34,14 +35,16 @@ files in this repo.
 ## Features
 
 - Fully responsive, light/dark themed, no client-side framework
-- A writing hub organized by topic, with a nav mega-menu, per-topic pages, and
-  an all-articles view that's filterable by year and sortable
+- A writing hub organized by topic, with a nav mega-menu, per-topic pages, an
+  all-articles view that's filterable by year and sortable, and per-tag pages
+  (`/tags/<tag>`) generated from article frontmatter
 - Talks/press/projects sections that group by category and support inline
   video embeds
-- Resources page organized the same way as the writing hub, so both grow
-  together as more gets added
-- Sitemap + `robots.txt` + Open Graph/Twitter card images out of the box,
-  and security headers (CSP and friends) via `vercel.json`
+- Resources page sharing the same topic taxonomy as the writing hub — each
+  topic declares whether it appears in Writing, Resources, or both
+- Sitemap + `robots.txt` + Open Graph/Twitter card images + JSON-LD
+  structured data + RSS feed (`/rss.xml`) out of the box, and security
+  headers (CSP and friends) via `vercel.json`
 - Link cards fetch their own preview thumbnail automatically at build time
   (the same `og:image` you'd see pasting a link into Slack) — no manual
   screenshotting needed
@@ -66,11 +69,14 @@ talks/press, experience, volunteer work, resources, topics, social links) —
 plain arrays of objects, no Astro/TypeScript knowledge required to edit them.
 
 **Adding an article**: copy `src/content/posts/_template.md`, fill in the
-frontmatter (title, topic, date), write it in Markdown, set `draft: false`.
-It shows up on its topic page and the all-articles view automatically.
+frontmatter (title, topic, date, optional tags), write it in Markdown, set
+`draft: false`. It shows up on its topic page, the all-articles view, the
+RSS feed, and any `/tags/<tag>` pages automatically.
 
 **Adding a new topic**: add one object to `src/data/pillars.ts` — its page
-and its spot in both nav menus are generated from that one entry.
+and its spot in the nav menus are generated from that one entry (the
+`sections` field controls whether it appears under Writing, Resources, or
+both).
 
 **No pull request needed for day-to-day changes.** This is a single-owner
 repo, so pushing straight to `main` is completely normal, and Vercel

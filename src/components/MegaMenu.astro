@@ -1,16 +1,20 @@
 ---
-import { pillars, pillarGroups } from "../data/pillars";
+import { pillars, pillarGroups, type PillarSection } from "../data/pillars";
 
 // Shared 3-column dropdown body used by both the "Writing" and "Resources"
 // nav items — columns are the pillar groups (Technical/Industry/Life) from
 // pillars.ts. `hrefFor` decides where each pillar link points (a page for
-// Writing, an anchor for Resources).
+// Writing, an anchor for Resources); `section` filters to the pillars that
+// belong in this menu (writing vs resources — see pillars.ts).
 interface Props {
   topLinks: { href: string; label: string }[];
   hrefFor: (pillarId: string) => string;
+  section: PillarSection;
 }
 
-const { topLinks, hrefFor } = Astro.props;
+const { topLinks, hrefFor, section } = Astro.props;
+
+const sectionPillars = pillars.filter((p) => p.sections.includes(section));
 ---
 
 <div class="mega">
@@ -28,7 +32,7 @@ const { topLinks, hrefFor } = Astro.props;
       pillarGroups.map((group) => (
         <div class="mega-col">
           <div class="mega-col-heading">{group}</div>
-          {pillars
+          {sectionPillars
             .filter((p) => p.group === group)
             .map((p) => (
               <a href={hrefFor(p.id)}>{p.label}</a>

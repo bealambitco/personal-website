@@ -1,6 +1,10 @@
 // Core identity — edit freely, everything on the homepage reads from here.
 export const profile = {
+  // `name` is the short everyday form (nav, page titles); `displayName` is
+  // what the Hero headline shows; `fullName` keeps the FRM designation for
+  // anywhere a formal citation is wanted.
   name: "Bea Lambitco",
+  displayName: "Bea Charmelyn T. Lambitco",
   fullName: "Bea Charmelyn T. Lambitco, FRM",
   title: "Data & AI Consultant · Trainer · Speaker",
   location: "Cavite, Philippines",
@@ -12,13 +16,13 @@ export const profile = {
   // Shown next to your photo. Keep it to 2-3 sentences — this is the
   // "who is this person" summary.
   tagline:
-    "Finance-native data and AI expertise — turning analytics and automation into clear, measurable outcomes for financial institutions.",
+    "Data and AI expertise built in finance — I help teams turn analytics and automation into clear, measurable business outcomes.",
 
   // One tight paragraph — this sits right under the tagline in the compact
   // hero block, above your credentials and achievements. Keep it short on
   // purpose; it's a summary, not the full story.
   about:
-    "Most PH finance teams don't have an AI problem. They have a clarity, workflow, and prioritisation problem. I've worked both sides of that gap — building the data and AI capability inside a financial institution, and now helping other teams do the same through consulting, training, and speaking.",
+    "Most teams don't have an AI problem — they have a clarity, alignment, and prioritisation problem: the technology and the business value it's meant to serve don't quite meet. I've worked both sides of that gap. I built the data and AI capability inside a financial institution end to end — from the engineering to the boardroom case — and now help teams across finance, education, and beyond do the same through consulting, training, and speaking. What I care about is quality you can measure: work that's technically sound, focused on business value, and communicated so clearly that decisions actually get made.",
 
   // `url` is optional — set it to a verification link (Credly, Microsoft
   // Learn, GARP, Coursera, etc.) and the chip becomes a link that opens it

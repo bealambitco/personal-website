@@ -21,12 +21,33 @@ const items = allPosts.map((post) => {
     year: post.data.date.getFullYear(),
   };
 });
+
+// Every tag used across published posts, most-used first — rendered as
+// links to the /tags/<tag> pages (real crawlable pages, so this doubles as
+// the tag "filter" without a second JS filter fighting the year filter).
+const tagCounts = new Map<string, number>();
+for (const post of allPosts) {
+  for (const tag of post.data.tags) tagCounts.set(tag, (tagCounts.get(tag) ?? 0) + 1);
+}
+const allTags = [...tagCounts.entries()].sort((a, b) => b[1] - a[1]).map(([tag]) => tag);
 ---
 
-<BaseLayout title="All Articles" description="Every article published on this site, filterable by topic and year.">
+<BaseLayout title="All Articles" description="Every article published on this site, filterable by topic, year, and tag.">
   <section class="section container">
     <a href="/" class="back-link">← Home</a>
     <h1 class="page-title">All articles</h1>
+
+    {
+      allTags.length > 0 && (
+        <div class="tag-row" style="margin-bottom: 20px;">
+          {allTags.map((tag) => (
+            <a class="tag tag-sm" href={`/tags/${tag}`}>
+              #{tag}
+            </a>
+          ))}
+        </div>
+      )
+    }
 
     {
       items.length > 0 ? (
