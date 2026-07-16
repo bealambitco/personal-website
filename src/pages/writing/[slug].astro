@@ -14,9 +14,25 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 const pillar = pillars.find((p) => p.id === post.data.pillar);
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.date.toISOString(),
+  author: { "@type": "Person", name: "Bea Lambitco", url: Astro.site?.toString() },
+  ...(post.data.tags.length > 0 && { keywords: post.data.tags.join(", ") }),
+};
 ---
 
-<BaseLayout title={post.data.title} description={post.data.description} canonicalUrl={post.data.canonicalUrl}>
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  canonicalUrl={post.data.canonicalUrl}
+  ogType="article"
+  structuredData={structuredData}
+>
   <article class="section container prose">
     {pillar && (
       <a href={`/topics/${pillar.id}`} class="back-link">← {pillar.label}</a>
@@ -25,6 +41,17 @@ const pillar = pillars.find((p) => p.id === post.data.pillar);
     <p class="muted">
       {post.data.date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
     </p>
+    {
+      post.data.tags.length > 0 && (
+        <div class="tag-row" style="margin-bottom: 20px;">
+          {post.data.tags.map((tag) => (
+            <a class="tag tag-sm" href={`/tags/${tag}`}>
+              #{tag}
+            </a>
+          ))}
+        </div>
+      )
+    }
     <Content />
   </article>
 </BaseLayout>

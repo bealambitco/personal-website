@@ -8,9 +8,20 @@ import VolunteerWork from "../components/VolunteerWork.astro";
 import LatestArticles from "../components/LatestArticles.astro";
 import Contact from "../components/Contact.astro";
 import { profile } from "../data/profile";
+import { socials } from "../data/socials";
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: profile.displayName,
+  alternateName: profile.name,
+  jobTitle: "Data & AI Consultant",
+  url: Astro.site?.toString(),
+  sameAs: socials.filter((s) => s.href.startsWith("http")).map((s) => s.href),
+};
 ---
 
-<BaseLayout title={profile.name}>
+<BaseLayout title={profile.name} structuredData={structuredData}>
   <Hero />
   <About />
   <Featured />

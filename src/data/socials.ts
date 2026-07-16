@@ -13,6 +13,8 @@ export const socials: SocialLink[] = [
   { label: "GitHub", href: "https://github.com/bealambitco" },
   { label: "YouTube", href: "https://www.youtube.com/@bealambitco" },
   { label: "TikTok", href: "https://www.tiktok.com/@bealambitco" },
-  // TODO: replace with your real Calendly (or other scheduling) link.
-  { label: "Book a time", href: "https://calendly.com/your-handle" },
+  { label: "Substack", href: "https://bealambitco.substack.com/" },
+  // When you have a real scheduling link, add it back like this and it
+  // reappears in Contact automatically (Contact.astro lists it by label):
+  // { label: "Book a time", href: "https://calendly.com/<your-real-handle>" },
 ];

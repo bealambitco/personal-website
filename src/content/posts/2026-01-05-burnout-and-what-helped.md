@@ -3,7 +3,7 @@ title: "Burnout, and what actually helped"
 description: "Notes on catching it early, and the two changes that made the biggest difference."
 pillar: "wellness"
 date: 2026-01-05
-draft: false
+draft: true
 ---
 
 _This is example content, generated as a starting point — replace it with your real writing, or delete the file._

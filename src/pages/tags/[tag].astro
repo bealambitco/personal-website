@@ -1,0 +1,51 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CardList from "../../components/CardList.astro";
+
+// One page per tag used across published posts — /tags/<tag>. Pages exist
+// only for tags that appear on at least one non-draft post, so there's
+// nothing to maintain by hand and no empty tag pages get generated.
+export async function getStaticPaths() {
+  const posts = await getCollection("posts", ({ data }) => !data.draft);
+  const tags = [...new Set(posts.flatMap((post) => post.data.tags))];
+  return tags.map((tag) => ({
+    params: { tag },
+    props: { tag, posts: posts.filter((post) => post.data.tags.includes(tag)) },
+  }));
+}
+
+const { tag, posts } = Astro.props;
+const sorted = [...posts].sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout title={`#${tag}`} description={`Articles tagged "${tag}".`}>
+  <section class="section container">
+    <a href="/writing" class="back-link">← All articles</a>
+    <h1 class="page-title">#{tag}</h1>
+    <p class="muted" style="margin-bottom: 24px;">
+      {sorted.length} {sorted.length === 1 ? "article" : "articles"} tagged "{tag}".
+    </p>
+    <CardList
+      items={sorted.map((post) => ({
+        kind: "Article",
+        title: post.data.title,
+        description: post.data.description,
+        href: `/writing/${post.id}`,
+        date: post.data.date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" }),
+        year: post.data.date.getFullYear(),
+      }))}
+    />
+  </section>
+</BaseLayout>
+
+<style>
+  .back-link {
+    font-size: 14px;
+    color: var(--ink-faint);
+    text-decoration: none;
+  }
+  .back-link:hover {
+    color: var(--primary);
+  }
+</style>

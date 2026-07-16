@@ -1,9 +1,9 @@
 ---
 title: "What BSP's Open Finance framework means for PH fintechs"
 description: "A practical read of the framework — what changes operationally, not just what the circular says."
-pillar: "ph-finance"
+pillar: "finance"
 date: 2025-11-20
-draft: false
+draft: true
 ---
 
 _This is example content, generated as a starting point — replace it with your real writing, or delete the file._

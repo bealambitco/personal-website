@@ -3,7 +3,7 @@ title: "Why data governance has to come before AI ambitions"
 description: "Most AI initiatives don't fail on model choice — they fail on data no one trusted enough to automate against."
 pillar: "data"
 date: 2026-02-10
-draft: false
+draft: true
 ---
 
 _This is example content, generated as a starting point — replace it with your real writing, or delete the file._

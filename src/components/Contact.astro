@@ -2,10 +2,14 @@
 import { socials } from "../data/socials";
 import { profile } from "../data/profile";
 
-// LinkedIn/GitHub/YouTube/TikTok live in Hero now — no need to repeat them
-// here too. Keep this to the two things "get in touch" actually means.
+// Social handles live in Hero now — no need to repeat them here too. Keep
+// this to the things "get in touch" actually means. ("Book a time"
+// reappears automatically once a real scheduling link is added back to
+// socials.ts.)
 const contactLabels = ["Email", "Book a time"];
 const contactLinks = socials.filter((s) => contactLabels.includes(s.label));
+
+const suggestHref = `mailto:${profile.email}?subject=${encodeURIComponent("Suggestion for bealambitco.com")}`;
 ---
 
 <section id="contact" class="section container">
@@ -14,4 +18,18 @@ const contactLinks = socials.filter((s) => contactLabels.includes(s.label));
   <div class="tag-row">
     {contactLinks.map((social) => <a class="tag" href={social.href}>{social.label}</a>)}
   </div>
+
+  <p class="suggest">
+    Got a suggestion? A topic you'd like me to write about, a resource worth adding, or feedback on the site —{" "}
+    <a href={suggestHref}>send it my way</a>.
+  </p>
 </section>
+
+<style>
+  .suggest {
+    margin: 20px 0 0;
+    font-size: 15px;
+    color: var(--ink-soft);
+    max-width: 58ch;
+  }
+</style>

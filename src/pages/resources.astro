@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { resources } from "../data/resources";
-import { pillars, pillarGroups } from "../data/pillars";
+import { resourcePillars, pillarGroups } from "../data/pillars";
 ---
 
 <BaseLayout title="Resources" description="Tools, learning, and other recommended links, by topic.">
@@ -14,7 +14,7 @@ import { pillars, pillarGroups } from "../data/pillars";
         pillarGroups.map((group) => (
           <div class="group-col">
             <h2 class="group-heading">{group}</h2>
-            {pillars
+            {resourcePillars
               .filter((p) => p.group === group)
               .map((pillar) => {
                 const items = resources.filter((r) => r.pillar === pillar.id);
