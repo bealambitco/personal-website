@@ -36,11 +36,4 @@ export const volunteer: VolunteerItem[] = [
     date: "2014–2015",
     year: 2014,
   },
-  {
-    kind: "Volunteer",
-    title: "Partnerships Management Trainee (Internship), Kalibrr",
-    href: "https://www.kalibrr.com/",
-    date: "2016–2017",
-    year: 2016,
-  },
 ];

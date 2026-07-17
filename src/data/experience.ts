@@ -8,7 +8,7 @@ export const experience: ExperienceItem[] = [
   {
     kind: "Consulting",
     title: "Data and AI Consultant (Self-employed)",
-    description: "Data modelling, engineering, and business analysis for a global consulting firm; grew a high-performing Data & AI team.",
+    description: "Performed data modelling, engineering, and business analysis for a financial services firm in Singapore, a Microsoft partner firm, and an asset management firm; grew a high-performing Data & AI team.",
     href: "https://www.linkedin.com/in/bea-lambitco",
     date: "2024–Present",
     year: 2024,
@@ -25,7 +25,7 @@ export const experience: ExperienceItem[] = [
   {
     kind: "Leadership",
     title: "Data & Analytics Head (3 yrs) · Risk Manager (2 yrs), ATRAM",
-    description: "Pioneered the Data & Analytics team; led the firm's Azure data warehouse and in-house data engineering capability; saved costs on an internal AML screening tool.",
+    description: "Pioneered the Data & Analytics team; led the firm's Azure data warehouse and in-house data engineering capability.",
     href: "https://www.linkedin.com/in/bea-lambitco",
     date: "2019–2024",
     year: 2024,
@@ -55,6 +55,17 @@ export const experience: ExperienceItem[] = [
     href: "https://www.linkedin.com/in/bea-lambitco",
     date: "2017–2019",
     year: 2019,
+  },
+  {
+    // Moved here from Volunteer Work — it's a paid internship, not
+    // volunteering. noPreview: Kalibrr's homepage og:image isn't specific
+    // to this role, so it's suppressed rather than shown as a generic logo.
+    kind: "Internship",
+    title: "Partnerships Management Trainee, Kalibrr",
+    href: "https://www.kalibrr.com/",
+    noPreview: true,
+    date: "2016–2017",
+    year: 2016,
   },
   // Certifications — years below are inferred from your career timeline
   // (bootcamp before Aralin, fundamentals before the associate-level cert,
@@ -114,13 +125,6 @@ export const experience: ExperienceItem[] = [
     date: "2023",
     year: 2023,
     expired: true,
-  },
-  {
-    kind: "Certification",
-    title: "IBM Data & AI Specialization",
-    href: "https://www.coursera.org/account/accomplishments/specialization/certificate/ZAQYNX5U483A",
-    date: "2023",
-    year: 2023,
   },
   {
     kind: "Certification",

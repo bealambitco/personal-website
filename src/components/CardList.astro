@@ -33,7 +33,14 @@ function shouldSkipPreview(url: string): boolean {
 // the source is known not to give a meaningful image (see above).
 const resolvedItems = await Promise.all(
   items.map(async (item) => {
-    if (!item.href || item.imageUrl || item.embedUrl || !item.href.startsWith("http") || shouldSkipPreview(item.href))
+    if (
+      !item.href ||
+      item.noPreview ||
+      item.imageUrl ||
+      item.embedUrl ||
+      !item.href.startsWith("http") ||
+      shouldSkipPreview(item.href)
+    )
       return item;
     const preview = await getPreviewImage(item.href);
     return preview ? { ...item, imageUrl: preview } : item;

@@ -12,10 +12,16 @@ interface Props {
 
 const { items } = Astro.props;
 
-// Group by kind, preserving each kind's first-appearance order in `items`.
-const kinds: string[] = [];
+// Group by `group` (falling back to `kind` when unset), preserving each
+// group's first-appearance order in `items`. Several different `kind`s can
+// share one group heading (see `group` in link-item.ts) — each card still
+// shows its own `kind`, only the section heading is shared.
+function groupOf(item: LinkItem) {
+  return item.group ?? item.kind;
+}
+const groups: string[] = [];
 for (const item of items) {
-  if (!kinds.includes(item.kind)) kinds.push(item.kind);
+  if (!groups.includes(groupOf(item))) groups.push(groupOf(item));
 }
 // Non-expired first (newest year first), expired last (also newest first
 // within that group) — lapsed certifications are still worth showing as
@@ -27,9 +33,9 @@ function sortEntries(list: LinkItem[]) {
   });
 }
 
-const byKind = kinds.map((kind) => ({
-  kind,
-  items: sortEntries(items.filter((i) => i.kind === kind)),
+const byKind = groups.map((group) => ({
+  kind: group,
+  items: sortEntries(items.filter((i) => groupOf(i) === group)),
 }));
 
 const years = [...new Set(items.map((i) => i.year).filter((y): y is number => typeof y === "number"))].sort(
@@ -39,12 +45,12 @@ const years = [...new Set(items.map((i) => i.year).filter((y): y is number => ty
 const newest = sortEntries(items);
 const oldest = [...items].sort((a, b) => (a.year ?? 0) - (b.year ?? 0));
 
-const showFilters = years.length > 1 || kinds.length > 1;
+const showFilters = years.length > 1 || groups.length > 1;
 
-// Kinds that read better as a compact card grid than a long stack of full-
-// width rows — mainly ones that tend to pile up (certifications) or don't
-// need much room per entry (talks, honors). Add to this list freely.
-const gridKinds = ["Certification", "Talk", "Honors"];
+// Groups that read better as a compact card grid than a long stack of
+// full-width rows — mainly ones that tend to pile up (certifications) or
+// don't need much room per entry (events, honors). Add to this list freely.
+const gridKinds = ["Certification", "Events", "Honors"];
 ---
 
 <div class="filterable" data-filterable>
@@ -63,7 +69,7 @@ const gridKinds = ["Certification", "Talk", "Honors"];
             ))}
           </div>
         )}
-        {kinds.length > 1 && (
+        {groups.length > 1 && (
           <div class="filter-group">
             <button type="button" class="view-pill active" data-view-btn="category">
               By category
@@ -84,7 +90,7 @@ const gridKinds = ["Certification", "Talk", "Honors"];
     {
       byKind.map(({ kind, items: kindItems }) => (
         <div class="kind-group">
-          {kinds.length > 1 && <h3 class="kind-heading">{kind}</h3>}
+          {groups.length > 1 && <h3 class="kind-heading">{kind}</h3>}
           <CardList items={kindItems} layout={gridKinds.includes(kind) ? "grid" : "list"} />
         </div>
       ))

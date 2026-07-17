@@ -14,7 +14,13 @@ export type LinkItem = {
   // Free text — each section defines its own conventional values, e.g.
   // Featured uses "Talk" | "Article" | "Video" | "Press" | "Project";
   // Experience uses "Project" | "Teaching" | "Leadership" | "Training".
+  // Always shown on the card itself.
   kind: string;
+  // Optional — when several different `kind`s should still share one
+  // FilterableList section heading (e.g. "Talk" and "Competition" both
+  // filed under an "Events" heading), set this to the shared heading name.
+  // Defaults to `kind` when not set, so most entries never need it.
+  group?: string;
   // Short display text, e.g. "2024" or "Mar 2026" — shown next to `kind`.
   date?: string;
   // The actual number used for year filtering/sorting. Set this whenever
@@ -26,6 +32,11 @@ export type LinkItem = {
   // A plain photo instead of a video embed — path under /public (e.g.
   // "/volunteer/dep-2024.jpg") or a full URL. Ignored if embedUrl is set.
   imageUrl?: string;
+  // Set true to skip the automatic og:image fetch for this entry and show
+  // no thumbnail at all — use when the linked page's preview image isn't
+  // actually relevant to this entry (e.g. a company homepage, not the
+  // specific page the achievement is about).
+  noPreview?: boolean;
   tags?: string[];
   // Marks a certification as lapsed — dims the card, adds an "Expired"
   // label, and sorts it after non-expired entries within its kind group.

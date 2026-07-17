@@ -9,12 +9,12 @@ export const timeline: TimelineEntry[] = [
   {
     year: "2024",
     title: "Data and AI Consultant/Corporate Trainer (Self-employed)",
-    detail: "Delivered 19 Data & AI courses (5.2/6 average rating); provided data modelling, engineering, and business analysis for a global consulting firm; and built a high-performing Data & AI team.",
+    detail: "Delivered 19 Data & AI courses (5.2/6 average rating), built high-performing data teams, and performed technical Data & AI consulting.",
   },
   {
     year: "2019–2024",
     title: "Data & Analytics Head (3 yrs) · Risk Manager (2 yrs), ATRAM",
-    detail: "Pioneered the Data & Analytics team, built the firm's Azure data warehouse, and saved costs on an internal AML screening tool. Capped by winning #1 at the BSP-IFC Open Finance PH Hackathon (2024) with Pensyon PH.",
+    detail: "Pioneered the Data & Analytics team and built the firm's Azure data warehouse. Won #1 at the BSP-IFC Open Finance PH Hackathon (2024) with Pensyon PH.",
   },
   {
     year: "2023–2024",

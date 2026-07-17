@@ -43,12 +43,16 @@ export const featured: FeaturedItem[] = [
     title: "Bilyonaryo coverage: Pensyon PH named top innovation",
     description: "Coverage of BSP's Open Finance initiative naming Pensyon PH the top innovation.",
     href: "https://bilyonaryo.com/2024/08/23/bsps-open-finance-initiative-retirement-app-pensyon-ph-emerges-as-top-innovation/technology/",
+    imageUrl: "/logos/bilyonaryo.png",
     date: "2024",
     year: 2024,
   },
   {
-    // approx. — exact 2025 date not given
-    kind: "Talk",
+    // approx. — exact 2025 date not given. Judging, not speaking, so it's
+    // filed as "Competition" — both this and the speaking engagements
+    // below share the "Events" group heading (see `group` in link-item.ts).
+    kind: "Competition",
+    group: "Events",
     title: "Judge, Gen AI Philippines Hackathon 2025",
     description: "Judged entries at the Gen AI Philippines Hackathon.",
     href: "https://www.facebook.com/genaicom/photos/122205606494255386/",
@@ -56,10 +60,10 @@ export const featured: FeaturedItem[] = [
     year: 2025,
   },
   {
-    kind: "Talk",
-    // "PJDSC" left unexpanded — didn't want to guess the full name you didn't spell out
+    kind: "Competition",
+    group: "Events",
     title: "Judge, UP PJDSC 2025 Final Round",
-    description: "Judged the final round.",
+    description: "Judged the final round of the Philippine Junior Data Science Challenge.",
     href: "https://www.facebook.com/pjdsc.updssoc/posts/pfbid0b64zEHv7RRj4LAoE6nKz89YVpnp3hD2uT5cVjMRPTSEzDdJrj7NhEeR1SZLXrHMtl",
     date: "2025",
     year: 2025,
@@ -67,6 +71,7 @@ export const featured: FeaturedItem[] = [
   {
     // approx. — exact 2025 date not given
     kind: "Talk",
+    group: "Events",
     title: "Guest speaker, Bulacan State University",
     description: "Spoke on data and AI in practice.",
     href: "https://www.facebook.com/share/p/1BmyvKFDfS/",
@@ -79,6 +84,7 @@ export const featured: FeaturedItem[] = [
     // stable outside their own site — same problem as Facebook's), so
     // this stays text-only rather than ship something broken.
     kind: "Talk",
+    group: "Events",
     title: "Guest speaker, University of Perpetual Help System Laguna",
     description: "TechCon session on data journeys and AI.",
     href: "https://www.linkedin.com/posts/bea-lambitco_techcon-datajourney-ai-activity-7323866333983449088-s1Lr",
