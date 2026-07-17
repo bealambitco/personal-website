@@ -12,11 +12,12 @@ export const experience: ExperienceItem[] = [
     href: "https://www.linkedin.com/in/bea-lambitco",
     date: "2024–Present",
     year: 2024,
+    tags: ["SQL", "Python", "Databricks", "BigQuery", "Azure", "Claude", "n8n"],
   },
   {
     kind: "Training",
-    title: "Corporate Trainer — Data & AI workshops",
-    description: "18 courses delivered (Prompt Engineering, SQL, Python, Power BI, BigQuery), 5.2/6 avg rating, 100% recommendation on Advanced SQL. Full feedback & testimonials linked below.",
+    title: "Corporate Trainer: Data & AI workshops",
+    description: "19 courses delivered (Prompt Engineering, SQL, Python, Power BI, BigQuery), 5.2/6 average rating, 100% recommendation on Advanced SQL. Click through for full feedback and testimonials.",
     href: "https://www.canva.com/design/DAHENEVk42c/NYjPMGIoVBwRNSmK-dbUXw/edit",
     date: "2024–Present",
     year: 2024,
@@ -24,7 +25,7 @@ export const experience: ExperienceItem[] = [
   {
     kind: "Leadership",
     title: "Data & Analytics Head (3 yrs) · Risk Manager (2 yrs), ATRAM",
-    description: "Pioneered the Data & Analytics team; led the firm's Azure data warehouse and in-house data engineering capability; saved $2.25M with an AML screening tool.",
+    description: "Pioneered the Data & Analytics team; led the firm's Azure data warehouse and in-house data engineering capability; saved costs on an internal AML screening tool.",
     href: "https://www.linkedin.com/in/bea-lambitco",
     date: "2019–2024",
     year: 2024,
@@ -33,7 +34,7 @@ export const experience: ExperienceItem[] = [
     // TODO: swap for the real Omdena project link
     kind: "Project",
     title: "AI-Driven Chatbot for Disaster Assistance & Emergency Relief",
-    description: "Omdena collaboration with DataCamp and 50 AI engineers worldwide — a proof-of-concept chatbot providing real-time guidance in disaster-affected areas.",
+    description: "Omdena collaboration with DataCamp and 50 AI engineers worldwide, building a proof-of-concept chatbot providing real-time guidance in disaster-affected areas.",
     href: "https://www.linkedin.com/in/bea-lambitco",
     date: "2023–2024",
     year: 2024,
@@ -50,7 +51,7 @@ export const experience: ExperienceItem[] = [
   {
     kind: "Project",
     title: "Credit Risk Portfolio Analytics Officer, Maybank Philippines",
-    description: "Built a mortgage behavioral scoring model and shifted the bank's PD approach to a rated IFRS 9 model.",
+    description: "Built a mortgage behavioral scoring model and shifted the bank's probability of default (PD) approach to a rated IFRS 9 model.",
     href: "https://www.linkedin.com/in/bea-lambitco",
     date: "2017–2019",
     year: 2019,
@@ -99,13 +100,20 @@ export const experience: ExperienceItem[] = [
   {
     // learn.microsoft.com credential pages don't expose a per-credential
     // image (confirmed), so using a self-hosted badge icon for consistency
-    // with the Credly-badge cards above instead of leaving it blank
+    // with the Credly-badge cards above instead of leaving it blank.
+    // Associate-level Microsoft certs lapse after ~1 year without renewal.
+    // Expiry dates below are mapped by issue-date order (this one issued
+    // 2023, assumed to have lapsed first) — confirm the exact date is
+    // right for THIS cert specifically, not swapped with the AI Engineer
+    // Associate cert below.
     kind: "Certification",
     title: "Microsoft Certified: Azure Data Engineer Associate",
+    description: "Expired December 1, 2025.",
     href: "https://learn.microsoft.com/en-us/users/bealambitco-6128/credentials/132cc3ed72252cd0",
     imageUrl: "/logos/microsoft-badge.png",
     date: "2023",
     year: 2023,
+    expired: true,
   },
   {
     kind: "Certification",
@@ -116,11 +124,13 @@ export const experience: ExperienceItem[] = [
   },
   {
     kind: "Certification",
-    title: "Microsoft AI Credential",
+    title: "Microsoft Certified: Azure AI Engineer Associate",
+    description: "Expired May 3, 2026.",
     href: "https://learn.microsoft.com/en-us/users/bealambitco-6128/credentials/4676fdc18a7500ba",
     imageUrl: "/logos/microsoft-badge.png",
     date: "2024",
     year: 2024,
+    expired: true,
   },
   {
     kind: "Certification",
@@ -128,5 +138,30 @@ export const experience: ExperienceItem[] = [
     href: "https://my.garp.org/DigitalBadgeFRM?id=0031W0000210o7kQAA",
     date: "2020",
     year: 2020,
+  },
+
+  // Honors — pre-professional recognition, kept separate from the
+  // certifications above. No public source exists for the elementary
+  // valedictorian award, so it renders as plain text (no href) rather
+  // than a dead link.
+  {
+    kind: "Honors",
+    title: "MTAP Elementary: Sectoral Individual Winner",
+    href: "https://mtapncrpublic.blogspot.com/2007/02/sectoral-individual-winners-elementary.html",
+    date: "2007",
+    year: 2007,
+  },
+  {
+    kind: "Honors",
+    title: "MTAP High School: Regional Finalist",
+    href: "https://mtapncrprivate.blogspot.com/2011/02/regional-finalists-high-school-category_25.html",
+    date: "2011",
+    year: 2011,
+  },
+  {
+    kind: "Honors",
+    title: "Class Valedictorian, F. G. Calderon Elementary School",
+    date: "2008",
+    year: 2008,
   },
 ];

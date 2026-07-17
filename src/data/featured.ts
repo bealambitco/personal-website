@@ -24,8 +24,8 @@ export const featured: FeaturedItem[] = [
   },
   {
     kind: "Project",
-    title: "BSP-IFC Open Finance PH — winning hackathon project",
-    description: "#1 at the BSP-IFC Open Finance Philippines Hackathon, 2024, with Pensyon PH — a retirement planning solution built on Open API and GenAI.",
+    title: "BSP-IFC Open Finance PH: winning hackathon project",
+    description: "#1 at the BSP-IFC Open Finance Philippines Hackathon, 2024, with Pensyon PH, a retirement planning solution built on Open API and GenAI.",
     href: "https://www.bsp.gov.ph/SitePages/MediaAndResearch/MediaDisp.aspx?ItemId=7225",
     date: "2024",
     year: 2024,
@@ -39,11 +39,28 @@ export const featured: FeaturedItem[] = [
     year: 2024,
   },
   {
+    kind: "Press",
+    title: "Bilyonaryo coverage: Pensyon PH named top innovation",
+    description: "Coverage of BSP's Open Finance initiative naming Pensyon PH the top innovation.",
+    href: "https://bilyonaryo.com/2024/08/23/bsps-open-finance-initiative-retirement-app-pensyon-ph-emerges-as-top-innovation/technology/",
+    date: "2024",
+    year: 2024,
+  },
+  {
     // approx. — exact 2025 date not given
     kind: "Talk",
     title: "Judge, Gen AI Philippines Hackathon 2025",
     description: "Judged entries at the Gen AI Philippines Hackathon.",
     href: "https://www.facebook.com/genaicom/photos/122205606494255386/",
+    date: "2025",
+    year: 2025,
+  },
+  {
+    kind: "Talk",
+    // "PJDSC" left unexpanded — didn't want to guess the full name you didn't spell out
+    title: "Judge, UP PJDSC 2025 Final Round",
+    description: "Judged the final round.",
+    href: "https://www.facebook.com/pjdsc.updssoc/posts/pfbid0b64zEHv7RRj4LAoE6nKz89YVpnp3hD2uT5cVjMRPTSEzDdJrj7NhEeR1SZLXrHMtl",
     date: "2025",
     year: 2025,
   },

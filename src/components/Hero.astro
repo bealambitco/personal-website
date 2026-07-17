@@ -6,8 +6,11 @@ import { socials } from "../data/socials";
 // visitor doesn't have to scroll to Contact to find them. Contact still
 // exists separately for Email/Book a time. Add/remove labels here — it
 // just filters the shared `socials` list, doesn't need its own data file.
-const handleLabels = ["LinkedIn", "GitHub", "YouTube", "TikTok", "Substack"];
-const handles = socials.filter((s) => handleLabels.includes(s.label));
+// This list also sets the display order (not `socials.ts`'s order).
+const handleLabels = ["LinkedIn", "GitHub", "Substack", "YouTube", "TikTok"];
+const handles = handleLabels
+  .map((label) => socials.find((s) => s.label === label))
+  .filter((s): s is (typeof socials)[number] => !!s);
 ---
 
 <section class="hero container">

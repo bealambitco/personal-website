@@ -7,7 +7,10 @@ export type LinkItem = {
   // Optional — leave it out for a terse entry (e.g. a certification) that
   // doesn't need a summary line.
   description?: string;
-  href: string;
+  // Optional — leave it out for an entry with no public/verifiable source
+  // (e.g. a college-org role, a childhood award). Renders as plain text
+  // instead of a clickable card.
+  href?: string;
   // Free text — each section defines its own conventional values, e.g.
   // Featured uses "Talk" | "Article" | "Video" | "Press" | "Project";
   // Experience uses "Project" | "Teaching" | "Leadership" | "Training".
@@ -24,4 +27,7 @@ export type LinkItem = {
   // "/volunteer/dep-2024.jpg") or a full URL. Ignored if embedUrl is set.
   imageUrl?: string;
   tags?: string[];
+  // Marks a certification as lapsed — dims the card, adds an "Expired"
+  // label, and sorts it after non-expired entries within its kind group.
+  expired?: boolean;
 };

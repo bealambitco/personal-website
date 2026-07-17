@@ -17,24 +17,34 @@ const kinds: string[] = [];
 for (const item of items) {
   if (!kinds.includes(item.kind)) kinds.push(item.kind);
 }
+// Non-expired first (newest year first), expired last (also newest first
+// within that group) — lapsed certifications are still worth showing as
+// history, just not competing for attention with current ones.
+function sortEntries(list: LinkItem[]) {
+  return [...list].sort((a, b) => {
+    if (!!a.expired !== !!b.expired) return a.expired ? 1 : -1;
+    return (b.year ?? 0) - (a.year ?? 0);
+  });
+}
+
 const byKind = kinds.map((kind) => ({
   kind,
-  items: items.filter((i) => i.kind === kind).sort((a, b) => (b.year ?? 0) - (a.year ?? 0)),
+  items: sortEntries(items.filter((i) => i.kind === kind)),
 }));
 
 const years = [...new Set(items.map((i) => i.year).filter((y): y is number => typeof y === "number"))].sort(
   (a, b) => b - a,
 );
 
-const newest = [...items].sort((a, b) => (b.year ?? 0) - (a.year ?? 0));
+const newest = sortEntries(items);
 const oldest = [...items].sort((a, b) => (a.year ?? 0) - (b.year ?? 0));
 
 const showFilters = years.length > 1 || kinds.length > 1;
 
 // Kinds that read better as a compact card grid than a long stack of full-
 // width rows — mainly ones that tend to pile up (certifications) or don't
-// need much room per entry (talks). Add to this list freely.
-const gridKinds = ["Certification", "Talk"];
+// need much room per entry (talks, honors). Add to this list freely.
+const gridKinds = ["Certification", "Talk", "Honors"];
 ---
 
 <div class="filterable" data-filterable>

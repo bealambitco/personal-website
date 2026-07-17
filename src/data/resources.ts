@@ -18,7 +18,7 @@ export const resources: Resource[] = [
   { pillar: "data", label: "dbt", href: "https://www.getdbt.com/", note: "Data transformation/modeling" },
   { pillar: "ai", label: "Anthropic docs", href: "https://docs.anthropic.com", note: "Claude & API reference" },
   { pillar: "risk", label: "GARP FRM Program", href: "https://www.garp.org/frm", note: "Risk certification" },
-  { pillar: "tools", label: "Power BI", href: "https://powerbi.microsoft.com", note: "Reporting & dashboards" },
+  { pillar: "data", label: "Power BI", href: "https://powerbi.microsoft.com", note: "Reporting & dashboards" },
   { pillar: "math", label: "3Blue1Brown", href: "https://www.3blue1brown.com/", note: "Visual math intuition" },
   { pillar: "finance", label: "BSP Open Finance", href: "https://www.bsp.gov.ph/", note: "Regulatory reference" },
   { pillar: "career", label: "So Good They Can't Ignore You", href: "https://calnewport.com/books/", note: "Career capital, not passion-chasing" },
