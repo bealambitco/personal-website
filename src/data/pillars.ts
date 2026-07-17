@@ -6,10 +6,9 @@
 //
 // `sections` controls where a pillar appears: "writing" puts it in the
 // Writing mega-menu, /topics, and the posts schema; "resources" puts it in
-// the Resources mega-menu and /resources. Most pillars are in both; a few
-// are writing-only (AI in Finance, AI in Education) or resources-only
-// (Investments). Add a new pillar by adding an object here — no other file
-// needs to change. Posts/resources are matched by their `pillar` field.
+// the Resources mega-menu and /resources. Most pillars are in both. Add a
+// new pillar by adding an object here — no other file needs to change.
+// Posts/resources are matched by their `pillar` field.
 export type PillarGroup = "Technical" | "Industry" | "Life";
 export type PillarSection = "writing" | "resources";
 
@@ -36,7 +35,7 @@ export const pillars: Pillar[] = [
     id: "data",
     label: "Data",
     description:
-      "Pipelines, governance, and the unglamorous data foundations that make AI work at all.",
+      "Pipelines, governance, tools, and the unglamorous data foundations that make AI work at all.",
     group: "Technical",
     sections: ["writing", "resources"],
   },
@@ -55,27 +54,6 @@ export const pillars: Pillar[] = [
     sections: ["writing", "resources"],
   },
   {
-    id: "tools",
-    label: "Tools & Tutorials",
-    description: "Hands-on guides in SQL, Python, Power BI, and BigQuery.",
-    group: "Technical",
-    sections: ["writing", "resources"],
-  },
-  {
-    id: "ai-in-finance",
-    label: "AI in Finance",
-    description: "Where AI actually earns its keep in financial institutions — and where it doesn't.",
-    group: "Industry",
-    sections: ["writing"],
-  },
-  {
-    id: "ai-in-education",
-    label: "AI in Education",
-    description: "AI for learning, teaching, and training — from classrooms to corporate upskilling.",
-    group: "Industry",
-    sections: ["writing"],
-  },
-  {
     id: "finance",
     label: "Finance",
     description:
@@ -84,11 +62,11 @@ export const pillars: Pillar[] = [
     sections: ["writing", "resources"],
   },
   {
-    id: "investments",
-    label: "Investments",
-    description: "Investing tools, references, and resources worth knowing.",
+    id: "education",
+    label: "Education",
+    description: "Teaching, training, and learning, from the classroom to corporate upskilling.",
     group: "Industry",
-    sections: ["resources"],
+    sections: ["writing", "resources"],
   },
   {
     id: "life",

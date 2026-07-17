@@ -33,7 +33,15 @@ function shouldSkipPreview(url: string): boolean {
 // the source is known not to give a meaningful image (see above).
 const resolvedItems = await Promise.all(
   items.map(async (item) => {
-    if (item.imageUrl || item.embedUrl || !item.href.startsWith("http") || shouldSkipPreview(item.href)) return item;
+    if (
+      !item.href ||
+      item.noPreview ||
+      item.imageUrl ||
+      item.embedUrl ||
+      !item.href.startsWith("http") ||
+      shouldSkipPreview(item.href)
+    )
+      return item;
     const preview = await getPreviewImage(item.href);
     return preview ? { ...item, imageUrl: preview } : item;
   }),
@@ -43,8 +51,9 @@ const resolvedItems = await Promise.all(
 <div class={`card-list ${layout}`}>
   {
     resolvedItems.map((item) => {
-      const isExternal = item.href.startsWith("http");
+      const isExternal = !!item.href?.startsWith("http");
       const hasThumb = !item.embedUrl && !!item.imageUrl;
+      const Tag = item.href ? "a" : "div";
       return (
         <div class="card-entry" data-year={item.year ?? ""}>
           {item.embedUrl && (
@@ -60,8 +69,8 @@ const resolvedItems = await Promise.all(
               />
             </div>
           )}
-          <a
-            class={`card-link${hasThumb ? " has-thumb" : ""}`}
+          <Tag
+            class={`card-link${hasThumb ? " has-thumb" : ""}${item.expired ? " is-expired" : ""}${item.href ? "" : " no-link"}`}
             href={item.href}
             target={isExternal ? "_blank" : undefined}
             rel={isExternal ? "noopener noreferrer" : undefined}
@@ -71,6 +80,7 @@ const resolvedItems = await Promise.all(
               <div class="card-kind">
                 {item.kind}
                 {item.date && ` · ${item.date}`}
+                {item.expired && <span class="card-expired"> · Expired</span>}
                 {isExternal && <span class="card-external"> ↗</span>}
               </div>
               <div class="card-title">{item.title}</div>
@@ -83,7 +93,7 @@ const resolvedItems = await Promise.all(
                 </div>
               )}
             </div>
-          </a>
+          </Tag>
         </div>
       );
     })

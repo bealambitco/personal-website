@@ -257,6 +257,25 @@ pre {
   color: var(--ink-faint);
   font-weight: 400;
 }
+.card-expired {
+  color: var(--ink-faint);
+  font-weight: 400;
+  font-style: italic;
+}
+/* no public source to link to — reads as plain text, not a dead click target */
+.card-link.no-link {
+  cursor: default;
+}
+.card-link.no-link:hover {
+  background: none;
+}
+.card-link.no-link:hover .card-title {
+  color: var(--ink);
+}
+/* lapsed certification — still worth showing (history), visually de-emphasized */
+.card-link.is-expired {
+  opacity: 0.6;
+}
 
 /* compact card-grid variant (certifications, talks — see FilterableList's
    gridKinds) instead of the default full-width row list */
