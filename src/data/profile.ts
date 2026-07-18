@@ -16,7 +16,7 @@ export const profile = {
   // Shown next to your photo. Keep it to 2-3 sentences — this is the
   // "who is this person" summary.
   tagline:
-    "Data and AI expertise built in financial services: I turn analytics and automation into measurable business outcomes, not just dashboards and demos.",
+    "Data and AI expertise built in financial services: I turn analytics and automation into measurable business outcomes.",
 
   // One or more short paragraphs — sits right under the tagline in the
   // compact hero block, above your credentials and achievements. Each

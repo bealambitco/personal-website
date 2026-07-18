@@ -8,7 +8,7 @@ export const experience: ExperienceItem[] = [
   {
     kind: "Consulting",
     title: "Data and AI Consultant (Self-employed)",
-    description: "Performed data modelling, engineering, and business analysis for a financial services firm in Singapore, a Microsoft partner firm, and an asset management firm; grew a high-performing Data & AI team.",
+    description: "Performed data modeling, engineering, and business analysis for a financial services firm in Singapore; grew a high-performing Data & AI team for a Microsoft partner and an asset management firm.",
     href: "https://www.linkedin.com/in/bea-lambitco",
     date: "2024–Present",
     year: 2024,
