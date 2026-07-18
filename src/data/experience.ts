@@ -56,17 +56,6 @@ export const experience: ExperienceItem[] = [
     date: "2017–2019",
     year: 2019,
   },
-  {
-    // Moved here from Volunteer Work — it's a paid internship, not
-    // volunteering. noPreview: Kalibrr's homepage og:image isn't specific
-    // to this role, so it's suppressed rather than shown as a generic logo.
-    kind: "Internship",
-    title: "Partnerships Management Trainee, Kalibrr",
-    href: "https://www.kalibrr.com/",
-    noPreview: true,
-    date: "2016–2017",
-    year: 2016,
-  },
   // Certifications — years below are inferred from your career timeline
   // (bootcamp before Aralin, fundamentals before the associate-level cert,
   // etc.) since exact issue dates weren't given. Double-check and correct
@@ -142,30 +131,5 @@ export const experience: ExperienceItem[] = [
     href: "https://my.garp.org/DigitalBadgeFRM?id=0031W0000210o7kQAA",
     date: "2020",
     year: 2020,
-  },
-
-  // Honors — pre-professional recognition, kept separate from the
-  // certifications above. No public source exists for the elementary
-  // valedictorian award, so it renders as plain text (no href) rather
-  // than a dead link.
-  {
-    kind: "Honors",
-    title: "MTAP Elementary: Sectoral Individual Winner",
-    href: "https://mtapncrpublic.blogspot.com/2007/02/sectoral-individual-winners-elementary.html",
-    date: "2007",
-    year: 2007,
-  },
-  {
-    kind: "Honors",
-    title: "MTAP High School: Regional Finalist",
-    href: "https://mtapncrprivate.blogspot.com/2011/02/regional-finalists-high-school-category_25.html",
-    date: "2011",
-    year: 2011,
-  },
-  {
-    kind: "Honors",
-    title: "Class Valedictorian, F. G. Calderon Elementary School",
-    date: "2008",
-    year: 2008,
   },
 ];

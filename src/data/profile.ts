@@ -16,21 +16,15 @@ export const profile = {
   // Shown next to your photo. Keep it to 2-3 sentences — this is the
   // "who is this person" summary.
   tagline:
-    "Data and AI expertise built in financial services: I help teams turn analytics and automation into clear, measurable business outcomes.",
+    "Data and AI expertise built in financial services: I turn analytics and automation into measurable business outcomes, not just dashboards and demos.",
 
-  // One tight paragraph — this sits right under the tagline in the compact
-  // hero block, above your credentials and achievements. Keep it short on
-  // purpose; it's a summary, not the full story.
-  //
-  // Opening sentence is a deliberate rewrite of a more generic "most
-  // organizations don't have an AI problem" framing — that line is a
-  // consulting cliché everyone in this space uses. A second draft leaned
-  // too hard on "most engagements fall short," which read as accusing
-  // other people's work rather than selling yours — trimmed to one
-  // confident, benefit-led sentence instead. Everything from "My work
-  // closes that gap" onward follows the wording you gave directly.
-  about:
-    "I build Data and AI capability from the inside, not just advise on it from the outside, so the technology and the business value it's meant to deliver move together. My work closes that gap. I have spent years in banking and asset management, engaging directly in the work, and pioneering and leading a data and analytics function from the ground up. Currently, I provide consultancy to organizations, train working professionals, and speak at industry events, all with the objective of simplifying and democratizing data and AI to enable more individuals and teams to utilize these tools.",
+  // One or more short paragraphs — sits right under the tagline in the
+  // compact hero block, above your credentials and achievements. Each
+  // array entry renders as its own paragraph.
+  about: [
+    "Most Data and AI advice stops at the strategy deck. I build the capability itself, from the inside, not just advising from the outside, so the technology and the business value it is meant to deliver move together.",
+    "I have spent years in banking and asset management, engaging directly in the work, and pioneering and leading a data and analytics function from the ground up. Today, I consult for organizations, train working professionals, and speak at industry events, all to simplify and democratize Data and AI so more individuals and teams can put these tools to work.",
+  ],
 
   // `url` is optional — set it to a verification link (Credly, Microsoft
   // Learn, GARP, Coursera, etc.) and the chip becomes a link that opens it

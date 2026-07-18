@@ -15,25 +15,10 @@ export const volunteer: VolunteerItem[] = [
   },
   {
     kind: "Mentor",
-    title: "Mentor: Women in Big Data, FTW Foundation, KadaKareer",
-    description: "Mentored students and professionals on their data career growth.",
+    title: "Mentor, KadaKareer",
+    description: "Also mentored through Women in Big Data and FTW Foundation.",
     href: "https://app.kadakareer.com/coaches/bealambitco27",
     date: "2023–present",
     year: 2023,
-  },
-
-  // College years — role only, no need for project-level detail. No public
-  // source for the two student-org roles, so they render as plain text.
-  {
-    kind: "Volunteer",
-    title: "Academics Department Head, Ateneo Mathematics Society",
-    date: "2015–2016",
-    year: 2015,
-  },
-  {
-    kind: "Volunteer",
-    title: "Corporate Relations Head, Alay ni Ignacio",
-    date: "2014–2015",
-    year: 2014,
   },
 ];
