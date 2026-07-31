@@ -22,7 +22,7 @@ const posts = allPosts
 const linkOut = socials.find((s) => s.label === "LinkedIn") ?? socials[0];
 ---
 
-<BaseLayout title={pillar.label} description={pillar.description}>
+<BaseLayout title={pillar.label} description={pillar.description} robots="noindex,follow">
   <section class="section container">
     <a href="/topics" class="back-link">← All topics</a>
     <h1 class="page-title">{pillar.label}</h1>

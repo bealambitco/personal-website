@@ -88,6 +88,64 @@ button:focus-visible {
   outline-offset: 3px;
 }
 
+.skip-link {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 100;
+  padding: 8px 12px;
+  border-radius: var(--radius);
+  background: var(--ink);
+  color: var(--bg);
+  text-decoration: none;
+  transform: translateY(-150%);
+}
+.skip-link:focus {
+  color: var(--bg);
+  transform: translateY(0);
+}
+
+.button {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 15px;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+.button:hover {
+  transform: translateY(-1px);
+}
+.button-primary {
+  color: #fff;
+  background: var(--color-amethyst);
+  border-color: var(--color-amethyst);
+}
+.button-primary:hover {
+  color: #fff;
+  background: var(--color-violet);
+  border-color: var(--color-violet);
+}
+.button-secondary {
+  color: var(--primary);
+  background: var(--bg);
+  border-color: var(--border);
+}
+.button-secondary:hover {
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
 h1,
 h2,
 h3 {

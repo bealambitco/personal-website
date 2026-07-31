@@ -16,15 +16,36 @@ const latest = allPosts
 ---
 
 <section id="latest-articles" class="section container">
-  <h2 class="section-title">Latest Articles</h2>
+  <div class="writing-heading">
+    <h2 class="section-title">Writing</h2>
+    <a href="/writing">Explore writing</a>
+  </div>
   {
     latest.length > 0 ? (
       <CardList items={latest} />
     ) : (
-      <p class="muted">
-        Nothing published on the site yet. Browse by topic using the{" "}
-        <a href="/topics">Writing</a> menu above, or check back soon.
+      <p class="writing-intro">
+        I’m preparing articles on practical Data & AI, career development, and learning. Published pieces will
+        appear here.
       </p>
     )
   }
 </section>
+
+<style>
+  .writing-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .writing-heading a {
+    flex-shrink: 0;
+    font-size: 14px;
+  }
+  .writing-intro {
+    max-width: 60ch;
+    margin: 0;
+    color: var(--ink-soft);
+  }
+</style>

@@ -26,3 +26,6 @@ EDITING.md
 
 # developer-facing technical deep dive — local reference only, not published
 TECHNICAL.md
+
+# locally delivered review artifact; not part of the public repository
+review-output/

@@ -8,6 +8,9 @@ import Analytics from "@vercel/analytics/astro";
 interface Props {
   title: string;
   description?: string;
+  // Thin navigation and archive pages stay usable and crawlable but can
+  // opt out of search results with "noindex,follow".
+  robots?: "index,follow" | "noindex,follow";
   // Set only for a post that's canonically published elsewhere (e.g.
   // mirrored from/to another platform later) — every other page defaults
   // to its own URL automatically, which is the correct canonical for
@@ -21,7 +24,14 @@ interface Props {
   structuredData?: Record<string, unknown>;
 }
 
-const { title, description = profile.tagline, canonicalUrl, ogType = "website", structuredData } = Astro.props;
+const {
+  title,
+  description = profile.tagline,
+  robots = "index,follow",
+  canonicalUrl,
+  ogType = "website",
+  structuredData,
+} = Astro.props;
 const pageTitle = title === profile.name ? title : `${title} · ${profile.name}`;
 const canonical = canonicalUrl ?? new URL(Astro.url.pathname, Astro.site).toString();
 const ogImage = new URL("/og-image.png", Astro.site).toString();
@@ -35,6 +45,7 @@ const ogImage = new URL("/og-image.png", Astro.site).toString();
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
+    <meta name="robots" content={robots} />
     <meta name="generator" content={Astro.generator} />
     <link rel="canonical" href={canonical} />
 
@@ -42,8 +53,12 @@ const ogImage = new URL("/og-image.png", Astro.site).toString();
     <meta property="og:description" content={description} />
     <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content={profile.name} />
     <meta property="og:image" content={ogImage} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
     <link rel="alternate" type="application/rss+xml" title={profile.name} href={new URL("/rss.xml", Astro.site)} />
     {
       /* JSON-LD must be raw JSON, so set:html is required here. The data is
@@ -56,8 +71,9 @@ const ogImage = new URL("/og-image.png", Astro.site).toString();
     <Analytics />
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     <Nav />
-    <main>
+    <main id="main-content">
       <slot />
     </main>
     <Footer />

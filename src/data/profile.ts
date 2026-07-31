@@ -9,21 +9,21 @@ export const profile = {
   title: "Data & AI Consultant · Trainer · Speaker",
   location: "Manila, Philippines",
 
-  // TODO: confirm which address you want published — this is the one
-  // from your brand board. Swap for your preferred public inbox.
+  // Temporary public inquiry address. Replace with admin@bealambitco.com
+  // only after that domain mailbox is active and receiving mail.
   email: "bealambitco@yahoo.com",
 
   // Shown next to your photo. Keep it to 2-3 sentences — this is the
   // "who is this person" summary.
   tagline:
-    "Data and AI expertise built in financial services: I turn analytics and automation into measurable business outcomes.",
+    "I help organizations turn Data and AI into practical capability and measurable business outcomes, drawing on experience in banking and asset management.",
 
   // One or more short paragraphs — sits right under the tagline in the
   // compact hero block, above your credentials and achievements. Each
   // array entry renders as its own paragraph.
   about: [
-    "Most Data and AI advice stops at the strategy deck. I build the capability itself, from the inside, not just advising from the outside, so the technology and the business value it is meant to deliver move together.",
-    "I have spent years in banking and asset management, engaging directly in the work, and pioneering and leading a data and analytics function from the ground up. Today, I consult for organizations, train working professionals, and speak at industry events, all to simplify and democratize Data and AI so more individuals and teams can put these tools to work.",
+    "Data and AI strategy matters only when people can turn it into working capability. I bridge the two—combining hands-on delivery with business context so technology, teams, and measurable value move together.",
+    "My experience spans banking and asset management, where I worked directly in analytics, risk, data engineering, and team leadership. Today, I consult for organizations, train working professionals, and speak at industry events to make Data and AI useful, understandable, and easier to put into practice.",
   ],
 
   // `url` is optional — set it to a verification link (Credly, Microsoft

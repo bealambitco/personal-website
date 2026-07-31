@@ -1,9 +1,23 @@
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 
-// Update `site` once you've picked a domain — it's used to generate
-// the sitemap and canonical URLs. See README.md for hosting/domain steps.
 export default defineConfig({
   site: "https://bealambitco.com",
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      // Archive and taxonomy pages remain available to visitors and
+      // crawlable via internal links, but only the homepage and substantive
+      // article pages belong in the public search sitemap.
+      filter: (page) => {
+        const pathname = new URL(page).pathname;
+        return (
+          pathname !== "/resources/" &&
+          pathname !== "/topics/" &&
+          !pathname.startsWith("/topics/") &&
+          pathname !== "/writing/" &&
+          !pathname.startsWith("/tags/")
+        );
+      },
+    }),
+  ],
 });

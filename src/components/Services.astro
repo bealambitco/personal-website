@@ -1,0 +1,89 @@
+---
+import { profile } from "../data/profile";
+import { services } from "../data/services";
+
+const inquiryHref = `mailto:${profile.email}?subject=${encodeURIComponent("Data & AI consulting, training, or speaking inquiry")}`;
+---
+
+<section id="services" class="section container">
+  <div class="section-heading-row">
+    <div>
+      <p class="section-kicker">Ways to work together</p>
+      <h2 class="section-title">Services</h2>
+    </div>
+    <a class="button button-secondary" href={inquiryHref}>Start a conversation</a>
+  </div>
+
+  <div class="service-grid">
+    {
+      services.map((service) => (
+        <article class="service-card">
+          <h3>{service.title}</h3>
+          <p>{service.description}</p>
+          <p class="service-fit">{service.bestFor}</p>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .section-heading-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 26px;
+  }
+  .section-heading-row .section-title {
+    margin-bottom: 0;
+  }
+  .section-kicker {
+    margin: 0 0 6px;
+    color: var(--primary);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .service-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+  .service-card {
+    padding: 20px;
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius);
+    background: var(--bg-raised);
+  }
+  .service-card h3 {
+    margin: 0 0 10px;
+    font-size: 18px;
+  }
+  .service-card p {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  .service-card .service-fit {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border-soft);
+    color: var(--ink-faint);
+    font-size: 13px;
+  }
+
+  @media (max-width: 760px) {
+    .service-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 520px) {
+    .section-heading-row {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+</style>

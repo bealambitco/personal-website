@@ -11,18 +11,24 @@ const handleLabels = ["LinkedIn", "GitHub", "Substack", "YouTube", "TikTok"];
 const handles = handleLabels
   .map((label) => socials.find((s) => s.label === label))
   .filter((s): s is (typeof socials)[number] => !!s);
+const inquiryHref = `mailto:${profile.email}?subject=${encodeURIComponent("Data & AI consulting, training, or speaking inquiry")}`;
 ---
 
 <section class="hero container">
   <div class="hero-top">
     <img class="hero-photo" src={profile.photo} alt={profile.photoAlt} width="104" height="104" />
     <div class="hero-heading">
-      <h1>{profile.displayName}</h1>
+      <h1>{profile.name}</h1>
       <p class="hero-title">{profile.title}</p>
     </div>
   </div>
 
   <p class="hero-tagline">{profile.tagline}</p>
+
+  <div class="hero-actions">
+    <a class="button button-primary" href={inquiryHref}>Email Bea</a>
+    <a class="button button-secondary" href="#services">Explore services</a>
+  </div>
 
   <div class="tag-row">
     {
@@ -78,8 +84,6 @@ const handles = handleLabels
     transform: scale(1.03);
   }
   .hero-heading h1 {
-    /* sized for the full three-word name — bumping this back up will make
-       it wrap awkwardly next to the photo at laptop widths */
     font-size: clamp(32px, 4.2vw, 44px);
     line-height: 1.1;
     letter-spacing: -0.03em;
@@ -97,6 +101,12 @@ const handles = handleLabels
     max-width: 58ch;
     font-size: 20px;
     line-height: 1.5;
+  }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: -4px;
   }
   .handle-row {
     display: flex;
