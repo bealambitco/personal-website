@@ -21,7 +21,15 @@ const structuredData = {
   headline: post.data.title,
   description: post.data.description,
   datePublished: post.data.date.toISOString(),
-  author: { "@type": "Person", name: "Bea Lambitco", url: Astro.site?.toString() },
+  image: new URL("/og-image.png", Astro.site).toString(),
+  url: new URL(`/writing/${post.id}/`, Astro.site).toString(),
+  mainEntityOfPage: new URL(`/writing/${post.id}/`, Astro.site).toString(),
+  author: {
+    "@type": "Person",
+    "@id": `${Astro.site?.toString()}#bea-lambitco`,
+    name: "Bea Charmelyn T. Lambitco, FRM",
+    url: Astro.site?.toString(),
+  },
   ...(post.data.tags.length > 0 && { keywords: post.data.tags.join(", ") }),
 };
 ---

@@ -11,14 +11,11 @@ export type FeaturedItem = LinkItem;
 // once you know it.
 export const featured: FeaturedItem[] = [
   {
-    // this page has no og:image (confirmed — checked its raw HTML), so
-    // pointing at the article's own real editorial photo instead of
-    // leaving it blank
     kind: "Press",
-    title: "Featured in Microsoft's coverage of ATRAM's Azure rollout",
-    description: "Quoted as Head of Data & Analytics at ATRAM on tackling data quality and governance challenges.",
+    title: "ATRAM's data transformation with Microsoft",
+    description: "Contributed as Head of Data & Analytics to ATRAM's Azure data platform and governance work, featured in Microsoft's case coverage.",
     href: "https://news.microsoft.com/en-ph/2023/03/17/atram-enhances-data-management-and-connectivity-with-microsoft-solutions-unlocks-more-investment-opportunities-for-filipinos/",
-    imageUrl: "https://msftstories.thesourcemediaassets.com/sites/436/2023/03/CLO18_bankCoworkers_001-scaled.jpg",
+    imageUrl: "/previews/microsoft-atram.jpg",
     date: "Mar 2023",
     year: 2023,
   },
@@ -27,6 +24,7 @@ export const featured: FeaturedItem[] = [
     title: "BSP-IFC Open Finance PH: winning hackathon project",
     description: "#1 at the BSP-IFC Open Finance Philippines Hackathon, 2024, with Pensyon PH, a retirement planning solution built on Open API and GenAI.",
     href: "https://www.bsp.gov.ph/SitePages/MediaAndResearch/MediaDisp.aspx?ItemId=7225",
+    imageUrl: "/previews/bsp.jpg",
     date: "2024",
     year: 2024,
   },
@@ -35,13 +33,14 @@ export const featured: FeaturedItem[] = [
     title: "BSP coverage of the Open Finance PH Hackathon win",
     description: "Official BSP write-up of the BSP-IFC Open Finance Philippines Hackathon.",
     href: "https://www.bsp.gov.ph/SitePages/MediaAndResearch/MediaDisp.aspx?ItemId=7225",
+    imageUrl: "/previews/bsp.jpg",
     date: "2024",
     year: 2024,
   },
   {
     kind: "Press",
-    title: "Bilyonaryo coverage: Pensyon PH named top innovation",
-    description: "Coverage of BSP's Open Finance initiative naming Pensyon PH the top innovation.",
+    title: "News coverage: Pensyon PH wins the BSP-IFC Open Finance PH Hackathon",
+    description: "Bilyonaryo's report on Pensyon PH, the winning retirement-planning solution in BSP's Open Finance initiative.",
     href: "https://bilyonaryo.com/2024/08/23/bsps-open-finance-initiative-retirement-app-pensyon-ph-emerges-as-top-innovation/technology/",
     imageUrl: "/logos/bilyonaryo.png",
     date: "2024",
@@ -72,21 +71,18 @@ export const featured: FeaturedItem[] = [
     // approx. — exact 2025 date not given
     kind: "Talk",
     group: "Events",
-    title: "Guest speaker, Bulacan State University",
-    description: "Spoke on data and AI in practice.",
+    title: "Workshop facilitator, Bulacan State University",
+    description: "Delivered a workshop on Data & AI in finance.",
     href: "https://www.facebook.com/share/p/1BmyvKFDfS/",
     date: "2025",
     year: 2025,
   },
   {
-    // approx. — exact 2025 date not given. Its auto-fetched LinkedIn image
-    // didn't render reliably once deployed (LinkedIn's CDN links aren't
-    // stable outside their own site — same problem as Facebook's), so
-    // this stays text-only rather than ship something broken.
+    // approx. — exact 2025 date not given
     kind: "Talk",
     group: "Events",
     title: "Guest speaker, University of Perpetual Help System Laguna",
-    description: "TechCon session on data journeys and AI.",
+    description: "Shared my data and AI journey with students at TechCon.",
     href: "https://www.linkedin.com/posts/bea-lambitco_techcon-datajourney-ai-activity-7323866333983449088-s1Lr",
     date: "2025",
     year: 2025,
@@ -96,13 +92,14 @@ export const featured: FeaturedItem[] = [
     title: "Why relationships and service to others matter more than money",
     description: "Guest piece for Tiny Buddha on connection, kindness, and purpose over material wealth.",
     href: "https://tinybuddha.com/blog/why-relationships-and-service-to-others-matter-more-than-money/",
+    imageUrl: "/previews/tiny-buddha.png",
   },
   {
-    // couldn't verify the exact mention (page blocked automated access) — confirm wording
     kind: "Press",
-    title: "Featured in Ateneo Math's 2026 SOSE Open House coverage",
-    description: "",
+    title: "Ateneo Math's 2026 SOSE Open House coverage",
+    description: "Coverage from Ateneo de Manila University's Department of Mathematics.",
     href: "https://www.ateneo.edu/news/2026/05/ateneo-math-welcomes-future-2026-sose-open-house",
+    imageUrl: "/previews/ateneo-open-house.png",
     date: "2026",
     year: 2026,
   },

@@ -1,111 +1,82 @@
-# bealambitco.com
+# Bea Lambitco — Professional Website
 
-The personal site of Bea Lambitco — Data & AI consultant, trainer, speaker.
-Bio, timeline, talks, projects, and a growing writing hub organized by topic
-(AI, Data, Risk, AI in Finance, and more).
+This repository powers [bealambitco.com](https://bealambitco.com), my professional home for Data & AI consulting, corporate training, speaking, selected work, and writing.
 
-**Live:** [bealambitco.com](https://bealambitco.com)
+The site is intentionally straightforward: it should be quick to read, easy to maintain, and credible to the organizations and communities I work with.
 
-## What this is
+## What is on the site
 
-A fast, unpretentious personal site with enough structure to hold a growing
-archive of writing, without the overhead of a full web app.
+- A concise introduction to my work in Data & AI, financial services, and education
+- Consulting, training, and speaking services
+- Selected projects, press, events, credentials, and professional experience
+- Volunteer and community work
+- A writing and resources structure that can grow as original material is published
+- A direct professional inquiry path
 
-It's built with [Astro](https://astro.build), which compiles down to flat,
-static HTML/CSS — no JavaScript framework ships to the browser. The one
-deliberate exception is a small, framework-free `<script>` tag that powers
-filtering/sorting on the writing archive — plain JavaScript, no build step,
-no dependency.
+## Technology
 
-No database, no CMS, no admin panel. All content lives in plain text/markdown
-files in this repo.
+The site uses [Astro](https://astro.build) and TypeScript to generate static HTML. Content is stored in TypeScript and Markdown files—there is no database, CMS, authentication layer, or server-side application.
 
-## Built with
+Inter and JetBrains Mono are bundled with the site rather than loaded from a font CDN. The production site is deployed on Vercel and uses Vercel Web Analytics.
 
-- **[Astro](https://astro.build)** — static site generation, zero client-side
-  JS by default
-- **Content collections** for the writing archive — each article is a
-  Markdown file with frontmatter (title, topic, date)
-- **[Inter](https://rsms.me/inter/)** + **[JetBrains Mono](https://www.jetbrains.com/lp/mono/)**,
-  self-hosted (no font CDN request)
-- Deployed on **[Vercel](https://vercel.com)**, redeploying automatically on
-  every push to `main`, with **Vercel Web Analytics** for privacy-friendly
-  traffic stats
+This architecture keeps the public attack surface and browser-side JavaScript small while leaving room for interactive components if they become genuinely useful later.
 
-## Features
+## Run it locally
 
-- Fully responsive, light/dark themed, no client-side framework
-- A writing hub organized by topic, with a nav mega-menu, per-topic pages, an
-  all-articles view that's filterable by year and sortable, and per-tag pages
-  (`/tags/<tag>`) generated from article frontmatter
-- Talks/press/projects sections that group by category and support inline
-  video embeds
-- Resources page sharing the same topic taxonomy as the writing hub — each
-  topic declares whether it appears in Writing, Resources, or both
-- Sitemap + `robots.txt` + Open Graph/Twitter card images + JSON-LD
-  structured data + RSS feed (`/rss.xml`) out of the box, and security
-  headers (CSP and friends) via `vercel.json`
-- Link cards fetch their own preview thumbnail automatically at build time
-  (the same `og:image` you'd see pasting a link into Slack) — no manual
-  screenshotting needed
-
-## Running it locally
+Requirements: Node.js 22 and npm.
 
 ```bash
-npm install
-npm run dev      # http://localhost:4321, auto-reloads on save
+npm ci
+npm run dev
 ```
+
+Astro will print the local URL, usually `http://localhost:4321`.
+
+Before opening a pull request:
 
 ```bash
-npm run check    # type-check the whole project
-npm run build    # production build, output in dist/
-npm run preview  # serve that build locally
+npm run check
+npm run build
+npm run test:site
+npm audit
 ```
 
-## Content workflow
+The site-verification script checks generated metadata, canonicals, robots directives, sitemap membership, heading structure, structured data, insecure URLs, and draft-content leakage.
 
-Everything editorial lives in `src/data/*.ts` (profile, timeline, featured
-talks/press, experience, volunteer work, resources, topics, social links) —
-plain arrays of objects, no Astro/TypeScript knowledge required to edit them.
+## Publishing workflow
 
-**Adding an article**: copy `src/content/posts/_template.md`, fill in the
-frontmatter (title, topic, date, optional tags), write it in Markdown, set
-`draft: false`. It shows up on its topic page, the all-articles view, the
-RSS feed, and any `/tags/<tag>` pages automatically.
+1. Create a feature branch.
+2. Make and review the change locally.
+3. Open a pull request.
+4. Check the Vercel Preview deployment and required GitHub checks.
+5. Merge into `main` when the preview is correct. Vercel then deploys production.
 
-**Adding a new topic**: add one object to `src/data/pillars.ts` — its page
-and its spot in the nav menus are generated from that one entry (the
-`sections` field controls whether it appears under Writing, Resources, or
-both).
+A permanent `dev` branch is not required: every pull request receives its own isolated preview URL.
 
-**No pull request needed for day-to-day changes.** This is a single-owner
-repo, so pushing straight to `main` is completely normal, and Vercel
-redeploys automatically either way. Two ways to make a change:
+## Content model
 
-- Edit locally and `git push` — live in about a minute.
-- Skip git entirely: use GitHub's own web editor (the pencil icon on any file,
-  or "Add file" for a new one) to commit straight from the browser — same
-  auto-deploy, no terminal needed.
+- `src/data/profile.ts` — name, positioning, public email, credentials, and proof points
+- `src/data/services.ts` — consulting, training, and speaking services
+- `src/data/*.ts` — experience, timeline, featured work, volunteer work, resources, and social links
+- `src/content/posts/*.md` — article drafts and published writing
+- `src/data/pillars.ts` — the shared writing and resources taxonomy
 
-A pull request is only useful as an optional safety net: opening one gives a
-Vercel *preview* deployment (a throwaway URL) to check a change before it
-goes live — worth using for something you want to double-check, not required
-otherwise.
+Articles remain private to the build while `draft: true`. Only original, reviewed work should be published under Bea's name.
 
-## Deploying
+See [Content and editing guide](docs/content-guide.md) for everyday updates and [Architecture and operations](docs/architecture.md) for technical details.
 
-1. Push to a GitHub repo.
-2. On [vercel.com/new](https://vercel.com/new), import the repo — Vercel
-   auto-detects Astro (build command `astro build`, output `dist`), no
-   configuration needed.
-3. Deploy. Every future push to `main` redeploys automatically.
-4. Custom domain: **Project Settings → Domains** in Vercel, then update
-   `site` in `astro.config.mjs` to match (used for the sitemap and social
-   preview links).
+## Search policy
 
-Vercel's free tier fully covers a site like this — the only real cost is the
-domain name itself.
+The homepage and substantive original articles are eligible for search indexing. Topic, tag, writing-index, and resources pages remain useful navigation pages, but they use `noindex,follow` and are excluded from the sitemap while they are thin archives.
+
+This keeps branded search focused on Bea Lambitco without preventing search engines from discovering future article links.
+
+## Repository guides
+
+- [Content and editing guide](docs/content-guide.md)
+- [Architecture and operations](docs/architecture.md)
+- [Current implementation brief](docs/implementation-brief.md)
 
 ---
 
-© Bea Lambitco. Built with [Astro](https://astro.build).
+© Bea Lambitco

@@ -2,10 +2,9 @@
 import type { LinkItem } from "../data/link-item";
 import CardList from "./CardList.astro";
 
-// Wraps CardList with a year filter and a category/newest/oldest view
-// toggle. Used by Featured and Experience, wherever a list can hold more
-// than a couple items per kind (e.g. three "Talk" entries) and benefits
-// from being sorted/filtered rather than read as one long list.
+// Wraps CardList with an optional year filter. Entries render once, grouped
+// by category, so the homepage stays compact without duplicating full card
+// lists into hidden sort panels.
 interface Props {
   items: LinkItem[];
 }
@@ -42,10 +41,7 @@ const years = [...new Set(items.map((i) => i.year).filter((y): y is number => ty
   (a, b) => b - a,
 );
 
-const newest = sortEntries(items);
-const oldest = [...items].sort((a, b) => (a.year ?? 0) - (b.year ?? 0));
-
-const showFilters = years.length > 1 || groups.length > 1;
+const showFilters = years.length > 1;
 
 // Groups that read better as a compact card grid than a long stack of
 // full-width rows — mainly ones that tend to pile up (certifications) or
@@ -58,35 +54,22 @@ const gridKinds = ["Certification", "Events"];
     showFilters && (
       <div class="filter-bar">
         {years.length > 1 && (
-          <div class="filter-group">
-            <button type="button" class="filter-pill active" data-year-filter="all">
+          <div class="filter-group" role="group" aria-label="Filter entries by year">
+            <button type="button" class="filter-pill active" data-year-filter="all" aria-pressed="true">
               All years
             </button>
             {years.map((y) => (
-              <button type="button" class="filter-pill" data-year-filter={y}>
+              <button type="button" class="filter-pill" data-year-filter={y} aria-pressed="false">
                 {y}
               </button>
             ))}
-          </div>
-        )}
-        {groups.length > 1 && (
-          <div class="filter-group">
-            <button type="button" class="view-pill active" data-view-btn="category">
-              By category
-            </button>
-            <button type="button" class="view-pill" data-view-btn="newest">
-              Newest first
-            </button>
-            <button type="button" class="view-pill" data-view-btn="oldest">
-              Oldest first
-            </button>
           </div>
         )}
       </div>
     )
   }
 
-  <div data-view-panel="category">
+  <div>
     {
       byKind.map(({ kind, items: kindItems }) => (
         <div class="kind-group">
@@ -95,12 +78,6 @@ const gridKinds = ["Certification", "Events"];
         </div>
       ))
     }
-  </div>
-  <div data-view-panel="newest" hidden>
-    <CardList items={newest} />
-  </div>
-  <div data-view-panel="oldest" hidden>
-    <CardList items={oldest} />
   </div>
 </div>
 
@@ -117,8 +94,7 @@ const gridKinds = ["Certification", "Events"];
     flex-wrap: wrap;
     gap: 6px;
   }
-  .filter-pill,
-  .view-pill {
+  .filter-pill {
     font-family: var(--font-mono);
     font-size: 12px;
     padding: 4px 10px;
@@ -132,12 +108,10 @@ const gridKinds = ["Certification", "Events"];
       border-color 180ms ease,
       background-color 180ms ease;
   }
-  .filter-pill:hover,
-  .view-pill:hover {
+  .filter-pill:hover {
     color: var(--primary);
   }
-  .filter-pill.active,
-  .view-pill.active {
+  .filter-pill.active {
     background: var(--bg-raised);
     border-color: var(--primary);
     color: var(--primary);
@@ -161,15 +135,17 @@ const gridKinds = ["Certification", "Events"];
 <script>
   function initFilterable(block: HTMLElement) {
     const yearButtons = block.querySelectorAll<HTMLButtonElement>("[data-year-filter]");
-    const viewButtons = block.querySelectorAll<HTMLButtonElement>("[data-view-btn]");
-    const panels = block.querySelectorAll<HTMLElement>("[data-view-panel]");
     const entries = block.querySelectorAll<HTMLElement>(".card-entry");
     const kindGroups = block.querySelectorAll<HTMLElement>(".kind-group");
 
     yearButtons.forEach((btn) => {
       btn.addEventListener("click", () => {
-        yearButtons.forEach((b) => b.classList.remove("active"));
+        yearButtons.forEach((b) => {
+          b.classList.remove("active");
+          b.setAttribute("aria-pressed", "false");
+        });
         btn.classList.add("active");
+        btn.setAttribute("aria-pressed", "true");
         const year = btn.dataset.yearFilter;
         entries.forEach((entry) => {
           const match = year === "all" || entry.dataset.year === year;
@@ -182,17 +158,6 @@ const gridKinds = ["Certification", "Events"];
             (entry) => entry.style.display !== "none",
           );
           group.style.display = hasVisible ? "" : "none";
-        });
-      });
-    });
-
-    viewButtons.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        viewButtons.forEach((b) => b.classList.remove("active"));
-        btn.classList.add("active");
-        const view = btn.dataset.viewBtn;
-        panels.forEach((panel) => {
-          panel.hidden = panel.dataset.viewPanel !== view;
         });
       });
     });

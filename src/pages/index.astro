@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
+import Services from "../components/Services.astro";
 import About from "../components/About.astro";
 import Featured from "../components/Featured.astro";
 import Experience from "../components/Experience.astro";
@@ -12,17 +13,40 @@ import { socials } from "../data/socials";
 
 const structuredData = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: profile.displayName,
-  alternateName: profile.name,
-  jobTitle: "Data & AI Consultant",
-  url: Astro.site?.toString(),
-  sameAs: socials.filter((s) => s.href.startsWith("http")).map((s) => s.href),
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${Astro.site?.toString()}#website`,
+      url: Astro.site?.toString(),
+      name: profile.name,
+      alternateName: ["bealambitco.com", profile.displayName],
+    },
+    {
+      "@type": "Person",
+      "@id": `${Astro.site?.toString()}#bea-lambitco`,
+      name: profile.fullName,
+      alternateName: [profile.name, profile.displayName],
+      jobTitle: "Data & AI Consultant, Trainer, and Speaker",
+      description: profile.tagline,
+      url: Astro.site?.toString(),
+      image: new URL(profile.photo, Astro.site).toString(),
+      homeLocation: {
+        "@type": "Place",
+        name: profile.location,
+      },
+      sameAs: socials.filter((s) => s.href.startsWith("http")).map((s) => s.href),
+    },
+  ],
 };
 ---
 
-<BaseLayout title={profile.name} structuredData={structuredData}>
+<BaseLayout
+  title={profile.name}
+  description={profile.tagline}
+  structuredData={structuredData}
+>
   <Hero />
+  <Services />
   <About />
   <Featured />
   <Experience />

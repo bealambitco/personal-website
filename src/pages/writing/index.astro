@@ -32,7 +32,11 @@ for (const post of allPosts) {
 const allTags = [...tagCounts.entries()].sort((a, b) => b[1] - a[1]).map(([tag]) => tag);
 ---
 
-<BaseLayout title="All Articles" description="Every article published on this site, filterable by topic, year, and tag.">
+<BaseLayout
+  title="All Articles"
+  description="Every article published on this site, filterable by topic, year, and tag."
+  robots="noindex,follow"
+>
   <section class="section container">
     <a href="/" class="back-link">← Home</a>
     <h1 class="page-title">All articles</h1>
@@ -54,7 +58,7 @@ const allTags = [...tagCounts.entries()].sort((a, b) => b[1] - a[1]).map(([tag])
         <FilterableList items={items} />
       ) : (
         <p class="muted" style="margin-top: 24px;">
-          Nothing published yet. Browse by topic using the <a href="/topics">Writing</a> menu above instead.
+          New articles are in progress. Drafts stay private until they are ready to publish.
         </p>
       )
     }

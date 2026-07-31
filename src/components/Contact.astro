@@ -1,33 +1,53 @@
 ---
-import { socials } from "../data/socials";
 import { profile } from "../data/profile";
 
-// Social handles live in Hero now — no need to repeat them here too. Keep
-// this to the things "get in touch" actually means. ("Book a time"
-// reappears automatically once a real scheduling link is added back to
-// socials.ts.)
-const contactLabels = ["Email", "Book a time"];
-const contactLinks = socials.filter((s) => contactLabels.includes(s.label));
-
-const suggestHref = `mailto:${profile.email}?subject=${encodeURIComponent("Suggestion for bealambitco.com")}`;
+const contactHref = `mailto:${profile.email}?subject=${encodeURIComponent("Website or work inquiry")}`;
 ---
 
-<section id="contact" class="section container">
+<section id="contact" class="section container contact">
+  <p class="section-kicker">Consulting · Training · Speaking</p>
   <h2 class="section-title">Get in touch</h2>
-  <p class="muted" style="margin-bottom: 16px;">{profile.location}</p>
-  <div class="tag-row">
-    {contactLinks.map((social) => <a class="tag" href={social.href}>{social.label}</a>)}
+  <p class="contact-intro">
+    If your organization is planning a Data or AI transformation, upskilling a team, or organizing an event,
+    send me a note about what you’re working on.
+  </p>
+  <div class="contact-actions">
+    <a class="button button-primary" href={contactHref}>Email Bea</a>
+    <span class="muted">{profile.location}</span>
   </div>
 
   <p class="suggest">
-    Got a suggestion? A topic you'd like me to write about, a resource worth adding, or feedback on the site —{" "}
-    <a href={suggestHref}>send it my way</a>.
+    Have another idea—a topic you'd like me to write about, a resource worth adding, or feedback on the site?
+    {" "}<a href={contactHref}>Send it my way</a>.
   </p>
 </section>
 
 <style>
+  .contact {
+    padding-block: 88px;
+  }
+  .section-kicker {
+    margin: 0 0 6px;
+    color: var(--primary);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .contact-intro {
+    max-width: 58ch;
+    margin: 0 0 20px;
+    color: var(--ink-soft);
+    font-size: 18px;
+  }
+  .contact-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
   .suggest {
-    margin: 20px 0 0;
+    margin: 24px 0 0;
     font-size: 15px;
     color: var(--ink-soft);
     max-width: 58ch;

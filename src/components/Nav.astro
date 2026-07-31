@@ -1,11 +1,14 @@
 ---
 import { profile } from "../data/profile";
-import MegaMenu from "./MegaMenu.astro";
 
 const links = [
+  { href: "/#services", label: "Services" },
   { href: "/#about", label: "About" },
   { href: "/#featured", label: "Featured" },
   { href: "/#experience", label: "Experience" },
+  { href: "/writing", label: "Writing" },
+  { href: "/resources", label: "Resources" },
+  { href: "/#contact", label: "Contact" },
 ];
 ---
 
@@ -14,35 +17,13 @@ const links = [
     <a class="nav-name" href="/">{profile.name}</a>
     <nav class="nav-links" aria-label="Section navigation">
       {links.map((link) => <a href={link.href}>{link.label}</a>)}
-
-      <details class="nav-dropdown" name="nav-dropdown">
-        <summary>Writing</summary>
-        <div class="nav-dropdown-panel">
-          <MegaMenu
-            topLinks={[
-              { href: "/#latest-articles", label: "Latest Articles" },
-              { href: "/topics", label: "All topics" },
-              { href: "/writing", label: "All articles" },
-            ]}
-            hrefFor={(id) => `/topics/${id}`}
-            section="writing"
-          />
-        </div>
-      </details>
-
-      <details class="nav-dropdown" name="nav-dropdown">
-        <summary>Resources</summary>
-        <div class="nav-dropdown-panel">
-          <MegaMenu
-            topLinks={[{ href: "/resources", label: "All resources" }]}
-            hrefFor={(id) => `/resources#${id}`}
-            section="resources"
-          />
-        </div>
-      </details>
-
-      <a href="/#contact">Contact</a>
     </nav>
+    <details class="mobile-menu">
+      <summary>Menu</summary>
+      <nav class="mobile-menu-panel" aria-label="Mobile section navigation">
+        {links.map((link) => <a href={link.href}>{link.label}</a>)}
+      </nav>
+    </details>
   </div>
 </header>
 
@@ -88,56 +69,58 @@ const links = [
   .nav-links > a:hover {
     color: var(--primary);
   }
-
-  .nav-dropdown {
-    position: static;
+  .mobile-menu {
+    display: none;
+    position: relative;
   }
-  .nav-dropdown summary {
+  .mobile-menu summary {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding-inline: 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
     color: var(--ink-soft);
-    font-size: 14px;
     cursor: pointer;
+    font-size: 14px;
     list-style: none;
-    white-space: nowrap;
-    transition: color 180ms ease;
   }
-  .nav-dropdown summary::-webkit-details-marker {
+  .mobile-menu summary::-webkit-details-marker {
     display: none;
   }
-  .nav-dropdown summary::after {
-    content: "";
-    display: inline-block;
-    width: 5px;
-    height: 5px;
-    border-right: 1.5px solid currentColor;
-    border-bottom: 1.5px solid currentColor;
-    transform: rotate(45deg);
-    margin-left: 6px;
-    opacity: 0.7;
-  }
-  .nav-dropdown:hover summary,
-  .nav-dropdown[open] summary {
-    color: var(--primary);
-  }
-  .nav-dropdown-panel {
+  .mobile-menu-panel {
     position: absolute;
     top: 100%;
-    right: 24px;
-    margin-top: 10px;
-    width: 520px;
-    max-width: calc(100vw - 48px);
-    padding: 16px;
+    right: 0;
+    width: min(260px, calc(100vw - 48px));
+    margin-top: 8px;
+    padding: 8px;
     background: var(--bg);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     box-shadow: 0 8px 24px rgba(30, 16, 48, 0.12);
   }
+  .mobile-menu-panel a {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    padding-inline: 10px;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 15px;
+  }
+  .mobile-menu-panel a:hover {
+    color: var(--primary);
+    background: var(--bg-raised);
+  }
 
-  @media (max-width: 640px) {
-    .nav-dropdown-panel {
-      position: static;
-      width: 100%;
-      margin-top: 12px;
-      box-shadow: none;
+  @media (max-width: 700px) {
+    .nav-links {
+      display: none;
+    }
+    .mobile-menu {
+      display: block;
     }
   }
 </style>

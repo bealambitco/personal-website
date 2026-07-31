@@ -1,6 +1,5 @@
 ---
 import type { LinkItem } from "../data/link-item";
-import { getPreviewImage } from "../lib/link-preview";
 
 // Shared renderer for any list of link cards (Featured, Experience,
 // Volunteer Work, Latest Articles, topic pages). Internal links (starting
@@ -17,40 +16,11 @@ interface Props {
 }
 
 const { items, layout = "list" } = Astro.props;
-
-// URLs where an og:image exists but is never actually representative of
-// the specific entry, so auto-fetching it just adds visual noise:
-// - linkedin.com/in/... is a personal profile page — its image is always
-//   the same profile photo, not a preview of whatever it's linked from.
-// - learn.microsoft.com credential pages all share one generic sitewide
-//   banner, not a per-credential image.
-function shouldSkipPreview(url: string): boolean {
-  return /linkedin\.com\/in\//i.test(url) || /learn\.microsoft\.com/i.test(url);
-}
-
-// Auto-fetch a real preview image for external links that don't already
-// have one set by hand — best-effort, silently skipped if it fails or if
-// the source is known not to give a meaningful image (see above).
-const resolvedItems = await Promise.all(
-  items.map(async (item) => {
-    if (
-      !item.href ||
-      item.noPreview ||
-      item.imageUrl ||
-      item.embedUrl ||
-      !item.href.startsWith("http") ||
-      shouldSkipPreview(item.href)
-    )
-      return item;
-    const preview = await getPreviewImage(item.href);
-    return preview ? { ...item, imageUrl: preview } : item;
-  }),
-);
 ---
 
 <div class={`card-list ${layout}`}>
   {
-    resolvedItems.map((item) => {
+    items.map((item) => {
       const isExternal = !!item.href?.startsWith("http");
       const hasThumb = !item.embedUrl && !!item.imageUrl;
       const Tag = item.href ? "a" : "div";
