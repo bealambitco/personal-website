@@ -26,7 +26,7 @@ Out of scope:
 
 ## Acceptance criteria
 
-- The homepage retains About, Featured, Experience, Volunteer Work, and Contact, with Services added and the empty Latest Articles section hidden.
+- The homepage retains Services, About, Featured, Experience, Volunteer Work, Writing, and Contact; Writing shows a clear empty state until an article is published.
 - `Bea Lambitco` is the primary public name; the full professional name remains in identity metadata and the footer.
 - A visible email inquiry action works without a backend.
 - Thin taxonomy/archive/resource routes remain usable but emit `noindex,follow` and are absent from the sitemap.
@@ -48,7 +48,7 @@ Out of scope:
 Rejected alternatives:
 
 - No broad redesign or migration to React/Next.js.
-- No permanent `dev` branch; PR previews provide isolated validation without branch drift.
+- No direct changes to `main`; the owner-controlled pull request remains the production approval boundary.
 - No canonicalization of distinct topic pages to the homepage; thin pages use `noindex,follow` instead.
 - No contact form because it would add spam, privacy, validation, and operations scope without improving the current inquiry job.
 
@@ -75,7 +75,16 @@ Rejected alternatives:
 
 ## Delivery and operations
 
-- Changes will remain local and undeployed unless deployment is requested separately.
+- Approved preview changes may be pushed to `dev`; `main` remains unchanged until the owner raises and merges a pull request.
 - A pull request should be used for the first production release so Vercel Preview and CI can validate it before merge.
 - After deployment, the owner should submit the updated sitemap and request recrawling in Google Search Console.
 - Search-result consolidation is directional, not guaranteed; Google controls final presentation and may take days or weeks to recrawl.
+
+## Ecosystem navigation increment
+
+- Outcome: connect visitors to Bea's consulting, research, and library properties without changing the homepage's professional narrative or section order.
+- Scope: remove Services, Featured, and Resources from primary navigation; add an accessible Ecosystem disclosure; link the Services CTA to the Consulting Hub; list live ecosystem destinations in the footer.
+- Configuration contract: ecosystem destinations use `live`, `comingSoon`, or `hidden`; live entries are links in navigation and footer, coming-soon entries are non-interactive dropdown labels, and hidden entries are not rendered.
+- Compatibility: `/resources` remains built and usable but is no longer linked from global navigation. No content migration, redirect, new ecosystem page, framework change, or dependency is included.
+- Evidence: type checking, production build, generated-site and status assertions, dependency audit, diff hygiene, and desktop/mobile browser interaction review must pass before committing to `dev`.
+- Delivery: push the validated commit to `origin/dev` for preview only; do not create a pull request or merge to `main`.

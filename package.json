@@ -9,7 +9,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "test:site": "node scripts/verify-site.mjs"
+    "test:site": "node scripts/verify-ecosystem.mjs && node scripts/verify-site.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",

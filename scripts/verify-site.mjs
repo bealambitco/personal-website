@@ -65,6 +65,27 @@ for (const required of ['"@type":"WebSite"', '"@type":"Person"', 'property="og:s
   if (!homepage.includes(required)) failures.push(`index.html: missing ${required}`);
 }
 
+for (const [href, label] of [
+  ["https://hub.bealambitco.com", "Explore consulting"],
+  ["https://research.bealambitco.com", "Research"],
+  ["https://library.bealambitco.com", "Library"],
+]) {
+  if (!new RegExp(`<a\\b[^>]*href="${href}"[^>]*>${label}<\\/a>`).test(homepage)) {
+    failures.push(`index.html: missing ecosystem link ${label} (${href})`);
+  }
+}
+
+for (const required of ['id="services"', 'id="featured"']) {
+  if (!homepage.includes(required)) failures.push(`index.html: missing ecosystem requirement ${required}`);
+}
+
+const primaryNavigation = homepage.match(/<nav class="nav-links"[^>]*>([\s\S]*?)<\/nav>/)?.[1] ?? "";
+for (const removedLabel of ["Services", "Featured", "Resources"]) {
+  if (new RegExp(`>${removedLabel}<\\/a>`).test(primaryNavigation)) {
+    failures.push(`index.html: ${removedLabel} should not be a primary navigation link`);
+  }
+}
+
 const noindexPages = [
   "resources/index.html",
   "topics/index.html",
