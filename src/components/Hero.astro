@@ -7,7 +7,7 @@ import { socials } from "../data/socials";
 // exists separately for Email/Book a time. Add/remove labels here — it
 // just filters the shared `socials` list, doesn't need its own data file.
 // This list also sets the display order (not `socials.ts`'s order).
-const handleLabels = ["LinkedIn", "GitHub", "Substack", "YouTube", "TikTok"];
+const handleLabels = ["LinkedIn", "GitHub"];
 const handles = handleLabels
   .map((label) => socials.find((s) => s.label === label))
   .filter((s): s is (typeof socials)[number] => !!s);

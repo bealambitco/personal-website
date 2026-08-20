@@ -17,7 +17,7 @@ export const experience: ExperienceItem[] = [
   {
     kind: "Training",
     title: "Corporate Trainer: Data & AI workshops",
-    description: "19 courses delivered (Prompt Engineering, SQL, Python, Power BI, BigQuery), 5.2/6 average rating, 100% recommendation on Advanced SQL. Click through for full feedback and testimonials.",
+    description: "20 courses delivered (Prompt Engineering, SQL, Python, Power BI, BigQuery), 5.2/6 average rating, 100% recommendation on Advanced SQL. Click through for full feedback and testimonials.",
     href: "https://www.canva.com/design/DAHENEVk42c/NYjPMGIoVBwRNSmK-dbUXw/edit",
     date: "2024–Present",
     year: 2024,
