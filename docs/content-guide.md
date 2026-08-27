@@ -48,7 +48,16 @@ Use:
 
 Cards may link to a public source. If no reliable source exists, omit `href`; the item will render as plain text rather than pointing visitors to a generic or misleading page.
 
-Use only reviewed, self-hosted images from `public/`. Do not embed expiring social-media image URLs or add automatic metadata scraping to the build.
+Use only reviewed, self-hosted images. Put them in `src/assets/` and `import` them in the data
+file, then set `image:` to the imported value — Astro compresses, converts, and resizes them at
+build time and emits the intrinsic dimensions, which is what keeps cards from shifting as they
+load. (Images placed in `public/` bypass all of that and ship at full size.) Do not embed
+expiring social-media image URLs or add automatic metadata scraping to the build.
+
+Public links must be genuinely public. Never publish a share URL that grants edit access to a
+third-party document — a Canva `/edit` URL is view-only purely by share setting, so use its
+`/view` form. `scripts/verify-site.mjs` fails the build on `/edit` URLs and on `canva.link`
+shortlinks, which redirect to `/edit`.
 
 ## Publish an article
 
@@ -73,7 +82,9 @@ The resources page is currently a navigation aid and is not eligible for search 
 
 ## Update social links
 
-Edit `src/data/socials.ts`. Hero links are selected in `Hero.astro`. The contact section uses the public email from `src/data/profile.ts`.
+Edit `src/data/socials.ts`. Hero links are selected in `Hero.astro`. The email entry is derived
+from `profile.email`, so change the public address in `src/data/profile.ts` only — the Hero,
+Contact section, and footer all follow.
 
 Add a scheduling link only after a real booking page is ready. A mailto inquiry remains the primary contact path.
 
@@ -85,4 +96,5 @@ Add a scheduling link only after a real booking page is ready. A mailto inquiry 
 - Use a feature branch and pull request.
 - Review the Vercel Preview on desktop and mobile.
 - Run `npm run check`, `npm run build`, `npm run test:site`, and `npm audit`.
+- Run `npm run test:site -- --check-links` before flipping any ecosystem destination to `live`.
 - Merge only when the preview and required checks pass.

@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import type { LinkItem } from "../data/link-item";
 
 // Shared renderer for any list of link cards (Featured, Experience,
@@ -22,7 +23,7 @@ const { items, layout = "list" } = Astro.props;
   {
     items.map((item) => {
       const isExternal = !!item.href?.startsWith("http");
-      const hasThumb = !item.embedUrl && !!item.imageUrl;
+      const hasThumb = !item.embedUrl && !!item.image;
       const Tag = item.href ? "a" : "div";
       return (
         <div class="card-entry" data-year={item.year ?? ""}>
@@ -45,13 +46,31 @@ const { items, layout = "list" } = Astro.props;
             target={isExternal ? "_blank" : undefined}
             rel={isExternal ? "noopener noreferrer" : undefined}
           >
-            {hasThumb && <img class="card-thumb" src={item.imageUrl} alt="" loading="lazy" />}
+            {hasThumb && item.image && (
+              /* Sized at 2x the slot each layout actually renders: 84px in
+                 the row list, 195px in the card grid. Astro compresses,
+                 converts, and emits the intrinsic width/height, which is
+                 what keeps these from shifting layout as they load. */
+              <Image
+                class="card-thumb"
+                src={item.image}
+                alt=""
+                width={layout === "grid" ? 400 : 176}
+                loading="lazy"
+                decoding="async"
+              />
+            )}
             <div class="card-body">
               <div class="card-kind">
                 {item.kind}
                 {item.date && ` · ${item.date}`}
                 {item.expired && <span class="card-expired"> · Expired</span>}
-                {isExternal && <span class="card-external"> ↗</span>}
+                {isExternal && (
+                  <>
+                    <span class="card-external" aria-hidden="true"> ↗</span>
+                    <span class="visually-hidden">(opens in a new tab)</span>
+                  </>
+                )}
               </div>
               <div class="card-title">{item.title}</div>
               {item.description && <div class="card-description">{item.description}</div>}

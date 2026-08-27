@@ -23,7 +23,13 @@
   --bg-raised: var(--color-lavender-mist);
   --ink: #1e1030;
   --ink-soft: #5b4a7a;
-  --ink-faint: #8577a3;
+  /* Darkened from #8577a3, which measured 3.98:1 on --bg and 3.68:1 on
+     --bg-raised — under the 4.5:1 WCAG AA guideline for normal-size text,
+     and this token carries .muted, .stat-detail, .timeline-year, the footer,
+     and service "Best for" lines. #756793 measures 4.99:1 on --bg and
+     4.62:1 on --bg-raised while staying visibly the faintest tier. The dark
+     theme's own --ink-faint already passed (5.10:1) and is unchanged. */
+  --ink-faint: #756793;
   --primary: var(--color-amethyst);
   --accent: var(--color-orchid);
   --gold: var(--color-gold);

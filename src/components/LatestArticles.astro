@@ -40,6 +40,11 @@ const latest = allPosts
     gap: 20px;
   }
   .writing-heading a {
+    /* Standalone link, not inline in a sentence — needs the WCAG 2.5.8
+       24×24 minimum. */
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
     flex-shrink: 0;
     font-size: 14px;
   }

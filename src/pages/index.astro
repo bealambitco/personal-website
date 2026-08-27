@@ -29,7 +29,7 @@ const structuredData = {
       jobTitle: "Data & AI Consultant, Trainer, and Speaker",
       description: profile.tagline,
       url: Astro.site?.toString(),
-      image: new URL(profile.photo, Astro.site).toString(),
+      image: new URL(profile.photo.src, Astro.site).toString(),
       homeLocation: {
         "@type": "Place",
         name: profile.location,

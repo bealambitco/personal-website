@@ -16,14 +16,14 @@ export const timeline: TimelineEntry[] = [
     detail: "Started my independent Data & AI consulting and training practice.",
   },
   {
-    year: "2019–2024",
-    title: "Data & Analytics Head (3 yrs) · Risk Manager (2 yrs), ATRAM",
-    detail: "Pioneered and led ATRAM's Data & Analytics function.",
-  },
-  {
     year: "2023–2024",
     title: "Software Engineer Consultant, Aralin",
     detail: "Built an AI-based learning management system called Aralin Insights.",
+  },
+  {
+    year: "2019–2024",
+    title: "Data & Analytics Head (3 yrs) · Risk Manager (2 yrs), ATRAM",
+    detail: "Pioneered and led ATRAM's Data & Analytics function.",
   },
   {
     year: "2017–2019",

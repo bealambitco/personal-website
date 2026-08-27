@@ -1,7 +1,12 @@
 ---
 import { services } from "../data/services";
+import { getEcosystemLink } from "../data/ecosystem";
 
-const consultingHref = "https://hub.bealambitco.com";
+// The consulting hub is an ecosystem destination, so its URL and release
+// status live in ecosystem.ts rather than being hardcoded here. Until it is
+// "live" the CTA renders as a non-clickable label instead of a dead link.
+const hub = getEcosystemLink("hub");
+const hubIsLive = hub?.status === "live";
 ---
 
 <section id="services" class="section container">
@@ -10,7 +15,18 @@ const consultingHref = "https://hub.bealambitco.com";
       <p class="section-kicker">Ways to work together</p>
       <h2 class="section-title">Services</h2>
     </div>
-    <a class="button button-secondary" href={consultingHref}>Explore consulting</a>
+    {
+      hub &&
+        (hubIsLive ? (
+          <a class="button button-secondary" href={hub.href}>
+            Explore consulting
+          </a>
+        ) : (
+          <span class="button button-secondary is-pending">
+            Consulting hub <span class="pending-label">Coming soon</span>
+          </span>
+        ))
+    }
   </div>
 
   <div class="service-grid">
@@ -42,6 +58,22 @@ const consultingHref = "https://hub.bealambitco.com";
     color: var(--primary);
     font-family: var(--font-mono);
     font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .is-pending {
+    color: var(--ink-faint);
+    background: var(--bg-raised);
+    border-color: var(--border-soft);
+    cursor: default;
+    gap: 8px;
+  }
+  .is-pending:hover {
+    transform: none;
+  }
+  .pending-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
     letter-spacing: 0.06em;
     text-transform: uppercase;
   }

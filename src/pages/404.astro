@@ -1,0 +1,64 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { profile } from "../data/profile";
+
+const contactHref = `mailto:${profile.email}?subject=${encodeURIComponent("Website or work inquiry")}`;
+---
+
+<BaseLayout
+  title="Page not found"
+  description="That page doesn't exist. Links to the main sections of the site."
+  robots="noindex,follow"
+>
+  <section class="section container notfound">
+    <p class="code">404</p>
+    <h1>That page doesn't exist</h1>
+    <p class="lead">
+      The link may be out of date, or the page may have moved. Here is where most visitors are
+      headed:
+    </p>
+    <ul class="routes">
+      <li><a href="/">Home</a> — positioning, services, and selected work</li>
+      <li><a href="/#experience">Experience</a> — projects, training, leadership, and credentials</li>
+      <li><a href="/writing">Writing</a> — articles and topics</li>
+      <li><a href={contactHref}>Get in touch</a> — consulting, training, or speaking</li>
+    </ul>
+  </section>
+</BaseLayout>
+
+<style>
+  .notfound {
+    padding-block: 96px 120px;
+  }
+  .code {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    color: var(--ink-faint);
+    margin: 0 0 10px;
+  }
+  .notfound h1 {
+    font-size: clamp(28px, 4vw, 38px);
+    letter-spacing: -0.02em;
+    margin: 0 0 16px;
+  }
+  .lead {
+    max-width: 54ch;
+    margin: 0 0 28px;
+    color: var(--ink-soft);
+    font-size: 18px;
+  }
+  .routes {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 15px;
+    color: var(--ink-faint);
+  }
+  .routes a {
+    font-weight: 600;
+  }
+</style>

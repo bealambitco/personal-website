@@ -29,9 +29,12 @@ export type LinkItem = {
   // YouTube "/embed/" URL (or any iframe-able page) — shows an inline
   // preview above the card. See featured.ts for an example.
   embedUrl?: string;
-  // A reviewed, self-hosted photo under /public (e.g.
-  // "/volunteer/dep-2024.jpg"). Ignored if embedUrl is set.
-  imageUrl?: string;
+  // A reviewed, self-hosted image imported from src/assets/ — e.g.
+  //   import depPhoto from "../assets/volunteer/dep-2024.jpg";
+  //   { ..., image: depPhoto }
+  // Importing (rather than pointing at a /public URL) is what lets Astro
+  // compress, resize, and emit width/height for it. Ignored if embedUrl is set.
+  image?: ImageMetadata;
   tags?: string[];
   // Marks a certification as lapsed — dims the card, adds an "Expired"
   // label, and sorts it after non-expired entries within its kind group.

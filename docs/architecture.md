@@ -14,7 +14,10 @@ Markdown posts ┘
 
 ## Source boundaries
 
-- `src/data/` owns structured profile and portfolio content.
+- `src/data/` owns structured profile and portfolio content, plus the ecosystem release gate
+  (`ecosystem.ts`).
+- `src/assets/` owns build-processed imagery; `public/` holds only files that must keep a stable
+  URL (favicon, `og-image.png`, `robots.txt`).
 - `src/content/posts/` owns article Markdown and frontmatter.
 - `src/content.config.ts` validates published and draft article metadata.
 - `src/components/` owns presentation and limited interaction.
@@ -49,6 +52,9 @@ Relevant remaining controls and risks are:
 - Vercel applies CSP, HSTS, MIME sniffing protection, frame protection, a restrictive permissions policy, and referrer controls.
 - External links use `noopener noreferrer`.
 - Card images are explicit and self-hosted; the build does not fetch arbitrary third-party page metadata.
+- Published third-party share links are checked at build time: `scripts/verify-site.mjs` fails on
+  any Canva `/edit` URL or `canva.link` shortlink, because such a link is view-only only by share
+  setting and can be switched to grant write access without any change to this repository.
 - Inline script and style allowances remain in CSP because Astro and Vercel Analytics emit small inline blocks. The lack of an untrusted HTML input path materially limits the associated risk.
 
 Any future contact form, CMS, comments system, newsletter endpoint, or server-rendered feature requires a fresh threat model.
@@ -59,7 +65,9 @@ Static output is served from Vercel's CDN and scales without an application serv
 
 Performance guardrails:
 
-- Keep homepage media deliberate and self-hosted.
+- Keep homepage media deliberate and self-hosted, and import it from `src/assets/` so it goes
+  through Astro's image pipeline. The August 2026 audit found 2.4 MB of `public/` images rendering
+  at up to 1/30th their intrinsic size; moving them to `src/assets/` cut that to roughly 164 KB.
 - Do not add a client framework for content that works as HTML and CSS.
 - Lazy-load non-critical images and embeds.
 - Keep the homepage focused on selected proof; put growing archives on their dedicated pages.
@@ -68,9 +76,11 @@ Performance guardrails:
 ## Environments and deployment
 
 - Feature branch / pull request: Vercel Preview plus GitHub quality checks.
+- `dev`: long-lived integration branch where preview builds are reviewed.
 - `main`: production deployment.
 
-The recommended release path is feature branch → pull request → preview review → merge to `main`. A permanent shared development branch is not necessary.
+The release path is feature branch → pull request into `dev` → preview review → pull request from
+`dev` into `main`. `main` is never committed to directly.
 
 Rollback options:
 
@@ -84,6 +94,7 @@ npm ci
 npm run check
 npm run build
 npm run test:site
+npm run test:site -- --check-links   # adds live HTTP checks of ecosystem destinations
 npm audit
 npm run dev
 npm run preview
