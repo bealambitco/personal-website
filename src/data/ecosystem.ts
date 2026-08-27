@@ -19,27 +19,9 @@ export type EcosystemLink = {
 };
 
 export const ecosystemLinks: EcosystemLink[] = [
-  {
-    id: "hub",
-    label: "Consulting",
-    href: "https://hub.bealambitco.com",
-    // DNS does not resolve yet (NXDOMAIN as of the 2026-08 audit).
-    status: "comingSoon",
-  },
-  {
-    id: "research",
-    label: "Research",
-    href: "https://research.bealambitco.com",
-    // Resolves but serves a 404 as of the 2026-08 audit.
-    status: "comingSoon",
-  },
-  {
-    id: "library",
-    label: "Library",
-    href: "https://library.bealambitco.com",
-    // DNS does not resolve yet (NXDOMAIN as of the 2026-08 audit).
-    status: "comingSoon",
-  },
+  { id: "hub", label: "Consulting", href: "https://hub.bealambitco.com", status: "live" },
+  { id: "research", label: "Research", href: "https://research.bealambitco.com", status: "live" },
+  { id: "library", label: "Library", href: "https://library.bealambitco.com", status: "live" },
 ];
 
 export function getVisibleEcosystemLinks(links: EcosystemLink[] = ecosystemLinks) {

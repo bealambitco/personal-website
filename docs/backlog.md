@@ -36,10 +36,15 @@ to be real friction for institutional enquiries.
 **`www.bealambitco.com` does not resolve.** Anyone typing "www" gets a DNS
 error. Add the `www` domain in Vercel and redirect it to the apex.
 
-**Ecosystem destinations are gated.** `hub`, `research`, and `library` are
-`comingSoon` in `src/data/ecosystem.ts` because none of them served a 200 at
-audit time. Flip an entry to `"live"` only after `npm run test:site -- --check-links`
-passes for it; that check runs in CI and will fail the build otherwise.
+**Ecosystem destinations are marked `live` ahead of their DNS.** `hub`,
+`research`, and `library` are `live` in `src/data/ecosystem.ts` because they
+are being deployed imminently, but none served a 200 at audit time (two
+NXDOMAIN, one 404). `npm run test:site -- --check-links` runs in CI and will
+**fail the build until all three actually answer 200** — that is the guardrail
+working, not a bug. Point the DNS before merging to `main`.
+
+If a destination slips, set its entry to `"comingSoon"` rather than removing
+the check: it then renders as a non-clickable label and CI goes green again.
 
 ## Engineering
 
