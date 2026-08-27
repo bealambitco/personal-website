@@ -11,9 +11,6 @@ export type FeaturedItem = LinkItem;
 // that lives outside this site for now. Add/remove objects freely — having
 // several entries with the same `kind` is expected, FilterableList groups
 // and lets a visitor filter/sort them.
-//
-// Years marked "approx." in a comment weren't given an exact date — fix
-// once you know it.
 export const featured: FeaturedItem[] = [
   {
     kind: "Press",
@@ -43,7 +40,7 @@ export const featured: FeaturedItem[] = [
     year: 2024,
   },
   {
-    // approx. — exact 2025 date not given. Judging, not speaking, so it's
+    // Judging, not speaking, so it's
     // filed as "Competition" — both this and the speaking engagements
     // below share the "Events" group heading (see `group` in link-item.ts).
     kind: "Competition",
@@ -51,7 +48,7 @@ export const featured: FeaturedItem[] = [
     title: "Judge, Gen AI Philippines Hackathon 2025",
     description: "Judged entries at the Gen AI Philippines Hackathon.",
     href: "https://www.facebook.com/genaicom/photos/122205606494255386/",
-    date: "2025",
+    date: "Nov 2025",
     year: 2025,
   },
   {
@@ -64,23 +61,21 @@ export const featured: FeaturedItem[] = [
     year: 2025,
   },
   {
-    // approx. — exact 2025 date not given
     kind: "Talk",
     group: "Events",
     title: "Workshop facilitator, Bulacan State University",
     description: "Delivered a workshop on Data & AI in finance.",
     href: "https://www.facebook.com/share/p/1BmyvKFDfS/",
-    date: "2025",
-    year: 2025,
+    date: "Mar 2026",
+    year: 2026,
   },
   {
-    // approx. — exact 2025 date not given
     kind: "Talk",
     group: "Events",
     title: "Guest speaker, University of Perpetual Help System Laguna",
     description: "Shared my data and AI journey with students at TechCon.",
     href: "https://www.linkedin.com/posts/bea-lambitco_techcon-datajourney-ai-activity-7323866333983449088-s1Lr",
-    date: "2025",
+    date: "Apr 2025",
     year: 2025,
   },
   {
@@ -89,6 +84,8 @@ export const featured: FeaturedItem[] = [
     description: "Guest piece for Tiny Buddha on connection, kindness, and purpose over material wealth.",
     href: "https://tinybuddha.com/blog/why-relationships-and-service-to-others-matter-more-than-money/",
     image: previewTinyBuddha,
+    date: "Nov 2024",
+    year: 2024,
   },
   {
     kind: "Press",
