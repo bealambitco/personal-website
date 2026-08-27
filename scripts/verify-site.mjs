@@ -1,7 +1,14 @@
 import { readFile, readdir } from "node:fs/promises";
 import { dirname, join, relative, resolve, sep } from "node:path";
+import { fileURLToPath } from "node:url";
+import { ecosystemLinks } from "../src/data/ecosystem.ts";
 
-const root = new URL("../", import.meta.url).pathname;
+// fileURLToPath (not .pathname) so paths containing spaces or a Windows
+// drive letter resolve correctly.
+const root = fileURLToPath(new URL("../", import.meta.url));
+
+// Network checks are opt-in so the suite still runs offline; CI passes it.
+const checkLinks = process.argv.includes("--check-links");
 const dist = join(root, "dist");
 
 async function listHtml(directory) {
@@ -65,13 +72,43 @@ for (const required of ['"@type":"WebSite"', '"@type":"Person"', 'property="og:s
   if (!homepage.includes(required)) failures.push(`index.html: missing ${required}`);
 }
 
-for (const [href, label] of [
-  ["https://hub.bealambitco.com", "Explore consulting"],
-  ["https://research.bealambitco.com", "Research"],
-  ["https://library.bealambitco.com", "Library"],
-]) {
-  if (!new RegExp(`<a\\b[^>]*href="${href}"[^>]*>${label}<\\/a>`).test(homepage)) {
-    failures.push(`index.html: missing ecosystem link ${label} (${href})`);
+// Ecosystem destinations are gated on `status` in src/data/ecosystem.ts.
+// The previous version of this check only asserted the anchors were PRESENT,
+// which is why three dead destinations passed CI. A "live" entry must render
+// as a real anchor AND (with --check-links) actually answer 200; a
+// "comingSoon" entry must not be linked anywhere in the built output.
+const allHtml = [...htmlByPath.values()].map((entry) => entry.html).join("\n");
+for (const link of ecosystemLinks) {
+  const anchor = new RegExp(`<a\\b[^>]*href="${link.href}"`);
+  if (link.status === "live") {
+    if (!anchor.test(allHtml)) failures.push(`ecosystem: "${link.label}" is live but never linked`);
+  } else if (link.status === "comingSoon") {
+    if (anchor.test(allHtml)) {
+      failures.push(`ecosystem: "${link.label}" is comingSoon but rendered as a link (${link.href})`);
+    }
+  }
+}
+
+if (checkLinks) {
+  for (const link of ecosystemLinks.filter((l) => l.status === "live")) {
+    let status = 0;
+    try {
+      status = (await fetch(link.href, { redirect: "follow", signal: AbortSignal.timeout(15000) })).status;
+    } catch (error) {
+      failures.push(`ecosystem: "${link.label}" (${link.href}) is unreachable — ${error.message}`);
+      continue;
+    }
+    if (status !== 200) failures.push(`ecosystem: "${link.label}" (${link.href}) returned ${status}, expected 200`);
+  }
+}
+
+// A Canva /edit URL published on a public page is view-only purely by share
+// setting — one toggle away from granting write access. Only /view links ship.
+for (const { html, page } of htmlByPath.values()) {
+  for (const match of html.matchAll(/https:\/\/(?:www\.)?canva\.(?:com|link)\/[^"']*/g)) {
+    const url = match[0];
+    if (/\/edit(?:[?#]|$)/.test(url)) failures.push(`${page}: Canva /edit URL published (${url}) — use a /view link`);
+    else if (/canva\.link\//.test(url)) failures.push(`${page}: Canva shortlink ${url} may redirect to /edit — inline the /view URL`);
   }
 }
 
@@ -97,14 +134,24 @@ for (const page of noindexPages) {
   if (!html.includes('name="robots" content="noindex,follow"')) failures.push(`${page}: should be noindex,follow`);
 }
 
+const notFound = await readFile(join(dist, "404.html"), "utf8").catch(() => null);
+if (notFound === null) failures.push("404.html: missing custom 404 page");
+else if (!notFound.includes('name="robots" content="noindex,follow"')) {
+  failures.push("404.html: should be noindex,follow");
+}
+
 const sitemap = await readFile(join(dist, "sitemap-0.xml"), "utf8");
 const forbiddenSitemapUrls = ["/resources/", "/topics/", "/writing/", "/tags/"];
 for (const url of forbiddenSitemapUrls) {
   if (sitemap.includes(`https://bealambitco.com${url}`)) failures.push(`sitemap: contains thin route ${url}`);
 }
 
-if (/example content, generated as a starting point/i.test(homepage)) {
-  failures.push("index.html: draft/example content leaked into production");
+// Previously scanned only index.html — the one page that can never contain
+// it. Scan every built page instead.
+for (const { html, page } of htmlByPath.values()) {
+  if (/example content, generated as a starting point/i.test(html)) {
+    failures.push(`${page}: draft/example content leaked into production`);
+  }
 }
 
 if (failures.length > 0) {

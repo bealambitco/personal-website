@@ -1,3 +1,8 @@
+import logoBilyonaryo from "../assets/logos/bilyonaryo.png";
+import previewAteneoOpenHouse from "../assets/previews/ateneo-open-house.png";
+import previewBsp from "../assets/previews/bsp.jpg";
+import previewMicrosoftAtram from "../assets/previews/microsoft-atram.jpg";
+import previewTinyBuddha from "../assets/previews/tiny-buddha.png";
 import type { LinkItem } from "./link-item";
 
 export type FeaturedItem = LinkItem;
@@ -15,7 +20,7 @@ export const featured: FeaturedItem[] = [
     title: "ATRAM's data transformation with Microsoft",
     description: "Contributed as Head of Data & Analytics to ATRAM's Azure data platform and governance work, featured in Microsoft's case coverage.",
     href: "https://news.microsoft.com/en-ph/2023/03/17/atram-enhances-data-management-and-connectivity-with-microsoft-solutions-unlocks-more-investment-opportunities-for-filipinos/",
-    imageUrl: "/previews/microsoft-atram.jpg",
+    image: previewMicrosoftAtram,
     date: "Mar 2023",
     year: 2023,
   },
@@ -24,16 +29,7 @@ export const featured: FeaturedItem[] = [
     title: "BSP-IFC Open Finance PH: winning hackathon project",
     description: "#1 at the BSP-IFC Open Finance Philippines Hackathon, 2024, with Pensyon PH, a retirement planning solution built on Open API and GenAI.",
     href: "https://www.bsp.gov.ph/SitePages/MediaAndResearch/MediaDisp.aspx?ItemId=7225",
-    imageUrl: "/previews/bsp.jpg",
-    date: "2024",
-    year: 2024,
-  },
-  {
-    kind: "Press",
-    title: "BSP coverage of the Open Finance PH Hackathon win",
-    description: "Official BSP write-up of the BSP-IFC Open Finance Philippines Hackathon.",
-    href: "https://www.bsp.gov.ph/SitePages/MediaAndResearch/MediaDisp.aspx?ItemId=7225",
-    imageUrl: "/previews/bsp.jpg",
+    image: previewBsp,
     date: "2024",
     year: 2024,
   },
@@ -42,7 +38,7 @@ export const featured: FeaturedItem[] = [
     title: "News coverage: Pensyon PH wins the BSP-IFC Open Finance PH Hackathon",
     description: "Bilyonaryo's report on Pensyon PH, the winning retirement-planning solution in BSP's Open Finance initiative.",
     href: "https://bilyonaryo.com/2024/08/23/bsps-open-finance-initiative-retirement-app-pensyon-ph-emerges-as-top-innovation/technology/",
-    imageUrl: "/logos/bilyonaryo.png",
+    image: logoBilyonaryo,
     date: "2024",
     year: 2024,
   },
@@ -92,14 +88,14 @@ export const featured: FeaturedItem[] = [
     title: "Why relationships and service to others matter more than money",
     description: "Guest piece for Tiny Buddha on connection, kindness, and purpose over material wealth.",
     href: "https://tinybuddha.com/blog/why-relationships-and-service-to-others-matter-more-than-money/",
-    imageUrl: "/previews/tiny-buddha.png",
+    image: previewTinyBuddha,
   },
   {
     kind: "Press",
     title: "Ateneo Math's 2026 SOSE Open House coverage",
     description: "Coverage from Ateneo de Manila University's Department of Mathematics.",
     href: "https://www.ateneo.edu/news/2026/05/ateneo-math-welcomes-future-2026-sose-open-house",
-    imageUrl: "/previews/ateneo-open-house.png",
+    image: previewAteneoOpenHouse,
     date: "2026",
     year: 2026,
   },

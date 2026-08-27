@@ -1,3 +1,5 @@
+import photo from "../assets/photo.jpg";
+
 // Core identity — edit freely, everything on the homepage reads from here.
 export const profile = {
   // `name` is the short everyday form (nav, page titles); `displayName` is
@@ -52,7 +54,7 @@ export const profile = {
     { value: "Top 30", label: "of 1,986 graduates", detail: "Ateneo de Manila · Magna Cum Laude" },
   ],
 
-  // Path to your photo inside /public.
-  photo: "/photo.jpg",
+  // Imported from src/assets/ so Astro compresses and resizes it.
+  photo,
   photoAlt: "Portrait of Bea Lambitco",
 };

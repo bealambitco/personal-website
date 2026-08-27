@@ -1,3 +1,10 @@
+import certificationAzureAiFundamentals from "../assets/certifications/azure-ai-fundamentals.png";
+import certificationAzureDataFundamentals from "../assets/certifications/azure-data-fundamentals.png";
+import certificationAzureFundamentals from "../assets/certifications/azure-fundamentals.png";
+import certificationCodingDojo from "../assets/certifications/coding-dojo.png";
+import certificationFrm from "../assets/certifications/frm.png";
+import certificationSas from "../assets/certifications/sas.png";
+import logoMicrosoftBadge from "../assets/logos/microsoft-badge.png";
 import type { LinkItem } from "./link-item";
 
 export type ExperienceItem = LinkItem;
@@ -18,7 +25,7 @@ export const experience: ExperienceItem[] = [
     kind: "Training",
     title: "Corporate Trainer: Data & AI workshops",
     description: "20 courses delivered (Prompt Engineering, SQL, Python, Power BI, BigQuery), 5.2/6 average rating, 100% recommendation on Advanced SQL. Click through for full feedback and testimonials.",
-    href: "https://www.canva.com/design/DAHENEVk42c/NYjPMGIoVBwRNSmK-dbUXw/edit",
+    href: "https://www.canva.com/design/DAHENEVk42c/NYjPMGIoVBwRNSmK-dbUXw/view",
     date: "2024–Present",
     year: 2024,
   },
@@ -63,7 +70,7 @@ export const experience: ExperienceItem[] = [
     title: "Software Development, Coding Dojo",
     description: "Software Development Bootcamp (online, part-time, accelerated).",
     href: "https://app.diplomasafe.com/en-US/diploma/d9bca34ebcea003c6e982c3b3d651673eed3e7581/software-development-online-part-time-accelerated",
-    imageUrl: "/certifications/coding-dojo.png",
+    image: certificationCodingDojo,
     date: "2022",
     year: 2022,
   },
@@ -71,7 +78,7 @@ export const experience: ExperienceItem[] = [
     kind: "Certification",
     title: "SAS Certification",
     href: "https://www.credly.com/badges/684ff2b4-3f13-481f-9ab1-b32d4e60f81f/linked_in_profile",
-    imageUrl: "/certifications/sas.png",
+    image: certificationSas,
     date: "2019",
     year: 2019,
   },
@@ -79,7 +86,7 @@ export const experience: ExperienceItem[] = [
     kind: "Certification",
     title: "Microsoft Certified: Azure AI Fundamentals (AI-900)",
     href: "https://www.credly.com/badges/57111cf4-7aa2-4683-b87e-acc1c586eed1/public_url",
-    imageUrl: "/certifications/azure-ai-fundamentals.png",
+    image: certificationAzureAiFundamentals,
     date: "2022",
     year: 2022,
   },
@@ -87,7 +94,7 @@ export const experience: ExperienceItem[] = [
     kind: "Certification",
     title: "Microsoft Certified: Azure Data Fundamentals (DP-900)",
     href: "https://www.credly.com/badges/d95208ca-8f45-469a-911d-59b77e0944aa/public_url",
-    imageUrl: "/certifications/azure-data-fundamentals.png",
+    image: certificationAzureDataFundamentals,
     date: "2022",
     year: 2022,
   },
@@ -95,7 +102,7 @@ export const experience: ExperienceItem[] = [
     kind: "Certification",
     title: "Microsoft Certified: Azure Fundamentals (AZ-900)",
     href: "https://www.credly.com/badges/81d5d309-c853-4233-9df9-1f9dfb89568d/public_url",
-    imageUrl: "/certifications/azure-fundamentals.png",
+    image: certificationAzureFundamentals,
     date: "2022",
     year: 2022,
   },
@@ -112,7 +119,7 @@ export const experience: ExperienceItem[] = [
     title: "Microsoft Certified: Azure Data Engineer Associate",
     description: "Expired December 1, 2025.",
     href: "https://learn.microsoft.com/en-us/users/bealambitco-6128/credentials/132cc3ed72252cd0",
-    imageUrl: "/logos/microsoft-badge.png",
+    image: logoMicrosoftBadge,
     date: "2023",
     year: 2023,
     expired: true,
@@ -122,7 +129,7 @@ export const experience: ExperienceItem[] = [
     title: "Microsoft Certified: Azure AI Engineer Associate",
     description: "Expired May 3, 2026.",
     href: "https://learn.microsoft.com/en-us/users/bealambitco-6128/credentials/4676fdc18a7500ba",
-    imageUrl: "/logos/microsoft-badge.png",
+    image: logoMicrosoftBadge,
     date: "2024",
     year: 2024,
     expired: true,
@@ -131,7 +138,7 @@ export const experience: ExperienceItem[] = [
     kind: "Certification",
     title: "FRM · Certified Financial Risk Manager",
     href: "https://my.garp.org/DigitalBadgeFRM?id=0031W0000210o7kQAA",
-    imageUrl: "/certifications/frm.png",
+    image: certificationFrm,
     date: "2020",
     year: 2020,
   },
