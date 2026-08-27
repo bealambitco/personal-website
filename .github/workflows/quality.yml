@@ -37,6 +37,14 @@ jobs:
         run: npm run build
 
       - name: Verify generated site contracts
+        run: npm run test:site
+
+      # Reachability is a PRODUCTION gate. `dev` is allowed to carry ecosystem
+      # destinations that are marked live but whose DNS hasn't been pointed
+      # yet; `main` is not. This is what blocks shipping the dead links the
+      # August 2026 audit found, without turning dev PRs red in the meantime.
+      - name: Verify ecosystem destinations are reachable
+        if: github.base_ref == 'main' || github.ref == 'refs/heads/main'
         run: npm run test:site -- --check-links
 
       - name: Audit all dependencies
