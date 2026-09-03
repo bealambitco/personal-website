@@ -1,7 +1,9 @@
 ---
 import { profile } from "../data/profile";
+import { getLiveEcosystemLinks } from "../data/ecosystem";
 
 const year = new Date().getFullYear();
+const ecosystem = getLiveEcosystemLinks();
 ---
 
 <footer class="footer">
@@ -9,7 +11,7 @@ const year = new Date().getFullYear();
     <span>{profile.fullName} · {year}</span>
     <nav class="footer-links" aria-label="Footer navigation">
       <a href="/writing">Writing</a>
-      <a href="/resources">Resources</a>
+      {ecosystem.map((link) => <a href={link.href}>{link.label}</a>)}
       <a href="/">Back to top</a>
     </nav>
   </div>
@@ -29,6 +31,11 @@ const year = new Date().getFullYear();
     color: var(--ink-faint);
   }
   .footer-inner a {
+    /* 21px tall previously — these are standalone nav links, so the WCAG
+       2.5.8 inline exception doesn't apply and they need 24×24. */
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
     color: var(--ink-faint);
   }
   .footer-links {

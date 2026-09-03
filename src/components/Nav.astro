@@ -1,31 +1,124 @@
 ---
 import { profile } from "../data/profile";
+import { getVisibleEcosystemLinks } from "../data/ecosystem";
 
-const links = [
-  { href: "/#services", label: "Services" },
+const primaryLinks = [
   { href: "/#about", label: "About" },
-  { href: "/#featured", label: "Featured" },
   { href: "/#experience", label: "Experience" },
   { href: "/writing", label: "Writing" },
-  { href: "/resources", label: "Resources" },
-  { href: "/#contact", label: "Contact" },
 ];
+const contactLink = { href: "/#contact", label: "Contact" };
+const ecosystem = getVisibleEcosystemLinks();
 ---
 
 <header class="nav">
   <div class="nav-inner container">
     <a class="nav-name" href="/">{profile.name}</a>
     <nav class="nav-links" aria-label="Section navigation">
-      {links.map((link) => <a href={link.href}>{link.label}</a>)}
+      {primaryLinks.map((link) => <a href={link.href}>{link.label}</a>)}
+      <details class="ecosystem-menu" data-ecosystem-menu data-disclosure>
+        <summary>Ecosystem <span aria-hidden="true">⌄</span></summary>
+        <div class="ecosystem-panel">
+          {
+            ecosystem.map((link) =>
+              link.status === "live" ? (
+                <a href={link.href}>{link.label}</a>
+              ) : (
+                <span class="ecosystem-pending">
+                  <span>{link.label}</span>
+                  <span class="status-label">Coming soon</span>
+                </span>
+              ),
+            )
+          }
+        </div>
+      </details>
+      <a href={contactLink.href}>{contactLink.label}</a>
     </nav>
-    <details class="mobile-menu">
+    <details class="mobile-menu" data-disclosure>
       <summary>Menu</summary>
       <nav class="mobile-menu-panel" aria-label="Mobile section navigation">
-        {links.map((link) => <a href={link.href}>{link.label}</a>)}
+        {primaryLinks.map((link) => <a href={link.href}>{link.label}</a>)}
+        <details class="mobile-ecosystem" data-ecosystem-menu data-disclosure>
+          <summary>Ecosystem <span aria-hidden="true">⌄</span></summary>
+          <div class="mobile-ecosystem-panel">
+            {
+              ecosystem.map((link) =>
+                link.status === "live" ? (
+                  <a href={link.href}>{link.label}</a>
+                ) : (
+                  <span class="ecosystem-pending">
+                    <span>{link.label}</span>
+                    <span class="status-label">Coming soon</span>
+                  </span>
+                ),
+              )
+            }
+          </div>
+        </details>
+        <a href={contactLink.href}>{contactLink.label}</a>
       </nav>
     </details>
   </div>
 </header>
+
+<script>
+  const disclosures = Array.from(document.querySelectorAll<HTMLDetailsElement>("[data-disclosure]"));
+  const ecosystemMenus = Array.from(document.querySelectorAll<HTMLDetailsElement>("[data-ecosystem-menu]"));
+
+  disclosures.forEach((menu) => {
+    const summary = menu.querySelector<HTMLElement>(":scope > summary");
+    summary?.addEventListener("keydown", (event) => {
+      if (event.key !== "Enter" && event.key !== " ") return;
+
+      event.preventDefault();
+      menu.open = !menu.open;
+    });
+  });
+
+  ecosystemMenus.forEach((menu) => {
+    menu.addEventListener("toggle", () => {
+      if (!menu.open) return;
+
+      ecosystemMenus.forEach((other) => {
+        if (other !== menu && !other.contains(menu) && !menu.contains(other)) other.open = false;
+      });
+    });
+  });
+
+  document.addEventListener("click", (event) => {
+    const target = event.target;
+    if (!(target instanceof Node)) return;
+
+    disclosures.forEach((menu) => {
+      if (menu.open && !menu.contains(target)) menu.open = false;
+    });
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+
+    const openMenu = disclosures
+      .filter((menu) => menu.open && menu.contains(document.activeElement))
+      .at(-1);
+    if (!openMenu) return;
+
+    openMenu.open = false;
+    openMenu.querySelector<HTMLElement>(":scope > summary")?.focus();
+  });
+
+  disclosures.forEach((menu) => {
+    menu.querySelectorAll<HTMLAnchorElement>("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        let current: HTMLDetailsElement | null = link.closest("details");
+        while (current) {
+          current.open = false;
+          current = current.parentElement?.closest("details") ?? null;
+        }
+      });
+    });
+  });
+</script>
 
 <style>
   .nav {
@@ -69,6 +162,74 @@ const links = [
   .nav-links > a:hover {
     color: var(--primary);
   }
+  .ecosystem-menu {
+    position: relative;
+  }
+  .ecosystem-menu > summary {
+    min-height: 24px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--ink-soft);
+    cursor: pointer;
+    font-size: 14px;
+    list-style: none;
+    white-space: nowrap;
+    transition: color 180ms ease;
+  }
+  .ecosystem-menu > summary:hover,
+  .ecosystem-menu[open] > summary {
+    color: var(--primary);
+  }
+  .ecosystem-menu summary::-webkit-details-marker,
+  .mobile-ecosystem summary::-webkit-details-marker {
+    display: none;
+  }
+  .ecosystem-menu > summary span,
+  .mobile-ecosystem > summary span {
+    transition: transform 180ms ease;
+  }
+  .ecosystem-menu[open] > summary span,
+  .mobile-ecosystem[open] > summary span {
+    transform: rotate(180deg);
+  }
+  .ecosystem-panel {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    width: 210px;
+    padding: 8px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: 0 8px 24px rgba(30, 16, 48, 0.12);
+  }
+  .ecosystem-panel a,
+  .ecosystem-pending {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding-inline: 10px;
+    border-radius: 6px;
+    color: var(--ink-soft);
+    font-size: 14px;
+    text-decoration: none;
+  }
+  .ecosystem-panel a:hover {
+    color: var(--primary);
+    background: var(--bg-raised);
+  }
+  .ecosystem-pending {
+    color: var(--ink-faint);
+    cursor: default;
+  }
+  .status-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    white-space: nowrap;
+  }
   .mobile-menu {
     display: none;
     position: relative;
@@ -87,6 +248,10 @@ const links = [
   }
   .mobile-menu summary::-webkit-details-marker {
     display: none;
+  }
+  .nav summary:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
   }
   .mobile-menu-panel {
     position: absolute;
@@ -113,6 +278,30 @@ const links = [
   .mobile-menu-panel a:hover {
     color: var(--primary);
     background: var(--bg-raised);
+  }
+  .mobile-ecosystem {
+    border-block: 1px solid var(--border-soft);
+  }
+  .mobile-ecosystem > summary {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding-inline: 10px;
+    color: var(--ink-soft);
+    cursor: pointer;
+    font-size: 15px;
+    list-style: none;
+  }
+  .mobile-ecosystem[open] > summary {
+    color: var(--primary);
+  }
+  .mobile-ecosystem-panel {
+    padding: 0 0 8px 10px;
+  }
+  .mobile-ecosystem-panel .ecosystem-pending {
+    padding-inline: 10px;
   }
 
   @media (max-width: 700px) {

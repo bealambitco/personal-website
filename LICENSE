@@ -1,0 +1,46 @@
+Copyright (c) 2026 Bea Charmelyn T. Lambitco
+
+TWO SETS OF TERMS APPLY TO THIS REPOSITORY.
+
+------------------------------------------------------------------------
+1. SOURCE CODE — MIT License
+------------------------------------------------------------------------
+
+Applies to the Astro components, layouts, pages, styles, build scripts,
+and configuration in this repository (src/components/, src/layouts/,
+src/pages/, src/styles/, scripts/, and the root configuration files).
+
+Permission is hereby granted, free of charge, to any person obtaining a
+copy of this software and associated documentation files (the "Software"),
+to deal in the Software without restriction, including without limitation
+the rights to use, copy, modify, merge, publish, distribute, sublicense,
+and/or sell copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included
+in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+DEALINGS IN THE SOFTWARE.
+
+------------------------------------------------------------------------
+2. CONTENT AND PERSONAL BRANDING — All Rights Reserved
+------------------------------------------------------------------------
+
+The MIT grant above does NOT extend to:
+
+  - written content, biography, and article text (src/content/, src/data/)
+  - photographs, portraits, logos, certification badges, and preview
+    images (src/assets/, public/)
+  - the name "Bea Lambitco" / "Bea Charmelyn T. Lambitco", associated
+    professional identity, and any credential or achievement claims
+
+These are © 2026 Bea Charmelyn T. Lambitco, all rights reserved. They may
+not be copied, redistributed, or reused, in whole or in part, without
+prior written permission. You are welcome to reuse the code to build your
+own site; please replace the content and imagery with your own.

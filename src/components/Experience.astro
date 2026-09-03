@@ -11,11 +11,22 @@ const github = socials.find((s) => s.label === "GitHub");
   {
     github && (
       <p class="muted" style="margin-bottom: 16px;">
-        <a href={github.href} target="_blank" rel="noopener noreferrer">
-          See code on GitHub ↗
+        <a class="github-link" href={github.href} target="_blank" rel="noopener noreferrer">
+          See code on GitHub <span aria-hidden="true">↗</span>
+          <span class="visually-hidden">(opens in a new tab)</span>
         </a>
       </p>
     )
   }
   <FilterableList items={experience} />
 </section>
+
+<style>
+  /* 18px tall previously, under the WCAG 2.2 AA 2.5.8 minimum of 24×24. */
+  .github-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    min-height: 24px;
+  }
+</style>

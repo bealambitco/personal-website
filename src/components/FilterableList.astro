@@ -95,9 +95,12 @@ const gridKinds = ["Certification", "Events"];
     gap: 6px;
   }
   .filter-pill {
+    /* 26px tall previously — cleared WCAG 2.5.8 (24×24) but was an
+       uncomfortably small tap target on mobile. */
+    min-height: 32px;
     font-family: var(--font-mono);
     font-size: 12px;
-    padding: 4px 10px;
+    padding: 4px 12px;
     border-radius: 20px;
     border: 1px solid var(--border);
     background: var(--bg);
